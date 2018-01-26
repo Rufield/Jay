@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Features\" />
+    <Folder Include="Views\Index\" />
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
   <ItemGroup>
