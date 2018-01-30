@@ -5,13 +5,10 @@ using System.Threading.Tasks;
 
 namespace Sweeter.Models
 {
-    public class CommentModel
+    public class LikesToPostsModel
     {
-        public int IDcomment { get; set; }
+        public int IDlike { get; set; }
         public PostsModel Post { get; set; }
-        public string Text { get; set; }
-        public int LikesNumber { get; set; }
-        public List<LikesToCommentsModel> Comments { get; set; }
         public AccountModel Author { get; set; }
     }
 }
