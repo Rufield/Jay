@@ -1,0 +1,222 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="~/lib/src/bootstrap.min.css">
+    <script data-main="scripts/main" src="~/js/require.js"></script>
+    <link rel="stylesheet" href="~/lib/src/style.css">
+    <link rel="icon" type="image/png" href="~/lib/img/logo.png">
+    <link rel="shortcut icon" href="~/lib/img/logo.png" type="image/png">
+    <title>Jay Feeds</title>
+
+
+
+</head>
+
+
+<body>
+    <div class="row">
+        <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 leftside">
+            <div class="logoleftt" style="text-align:center">
+                <h1 class="headlabel" style="font-size:35px; margin-top:-2%;">JAY</h1>
+                <img src="~/lib/img/logo.png" class="logoleft">
+
+            </div>
+            <hr class="line">
+            <img src="~/lib/img/Avatar.jpeg " class="avatar ">
+            <hr class="line ">
+        </div>
+        <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8 maincontainer">
+            <div class="headmobile">
+                <div class="row">
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
+                        <img src="~/lib/img/logo.png" class="mobilelogoleft">
+
+                    </div>
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
+                        <h1 class="mobileheadlabel">JAY</h1>
+
+                    </div>
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 " style="text-align:center;">
+
+                        <img src="~/lib/img/Avatar.jpeg" class="mobileavatar">
+
+                    </div>
+                </div>
+            </div>
+            <div class="addfeedmobile">
+                <form action="" class="addfeedformmobile">
+<textarea class="mobilemypost" name="mypost" id="mypost" rows="3">What are you thinking about...</textarea>
+                    <input type="submit" class="mobileaddpost" name="addpost" id="addpost" value="Send">
+                    <hr style="border-color:rgba(0,0,0,0.6)">
+
+                    <div class="mobilesignout">
+                        <button class="mobilenavbutton">Sign out</button>
+                    </div>
+                    <div class="mobilemypage">
+                        <button class="mobilenavbutton">My Page</button>
+                    </div>
+                    <div class="mobilefeeds">
+                        <button class="mobilenavbutton">Feeds</button>
+                    </div>
+
+                </form>
+            </div>
+            <form action="" class="post">
+                <label class="lab" style="margin:1%">
+                    Comments to username's post
+                </label><hr><div class="postcontainer">
+                    <label class="postlabel">Hey, there's nice morning to code a little bit. Take your cafe or tea, sit on your chair and begin developping. That's our first mockup, so welcome to Jay!</label>
+                </div><span><img src="~/lib/img/Like.png" class="like"></span><div class="likecontainer"><label class="likelabel">44</label></div><span><img src="lib/img/comment.png" class="comment"></span><div class="commentcontainer"><label class="commentlabel">44</label></div>
+            </form>
+            <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
+            <form action="" class="addfeedform">
+                <label class="lab" style="margin:1%">Publish your comment, Username</label>
+                <hr>
+<textarea class="mypost" name="mypost" id="mypost" rows="3">What are you thinking about...</textarea><input type="submit" class="addpost" name="addpost" id="addpost" value="Send">
+
+            </form>
+            <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
+            <div id="wall">
+                <script>
+                    var myRequest = new Request('http://api.icndb.com/jokes?escape=javascript');
+                    var htm = " ";
+                    fetch(myRequest)
+                        .then(function (response) { return response.json(); })
+                        .then(function (json) {
+
+                            var n = json.value.length;
+
+                            for (var i = 0; i < n; i++) {
+
+                                htm += '<form action="" class= "post" "><label class="lab" style="margin:1%">' + json.value[i].categories[0] + '</label><hr><div class="commentpostcontainer" ><label class="postlabel">' + json.value[i].joke + '</label></div><span><img src="lib/img/Like.png" class="commentlike"></span><div class="likecontainer"><label class="likelabel">44</label></div></form> ';
+
+                            }
+                            document.getElementById('wall').innerHTML = htm;
+                        });
+
+                </script>
+
+
+            </div>
+
+            <form action="" class="post" ">
+                <label class="lab" style="margin:1%">Username</label>
+                <hr>
+
+
+
+                <div class="postcontainer">
+                    <label class="postlabel">Hey, there's nice morning to code a little bit. Take your cafe or tea, sit on your chair and begin developping. That's our first mockup, so welcome to Jay!</label>
+                </div>
+                <span><img src="img/Like.png" class="like"></span>
+                <div class="likecontainer">
+                    <label class="likelabel">44</label>
+                </div>
+                <span><img src="img/comment.png" class="comment"></span>
+                <div class="commentcontainer">
+                    <label class="commentlabel">44</label>
+                </div>
+
+            </form>
+            <form action="" class="post">
+                <label class="lab" style="margin:1%">Username</label>
+                <hr>
+
+
+
+                <div class="postcontainer">
+                    <label class="postlabel">Hey, there's nice morning to code a little bit. Take your cafe or tea, sit on your chair and begin developping. That's our first mockup, so welcome to Jay!</label>
+                </div>
+                <span><img src="img/Like.png" class="like"></span>
+                <div class="likecontainer">
+                    <label class="likelabel">44</label>
+                </div>
+                <span><img src="img/comment.png" class="comment"></span>
+                <div class="commentcontainer">
+                    <label class="commentlabel">44</label>
+                </div>
+
+            </form>
+            <form action="" class="post">
+                <label class="lab" style="margin:1%">Username</label>
+                <hr>
+
+
+
+                <div class="postcontainer">
+                    <label class="postlabel">Hey, there's nice morning to code a little bit. Take your cafe or tea, sit on your chair and begin developping. That's our first mockup, so welcome to Jay!</label>
+                </div>
+                <span><img src="img/Like.png" class="like"></span>
+                <div class="likecontainer">
+                    <label class="likelabel">44</label>
+                </div>
+                <span><img src="img/comment.png" class="comment"></span>
+                <div class="commentcontainer">
+                    <label class="commentlabel">44</label>
+                </div>
+
+            </form>
+
+            <form action="" class="post">
+                <label class="lab" style="margin:1%">Username</label>
+                <hr>
+
+
+
+                <div class="postcontainer">
+                    <label class="postlabel">Hey, there's nice morning to code a little bit. Take your cafe or tea, sit on your chair and begin developping. That's our first mockup, so welcome to Jay!</label>
+                </div>
+                <span><img src="img/Like.png" class="like"></span>
+                <div class="likecontainer">
+                    <label class="likelabel">44</label>
+                </div>
+                <span><img src="img/comment.png" class="comment"></span>
+                <div class="commentcontainer">
+                    <label class="commentlabel">44</label>
+                </div>
+
+            </form>
+            <form action="" class="post">
+                <label class="lab" style="margin:1%">Username</label>
+                <hr>
+
+
+
+                <div class="postcontainer">
+                    <label class="postlabel">Hey, there's nice morning to code a little bit. Take your cafe or tea, sit on your chair and begin developping. That's our first mockup, so welcome to Jay!</label>
+                </div>
+                <span><img src="img/Like.png" class="like"></span>
+                <div class="likecontainer">
+                    <label class="likelabel">44</label>
+                </div>
+                <span><img src="img/comment.png" class="comment"></span>
+                <div class="commentcontainer">
+                    <label class="commentlabel">44</label>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 rightside">
+            <nav>
+                <button class="navi">My Page</button>
+                <button class="navi">Feeds</button>
+                <button class="navi">Sign out</button>
+            </nav>
+            <hr class="line">
+        </div>
+
+    </div>
+</body>
+</html>

@@ -9,11 +9,24 @@ namespace Sweeter.Controllers
     [Route("/")]
     public class IndexController : Controller
     {
-
-        [HttpGet]
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View();
+        }
+        [HttpPost]
+        public RedirectResult Index(string action)
+        {
+            if (action == "signin")
+            {
+
+                return RedirectPermanent("/Login");
+
+            }
+
+            return RedirectPermanent("/Register");
+
+
+
         }
     }
 }

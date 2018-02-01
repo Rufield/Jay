@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Sweeter.DataProviders;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Sweeter
 {
@@ -22,6 +24,12 @@ namespace Sweeter
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           
+            services.AddTransient<IAccountDataProvider, AccountDataProvider>();
+           services.AddTransient<IPostDataProvider, PostDataProvider>();
+        services.AddTransient<ICommentDataProvider, CommentDataProvider>();
+		services.AddTransient<ILikesToCommentsProvider, LikesToCommentsProvider>();
+          services.AddTransient<ILikesToPostsProvider, LikesToPostsProvider>();
             // Add framework services.
              services.AddMvc();
         }

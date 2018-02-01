@@ -11,7 +11,7 @@ namespace Sweeter.Models
         public PostsModel Post { get; set; }
         public string Text { get; set; }
         public int LikesNumber { get; set; }
-        public List<LikesToCommentsModel> Comments { get; set; }
-        public AccountModel Author { get; set; }
-    }
+    public List<LikesToCommentsModel> Comments { get; set; }
+    public AccountModel Author { get; set; }
+}
 }
