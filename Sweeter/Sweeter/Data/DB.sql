@@ -2,10 +2,10 @@ USE [master]
 GO
 
 /****** Object:  Database [JayData]    Script Date: 30.01.2018 22:06:19 ******/
-IF DB_ID (N'JayData.mdf') IS NOT NULL
+IF DB_ID (N'JayData') IS NOT NULL
 BREAK;
 GO
-CREATE DATABASE [JayData.mdf]
+CREATE DATABASE [JayData]
  CONTAINMENT = NONE
 GO
 
@@ -142,7 +142,7 @@ ALTER DATABASE [JayData] SET  READ_WRITE
 GO
 
 CREATE TABLE [dbo].[AccountTable](
-	[IDuser] [bigint] NOT NULL,
+	[IDuser] [bigint] IDENTITY(1, 1) NOT NULL,
 	[Name] [nvarchar](50) NOT NULL,
 	[Email] [nvarchar](50) NOT NULL,
 	[Password] [nvarchar](50) NOT NULL,
@@ -156,7 +156,7 @@ CREATE TABLE [dbo].[AccountTable](
 GO
 
 CREATE TABLE [dbo].[CommentTable](
-	[IDcomment] [bigint] NOT NULL,
+	[IDcomment] [bigint] IDENTITY(1, 1) NOT NULL,
 	[IDpost] [bigint] NOT NULL,
 	[IDuser] [bigint] NOT NULL,
 	[Text] [text] NOT NULL,
@@ -169,7 +169,7 @@ CREATE TABLE [dbo].[CommentTable](
 GO
 
 CREATE TABLE [dbo].[LikesToCommentTable](
-	[IDus_com] [bigint] NOT NULL,
+	[IDus_com] [bigint] IDENTITY(1, 1) NOT NULL,
 	[IDuser] [bigint] NOT NULL,
 	[IDcomment] [bigint] NOT NULL,
  CONSTRAINT [PK_LikesToCommentTable] PRIMARY KEY CLUSTERED 
@@ -180,7 +180,7 @@ CREATE TABLE [dbo].[LikesToCommentTable](
 GO
 
 CREATE TABLE [dbo].[LikesToPostTable](
-	[IDus_post] [bigint] NOT NULL,
+	[IDus_post] [bigint] IDENTITY(1, 1) NOT NULL,
 	[IDuser] [bigint] NOT NULL,
 	[IDpost] [bigint] NOT NULL,
  CONSTRAINT [PK_LikesToPostTable] PRIMARY KEY CLUSTERED 
@@ -191,7 +191,7 @@ CREATE TABLE [dbo].[LikesToPostTable](
 GO
 
 CREATE TABLE [dbo].[PostTable](
-	[IDpost] [bigint] NOT NULL,
+	[IDpost] [bigint] IDENTITY(1, 1) NOT NULL,
 	[IDuser] [bigint] NOT NULL,
 	[Text] [text] NOT NULL,
 	[PublicDate] [datetime] NOT NULL,
@@ -237,6 +237,13 @@ REFERENCES [dbo].[AccountTable] ([IDuser])
 GO
 
 ALTER TABLE [dbo].[LikesToPostTable] CHECK CONSTRAINT [FK_LikesToPostTable_AccountTable]
+GO
+
+ALTER TABLE [dbo].[LikesToPostTable]  WITH CHECK ADD  CONSTRAINT [FK_LikesToPostTable_PostTable] FOREIGN KEY([IDpost])
+REFERENCES [dbo].[PostTable] ([IDpost])
+GO
+
+ALTER TABLE [dbo].[LikesToPostTable] CHECK CONSTRAINT [FK_LikesToPostTable_PostTable]
 GO
 
 INSERT INTO [dbo].[AccountTable]
@@ -294,7 +301,7 @@ INSERT INTO [dbo].[PostTable]
      VALUES
            (1
            ,1
-           ,"Hi"
+           ,'Hi'
            ,1998
            ,1
            ,1)
@@ -309,7 +316,7 @@ INSERT INTO [dbo].[PostTable]
      VALUES
            (2
            ,2
-           ,"Hi"
+           ,'Hi'
            ,1998
            ,2
            ,2)
@@ -324,7 +331,7 @@ INSERT INTO [dbo].[PostTable]
      VALUES
            (3
            ,3
-           ,"Hi"
+           ,'Hi'
            ,1998
            ,3
            ,3)
@@ -339,7 +346,7 @@ INSERT INTO [dbo].[CommentTable]
            (1
            ,1
            ,1
-           ,"I am first"
+           ,'I am first'
            ,1)
 GO
 INSERT INTO [dbo].[CommentTable]
@@ -352,7 +359,7 @@ INSERT INTO [dbo].[CommentTable]
            (2
            ,2
            ,2
-           ,"Ohhhh, It's my first comment"
+           ,'Ohhhh, Its my first comment'
            ,2)
 GO
 INSERT INTO [dbo].[CommentTable]
@@ -365,6 +372,6 @@ INSERT INTO [dbo].[CommentTable]
            (3
            ,3
            ,3
-           ,"Good. Its good idea"
+           ,'Good. Its good idea'
            ,3)
 GO
