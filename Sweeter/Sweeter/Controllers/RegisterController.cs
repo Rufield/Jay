@@ -26,11 +26,12 @@ namespace Sweeter.Controllers
       [HttpPost]
         public IActionResult Form(string avatar,string fullname, string username, string Email, string password, string password2)
         {
-            if (password.Equals(password2))
-            {
+            
                 if (accountDataProvider.GetAccountsByEmail(Email).Count() == 0)
                 {
-                    if (accountDataProvider.GetAccountsByUsername(username).Count() == 0)
+                if (accountDataProvider.GetAccountsByUsername(username).Count() == 0)
+                {
+                    if (password.Equals(password2))
                     {
                         AccountModel account = new AccountModel
                         {
@@ -44,22 +45,36 @@ namespace Sweeter.Controllers
 
                         };
                         accountDataProvider.AddAccount(account);
-                        return RedirectToAction("Index", "Login" );
+                        return RedirectToAction("Index", "Login");
                     }
-                    
                     else
                     {
-                        ViewData["UsernameStat"] = "notright";
+                        ViewData["UsernameStat"] = "";
                         ViewData["Name"] = fullname;
-                        ViewData["Username"] = "";
+                        ViewData["Username"] = username;
                         ViewData["Email"] = Email;
-                      
-                        
+
+
                         ViewData["EmailStat"] = "";
-                        ViewData["PasswordStat"] = "";
-                        ViewData["ErrorMessage"] = "Such username already exists";
+                        ViewData["PasswordStat"] = "notright";
+                        ViewData["ErrorMessage"] = "Passwords are not equal";
                         return View();
                     }
+
+                }
+                else
+                {
+                    ViewData["UsernameStat"] = "notright";
+                    ViewData["Name"] = fullname;
+                    ViewData["Username"] = "";
+                    ViewData["Email"] = Email;
+
+
+                    ViewData["EmailStat"] = "";
+                    ViewData["PasswordStat"] = "";
+                    ViewData["ErrorMessage"] = "Such username already exists";
+                    return View();
+                }
                 }
                 else
                 {
@@ -75,22 +90,10 @@ namespace Sweeter.Controllers
                     return View();
                 }
             }
-            else
-            {
-                ViewData["UsernameStat"] = "";
-                ViewData["Name"] = fullname;
-                ViewData["Username"] = username;
-                ViewData["Email"] = Email;
-                
-
-                ViewData["EmailStat"] = "";
-                ViewData["PasswordStat"] = "notright";
-                ViewData["ErrorMessage"] = "Passwords are not equal";
-                return View();
-            }
+            
         }
       
 
 
     }
-}
+
