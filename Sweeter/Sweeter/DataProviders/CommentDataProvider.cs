@@ -19,8 +19,8 @@ namespace Sweeter.DataProviders
             using (var sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Execute(@"insert into CommentTable(IDpost, IDuser,Text, LikeNumber)
-      values (@IDpost, @IDauthor,@Text, @LikesNumber);",
- new { IDpost=comment.Post.IDnews, IDauthor=comment.Author.IDaccount, Text=comment.Text, LikesNumber=comment.LikesNumber });
+      values (@IDpost, @IDauthor,@Text, @LikeNumber);",
+ new { IDpost=comment.Post.IDpost, IDauthor=comment.Author.IDuser, Text=comment.Text, LikesNumber=comment.LikeNumber });
             }
         }
 
@@ -53,8 +53,8 @@ namespace Sweeter.DataProviders
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {
-                sqlConnection.Execute(@"update CommentTable set IDpost=@IDpost, IDuser=@IDauthor,Text=@Text, LikeNumber=@LikesNumber where IDcomment = @id;",
-                  new {IDpost= comment.Post.IDnews, IDauthor=comment.Author.IDaccount,Text=comment.Text,LikesNumber=comment.LikesNumber, id=comment.IDcomment });
+                sqlConnection.Execute(@"update CommentTable set IDpost=@IDpost, IDuser=@IDauthor,Text=@Text, LikeNumber=@LikeNumber where IDcomment = @id;",
+                  new {IDpost= comment.Post.IDpost, IDauthor=comment.Author.IDuser,Text=comment.Text,LikesNumber=comment.LikeNumber, id=comment.IDcomment });
             }
         }
 

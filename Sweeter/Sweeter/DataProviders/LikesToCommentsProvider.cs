@@ -20,7 +20,7 @@ namespace Sweeter.DataProviders
             {
                 sqlConnection.Execute(@"insert into LikesToCommentTable(IDuser,IDcomment)
       values (@IDauthor, @IDcomment);",
-    new { IDauthor=like.Author.IDaccount, IDcomment=like.Comment.IDcomment });
+    new { IDauthor=like.Author.IDuser, IDcomment=like.Comment.IDcomment });
 
             }
         }

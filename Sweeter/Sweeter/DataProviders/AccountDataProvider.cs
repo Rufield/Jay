@@ -26,7 +26,7 @@ namespace Sweeter.DataProviders
             {
                 sqlConnection.Execute(@"insert into AccountTable(Name, Email, Password, Username, Avatar)
       values (@Name, @Email, @Password, @Username, @Avatar);",
-    new { Name=account.FullName, Email=account.Email,Password= account.Password, Username=account.Login, Avatar=account.Avatar });
+    new { Name=account.Name, Email=account.Email,Password= account.Password, Username=account.Username, Avatar=account.Avatar });
            
             }
 
@@ -88,7 +88,7 @@ namespace Sweeter.DataProviders
             {
 
                 sqlConnection.Execute(@"update AccountTable set Fullname=@Fullname, Email=@Email, Password=@Password, Username=@Username, Avatar=@Avatar where ID = @id;",
-              new { Fullname= account.FullName, Email= account.Email, Password= account.Password,Username= account.Login, Avatar=account.Avatar, id= account.IDaccount });
+              new { Fullname= account.Name, Email= account.Email, Password= account.Password,Username= account.Username, Avatar=account.Avatar, id= account.IDuser });
             }
         }
     }

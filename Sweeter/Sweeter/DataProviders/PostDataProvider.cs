@@ -19,8 +19,8 @@ namespace Sweeter.DataProviders
             using (var sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Execute(@"insert into PostTable(IDuser,Text,PublicDate, LikeNumber, CommentNumber)
-      values (@IDauthor,@Text,@PublicDate, @LikesNumber, @CommentNumber);",
-   new { IDauthor=post.Author.IDaccount,Text= post.Text, PublicDate=post.PublicDate, LikesNumber= post.LikesNumber, CommentNumber=post.CommentsNumber });
+      values (@IDauthor,@Text,@PublicDate, @LikeNumber, @CommentNumber);",
+   new { IDauthor=post.Author.IDuser,Text= post.Text, PublicDate=post.PublicDate, LikesNumber= post.LikeNumber, CommentNumber=post.CommentNumber });
              
             }
         }
@@ -65,8 +65,8 @@ namespace Sweeter.DataProviders
             using (var sqlConnection = new SqlConnection(connectionString))
             {
                 
-                sqlConnection.Execute(@"update PostTable set IDuser=@IDauthor,Text=@Text,PublicDate=@PublicDate, LikeNumber=@LikesNumber, CommentNumber=@CommentNumber where IDpost = @id;",
-                  new { IDauthor=post.Author.IDaccount, Text= post.Text, PublicDate= post.PublicDate,LikesNumber=post.LikesNumber, CommentNumber=post.CommentsNumber, id=post.IDnews });
+                sqlConnection.Execute(@"update PostTable set IDuser=@IDauthor,Text=@Text,PublicDate=@PublicDate, LikeNumber=@LikeNumber, CommentNumber=@CommentNumber where IDpost = @id;",
+                  new { IDauthor=post.Author.IDuser, Text= post.Text, PublicDate= post.PublicDate,LikesNumber=post.LikeNumber, CommentNumber=post.CommentNumber, id=post.IDpost });
             }
         }
     }

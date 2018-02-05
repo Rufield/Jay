@@ -7,7 +7,7 @@ namespace Sweeter.Models
 {
     public class LikesToCommentsModel
     {
-        public int IDlike { get; set; }
+        public int IDus_com { get; set; }
         public CommentModel Comment { get; set; }
         public AccountModel Author { get; set; }
     }

@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Sweeter.DataProviders;
 using Sweeter.Models;
-
+using System.Security.Cryptography;
+using System.Text;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Sweeter.Controllers
@@ -18,14 +19,36 @@ namespace Sweeter.Controllers
         {
             this.accountDataProvider = accountData;
         }
+
         // GET: /<controller>/
         public IActionResult Index()
         {
             return View();
         }
-      [HttpPost]
+        string GetHashString(string s)
+        {
+            
+            byte[] bytes = Encoding.Unicode.GetBytes(s);
+
+            
+            MD5CryptoServiceProvider CSP =
+                new MD5CryptoServiceProvider();
+
+             
+            byte[] byteHash = CSP.ComputeHash(bytes);
+
+            string hash = string.Empty;
+
+             
+            foreach (byte b in byteHash)
+                hash += string.Format("{0:x2}", b);
+
+            return hash;
+        }
+        [HttpPost]
         public IActionResult Form(string avatar,string fullname, string username, string Email, string password, string password2)
         {
+      
             
                 if (accountDataProvider.GetAccountsByEmail(Email).Count() == 0)
                 {
@@ -35,10 +58,11 @@ namespace Sweeter.Controllers
                     {
                         AccountModel account = new AccountModel
                         {
-                            FullName = fullname,
-                            Login = username,
+                            
+                            Name=fullname,
+                            Username = username,
                             Email = Email,
-                            Password = password,
+                            Password = GetHashString(password),
                             Avatar = avatar
 
 
@@ -89,6 +113,7 @@ namespace Sweeter.Controllers
                     ViewData["ErrorMessage"] = "Such email already exists";
                     return View();
                 }
+                
             }
             
         }

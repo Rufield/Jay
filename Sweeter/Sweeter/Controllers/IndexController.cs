@@ -19,7 +19,7 @@ namespace Sweeter.Controllers
             if (action == "signin")
             {
 
-                return RedirectPermanent("/Login");
+                return RedirectPermanent("/Username");
 
             }
 
