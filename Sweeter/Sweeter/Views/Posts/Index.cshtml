@@ -207,7 +207,8 @@
             <nav>
                 <button class="navi">My Page</button>
                 <button class="navi">Feeds</button>
-                <button class="navi">Sign out</button>
+                @Html.ActionLink("Log out","Logout", "LogOut")
+                <button type="button" class="navi" >Sign out</button>
             </nav>
             <hr class="line">
         </div>
