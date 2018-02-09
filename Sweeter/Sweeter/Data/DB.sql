@@ -2,14 +2,14 @@ USE [master]
 GO
 
 /****** Object:  Database [JayData]    Script Date: 30.01.2018 22:06:19 ******/
-IF DB_ID (N'JayData') IS NOT NULL
-BREAK;
-GO
+--IF DB_ID (N'JayData') IS NOT NULL
+--BREAK
+--GO
 CREATE DATABASE [JayData]
  CONTAINMENT = NONE
 GO
 
-ALTER DATABASE [JayData] SET COMPATIBILITY_LEVEL = 140
+ALTER DATABASE [JayData] SET COMPATIBILITY_LEVEL = 130
 GO
 
 IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
@@ -111,8 +111,8 @@ GO
 USE [JayData]
 GO
 
-ALTER DATABASE SCOPED CONFIGURATION SET IDENTITY_CACHE = ON;
-GO
+--ALTER DATABASE SCOPED CONFIGURATION SET IDENTITY_INSERT = ON;
+--GO
 
 ALTER DATABASE SCOPED CONFIGURATION SET LEGACY_CARDINALITY_ESTIMATION = OFF;
 GO
@@ -147,7 +147,7 @@ CREATE TABLE [dbo].[AccountTable](
 	[Email] [nvarchar](50) NOT NULL,
 	[Password] [nvarchar](50) NOT NULL,
 	[Username] [nvarchar](50) NOT NULL,
-	[Avatar] [nvarchar](50) NULL,
+	[Avatar] [varbinary](MAX) NULL,
  CONSTRAINT [PK_AccountTable] PRIMARY KEY CLUSTERED 
 (
 	[IDuser] ASC
@@ -246,132 +246,132 @@ GO
 ALTER TABLE [dbo].[LikesToPostTable] CHECK CONSTRAINT [FK_LikesToPostTable_PostTable]
 GO
 
-INSERT INTO [dbo].[AccountTable]
-           ([IDuser]
-           ,[Name]
-           ,[Email]
-           ,[Password]
-           ,[Username]
-           ,[Avatar])
-     VALUES
-           (1
-           ,'Vasa'
-           ,'Nub@gmail.com'
-           ,'123'
-           ,'Nub'
-           ,NULL)
-GO
-INSERT INTO [dbo].[AccountTable]
-           ([IDuser]
-           ,[Name]
-           ,[Email]
-           ,[Password]
-           ,[Username]
-           ,[Avatar])
-     VALUES
-           (1
-           ,'Lilo'
-           ,'Lilo@gmail.com'
-           ,'321'
-           ,'Master'
-           ,NULL)
-GO
-INSERT INTO [dbo].[AccountTable]
-           ([IDuser]
-           ,[Name]
-           ,[Email]
-           ,[Password]
-           ,[Username]
-           ,[Avatar])
-     VALUES
-           (1
-           ,'Bob'
-           ,'Bob@gmail.com'
-           ,'huk'
-           ,'Hucker'
-           ,NULL)
-GO
-INSERT INTO [dbo].[PostTable]
-           ([IDpost]
-           ,[IDuser]
-           ,[Text]
-           ,[PublicDate]
-           ,[LikeNumder]
-           ,[CommentNumber])
-     VALUES
-           (1
-           ,1
-           ,'Hi'
-           ,1998
-           ,1
-           ,1)
-GO
-INSERT INTO [dbo].[PostTable]
-           ([IDpost]
-           ,[IDuser]
-           ,[Text]
-           ,[PublicDate]
-           ,[LikeNumder]
-           ,[CommentNumber])
-     VALUES
-           (2
-           ,2
-           ,'Hi'
-           ,1998
-           ,2
-           ,2)
-GO
-INSERT INTO [dbo].[PostTable]
-           ([IDpost]
-           ,[IDuser]
-           ,[Text]
-           ,[PublicDate]
-           ,[LikeNumder]
-           ,[CommentNumber])
-     VALUES
-           (3
-           ,3
-           ,'Hi'
-           ,1998
-           ,3
-           ,3)
-GO
-INSERT INTO [dbo].[CommentTable]
-           ([IDcomment]
-           ,[IDpost]
-           ,[IDuser]
-           ,[Text]
-           ,[LikeNumder])
-     VALUES
-           (1
-           ,1
-           ,1
-           ,'I am first'
-           ,1)
-GO
-INSERT INTO [dbo].[CommentTable]
-           ([IDcomment]
-           ,[IDpost]
-           ,[IDuser]
-           ,[Text]
-           ,[LikeNumder])
-     VALUES
-           (2
-           ,2
-           ,2
-           ,'Ohhhh, Its my first comment'
-           ,2)
-GO
-INSERT INTO [dbo].[CommentTable]
-           ([IDcomment]
-           ,[IDpost]
-           ,[IDuser]
-           ,[Text]
-           ,[LikeNumder])
-     VALUES
-           (3
-           ,3
-           ,3
-           ,'Good. Its good idea'
-           ,3)
-GO
+--INSERT INTO [dbo].[AccountTable]
+--           ([IDuser]
+--           ,[Name]
+--           ,[Email]
+--           ,[Password]
+--           ,[Username]
+--           ,[Avatar])
+--     VALUES
+--           (1
+--           ,'Vasa'
+--           ,'Nub@gmail.com'
+--           ,'123'
+--           ,'Nub'
+--           ,NULL)
+--GO
+--INSERT INTO [dbo].[AccountTable]
+--           ([IDuser]
+--           ,[Name]
+--           ,[Email]
+--           ,[Password]
+--           ,[Username]
+--           ,[Avatar])
+--     VALUES
+--           (1
+--           ,'Lilo'
+--           ,'Lilo@gmail.com'
+--           ,'321'
+--           ,'Master'
+--           ,NULL)
+--GO
+--INSERT INTO [dbo].[AccountTable]
+--           ([IDuser]
+--           ,[Name]
+--           ,[Email]
+--           ,[Password]
+--           ,[Username]
+--           ,[Avatar])
+--     VALUES
+--           (1
+--           ,'Bob'
+--           ,'Bob@gmail.com'
+--           ,'huk'
+--           ,'Hucker'
+--           ,NULL)
+--GO
+--INSERT INTO [dbo].[PostTable]
+--           ([IDpost]
+--           ,[IDuser]
+--           ,[Text]
+--           ,[PublicDate]
+--           ,[LikeNumder]
+--           ,[CommentNumber])
+--     VALUES
+--           (1
+--           ,1
+--           ,'Hi'
+--           ,1998
+--           ,1
+--           ,1)
+--GO
+--INSERT INTO [dbo].[PostTable]
+--           ([IDpost]
+--           ,[IDuser]
+--           ,[Text]
+--           ,[PublicDate]
+--           ,[LikeNumder]
+--           ,[CommentNumber])
+--     VALUES
+--           (2
+--           ,2
+--           ,'Hi'
+--           ,1998
+--           ,2
+--           ,2)
+--GO
+--INSERT INTO [dbo].[PostTable]
+--           ([IDpost]
+--           ,[IDuser]
+--           ,[Text]
+--           ,[PublicDate]
+--           ,[LikeNumder]
+--           ,[CommentNumber])
+--     VALUES
+--           (3
+--           ,3
+--           ,'Hi'
+--           ,1998
+--           ,3
+--           ,3)
+--GO
+--INSERT INTO [dbo].[CommentTable]
+--           ([IDcomment]
+--           ,[IDpost]
+--           ,[IDuser]
+--           ,[Text]
+--           ,[LikeNumder])
+--     VALUES
+--           (1
+--           ,1
+--           ,1
+--           ,'I am first'
+--           ,1)
+--GO
+--INSERT INTO [dbo].[CommentTable]
+--           ([IDcomment]
+--           ,[IDpost]
+--           ,[IDuser]
+--           ,[Text]
+--           ,[LikeNumder])
+--     VALUES
+--           (2
+--           ,2
+--           ,2
+--           ,'Ohhhh, Its my first comment'
+--           ,2)
+--GO
+--INSERT INTO [dbo].[CommentTable]
+--           ([IDcomment]
+--           ,[IDpost]
+--           ,[IDuser]
+--           ,[Text]
+--           ,[LikeNumder])
+--     VALUES
+--           (3
+--           ,3
+--           ,3
+--           ,'Good. Its good idea'
+--           ,3)
+--GO

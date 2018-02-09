@@ -7,6 +7,7 @@ using Sweeter.DataProviders;
 using Sweeter.Models;
 using System.Security.Cryptography;
 using System.Text;
+using Sweeter.Services.HashService;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -18,9 +19,12 @@ namespace Sweeter.Controllers
     public class LoginController : Controller
     {
         private IAccountDataProvider accountDataProvider;
-        public LoginController(IAccountDataProvider accountData)
+        private IHashService _hasher;
+
+        public LoginController(IAccountDataProvider accountData, IHashService hasher)
         {
             this.accountDataProvider = accountData;
+            this._hasher = hasher;
         }
         // GET: /<controller>/
         public IActionResult Index()
@@ -28,26 +32,26 @@ namespace Sweeter.Controllers
             return View();
         }
 
-        string GetHashString(string s)
-        {
+        //string GetHashString(string s)
+        //{
 
-            byte[] bytes = Encoding.Unicode.GetBytes(s);
-
-
-            MD5CryptoServiceProvider CSP =
-                new MD5CryptoServiceProvider();
+        //    byte[] bytes = Encoding.Unicode.GetBytes(s);
 
 
-            byte[] byteHash = CSP.ComputeHash(bytes);
+        //    MD5CryptoServiceProvider CSP =
+        //        new MD5CryptoServiceProvider();
 
-            string hash = string.Empty;
+
+        //    byte[] byteHash = CSP.ComputeHash(bytes);
+
+        //    string hash = string.Empty;
 
 
-            foreach (byte b in byteHash)
-                hash += string.Format("{0:x2}", b);
+        //    foreach (byte b in byteHash)
+        //        hash += string.Format("{0:x2}", b);
 
-            return hash;
-        }
+        //    return hash;
+        //}
 
         [HttpPost]
         public string Login(string email, string password)
@@ -57,7 +61,7 @@ namespace Sweeter.Controllers
            if(accs.Count()!=0)
             {
                 {
-                    if (accs.First().Password.Equals(GetHashString(password)))
+                    if (accs.First().Password.Equals(_hasher.GetHashString(password)))
                     {
                         return "All is good";
                     }

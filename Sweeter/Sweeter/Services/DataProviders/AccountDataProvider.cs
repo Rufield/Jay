@@ -5,36 +5,37 @@ using System.Threading.Tasks;
 using Sweeter.Models;
 using Dapper;
 using System.Data.SqlClient;
-using System.Web;
-
-
-
+using Microsoft.Extensions.Options;
 
 namespace Sweeter.DataProviders
 {
     
     public class AccountDataProvider : IAccountDataProvider
     {
-        
-        string connectionString  =System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-       
-        private SqlConnection sqlConnection;
+        //string connectionString = null;
+        //System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private ConnectionStrings _string;
+
+        //private SqlConnection sqlConnection;
+
+        public AccountDataProvider(IOptions<ConnectionStrings> String)
+        {
+            _string = String.Value;
+        }
 
         public void AddAccount(AccountModel account)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(_string.DefaultConnection))
             {
                 sqlConnection.Execute(@"insert into AccountTable(Name, Email, Password, Username, Avatar)
-      values (@Name, @Email, @Password, @Username, @Avatar);",
-    new { Name=account.Name, Email=account.Email,Password= account.Password, Username=account.Username, Avatar=account.Avatar });
-           
+                values (@Name, @Email, @Password, @Username, @Avatar);",
+                new { Name=account.Name, Email=account.Email,Password= account.Password, Username=account.Username, Avatar=account.Avatar });
             }
-
         }
 
         public void DeleteAccount(int id)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(_string.DefaultConnection))
             {
                 sqlConnection.Execute(@"delete from AccountTable where IDuser = @id", new { id = id });
             }
@@ -42,7 +43,7 @@ namespace Sweeter.DataProviders
 
         public AccountModel GetAccount(int id)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(_string.DefaultConnection))
             {
                 var account = sqlConnection.Query<AccountModel>("select * from AccountTable where IDuser = @id", new { id = id }).First();
                 return account;
@@ -51,7 +52,7 @@ namespace Sweeter.DataProviders
 
         public AccountModel GetAccountByEmail(string Email)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(_string.DefaultConnection))
             {
                 var account = sqlConnection.Query<AccountModel>("select * from AccountTable where Email=@email", new { email = Email }).First();
                 return account;
@@ -59,7 +60,7 @@ namespace Sweeter.DataProviders
         }
         public IEnumerable<AccountModel> GetAccounts()
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(_string.DefaultConnection))
             {
                 var accounts = sqlConnection.Query<AccountModel>("select * from AccountTable").ToList();
                 return accounts;
@@ -67,7 +68,7 @@ namespace Sweeter.DataProviders
         }
         public IEnumerable<AccountModel> GetAccountsByEmail(string Email)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(_string.DefaultConnection))
             {
                 var accounts = sqlConnection.Query<AccountModel>("select * from AccountTable where Email=@Email",new { Email = Email }).ToList();
                 return accounts;
@@ -75,7 +76,7 @@ namespace Sweeter.DataProviders
         }
         public IEnumerable<AccountModel> GetAccountsByUsername(string username)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(_string.DefaultConnection))
             {
                 var accounts = sqlConnection.Query<AccountModel>("select * from AccountTable where Username=@username", new { username=username }).ToList();
                 return accounts;
@@ -84,11 +85,11 @@ namespace Sweeter.DataProviders
 
         public void UpdateAccount(AccountModel account)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(_string.DefaultConnection))
             {
 
                 sqlConnection.Execute(@"update AccountTable set Fullname=@Fullname, Email=@Email, Password=@Password, Username=@Username, Avatar=@Avatar where ID = @id;",
-              new { Fullname= account.Name, Email= account.Email, Password= account.Password,Username= account.Username, Avatar=account.Avatar, id= account.IDuser });
+                new { Fullname= account.Name, Email= account.Email, Password= account.Password,Username= account.Username, Avatar=account.Avatar, id= account.IDuser });
             }
         }
     }

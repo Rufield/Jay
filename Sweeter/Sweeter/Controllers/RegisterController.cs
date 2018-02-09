@@ -7,6 +7,7 @@ using System.Text;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using Sweeter.Services.HashService;
 
 namespace Sweeter.Controllers
 {
@@ -15,9 +16,12 @@ namespace Sweeter.Controllers
     public class RegisterController : Controller
     {
         private IAccountDataProvider accountDataProvider;
-        public RegisterController(IAccountDataProvider accountData)
+        private IHashService _hasher;
+
+        public RegisterController(IAccountDataProvider accountData, IHashService hasher)
         {
             this.accountDataProvider = accountData;
+            this._hasher = hasher;
         }
 
         // GET: /<controller>/
@@ -25,17 +29,17 @@ namespace Sweeter.Controllers
         {
             return View();
         }
-        string GetHashString(string s)
-        {
-            byte[] bytes = Encoding.Unicode.GetBytes(s);
-            MD5CryptoServiceProvider CSP =
-                new MD5CryptoServiceProvider();
-            byte[] byteHash = CSP.ComputeHash(bytes);
-            string hash = string.Empty;
-            foreach (byte b in byteHash)
-                hash += string.Format("{0:x2}", b);
-            return hash;
-        }
+        //string GetHashString(string s)
+        //{
+        //    byte[] bytes = Encoding.Unicode.GetBytes(s);
+        //    MD5CryptoServiceProvider CSP =
+        //        new MD5CryptoServiceProvider();
+        //    byte[] byteHash = CSP.ComputeHash(bytes);
+        //    string hash = string.Empty;
+        //    foreach (byte b in byteHash)
+        //        hash += string.Format("{0:x2}", b);
+        //    return hash;
+        //}
 
         [HttpPost]
         public IActionResult Index(AccountModel account, IFormFile avatar)
@@ -57,7 +61,7 @@ namespace Sweeter.Controllers
                             }
                             account.Avatar = ImageData;
                         }
-                        account.Password = GetHashString(account.Password);
+                        account.Password = _hasher.GetHashString(account.Password);
                         accountDataProvider.AddAccount(account);
                         return RedirectToAction("Index", "Login");
                     }
