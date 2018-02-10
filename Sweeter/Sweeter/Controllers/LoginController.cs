@@ -1,8 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Sweeter.DataProviders;
 using Sweeter.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Logging;
 using Sweeter.Services.HashService;
 
 
@@ -14,13 +20,15 @@ namespace Sweeter.Controllers
     [Route("/Username")]
     public class LoginController : Controller
     {
+        private readonly ILogger _logger;
         private IAccountDataProvider accountDataProvider;
         private IHashService _hasher;
 
-        public LoginController(IAccountDataProvider accountData, IHashService hasher)
+        public LoginController(IAccountDataProvider accountData, IHashService hasher, ILogger<LoginController> logger)
         {
             this.accountDataProvider = accountData;
             this._hasher = hasher;
+            this._logger = logger;
         }
         // GET: /<controller>/
         public IActionResult Index()
@@ -50,25 +58,80 @@ namespace Sweeter.Controllers
         //}
 
         [HttpPost]
-        public string Login(string email, string password)
+        public async Task<IActionResult> OnPostAsync(string email, string password)
         {
-            IEnumerable<AccountModel> accs = accountDataProvider.GetAccountsByEmail(email);
-        
-           if(accs.Count()!=0)
+
+
+            if (ModelState.IsValid)
             {
+
+
+                var user = await AuthenticateUser(email, password);
+
+                if (user == null)
                 {
-                    if (accs.First().Password.Equals(_hasher.GetHashString(password)))
-                    {
-                        return "All is good";
-                    }
-                    return "Incorrect password";
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return RedirectToAction("Index", "Index");
                 }
+
+
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.Email)
+
+                };
+
+                var claimsIdentity = new ClaimsIdentity(
+                    claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var authProperties = new AuthenticationProperties
+                {
+
+                };
+
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity),
+                    authProperties);
+
+
+                _logger.LogInformation($"User {user.Email} logged in at {DateTime.UtcNow}.");
+
+                return RedirectToAction("Index", "Posts");
             }
-            
-            
-            return "There's no such account";
-            
+
+            // Something failed. Redisplay the form.
+            return RedirectToAction("Index", "Login");
         }
-        
+
+        private async Task<AccountModel> AuthenticateUser(string email, string password)
+        {
+            // For demonstration purposes, authenticate a user
+            // with a static email address. Ignore the password.
+            // Assume that checking the database takes 500ms
+
+            await Task.Delay(500);
+            IEnumerable<AccountModel> accs = accountDataProvider.GetAccountsByEmail(email);
+
+            if (accs.Count() != 0)
+            {
+
+                if (accs.First().Password.Equals(_hasher.GetHashString(password)))
+                {
+                    return new AccountModel()
+                    {
+                        Email = email
+
+                    };
+
+                }
+                return null;
+            }
+            return null;
+
+        }
+
+
+
     }
 }
