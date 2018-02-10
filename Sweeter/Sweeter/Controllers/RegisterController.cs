@@ -1,40 +1,30 @@
-﻿using System.Linq;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Sweeter.DataProviders;
 using Sweeter.Models;
-using System.Security.Cryptography;
-using System.Text;
+using Sweeter.Services.HashService;
 using System.IO;
-using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace Sweeter.Controllers
 {
-   
+
     [Route("/Register")]
     public class RegisterController : Controller
     {
         private IAccountDataProvider accountDataProvider;
-        public RegisterController(IAccountDataProvider accountData)
+        private IHashService _hasher;
+
+        public RegisterController(IAccountDataProvider accountData, IHashService hasher)
         {
-            this.accountDataProvider = accountData;
+            accountDataProvider = accountData;
+            _hasher = hasher;
         }
 
         // GET: /<controller>/
         public IActionResult Index()
         {
             return View();
-        }
-        string GetHashString(string s)
-        {
-            byte[] bytes = Encoding.Unicode.GetBytes(s);
-            MD5CryptoServiceProvider CSP =
-                new MD5CryptoServiceProvider();
-            byte[] byteHash = CSP.ComputeHash(bytes);
-            string hash = string.Empty;
-            foreach (byte b in byteHash)
-                hash += string.Format("{0:x2}", b);
-            return hash;
         }
 
         [HttpPost]
@@ -66,7 +56,7 @@ namespace Sweeter.Controllers
                             }
                         }
                         account.Avatar = ImageData;
-                        account.Password = GetHashString(account.Password);
+                        account.Password = _hasher.GetHashString(account.Password);
                         accountDataProvider.AddAccount(account);
                         return RedirectToAction("Index", "Login");
                     }

@@ -3,8 +3,6 @@ using System.Data.SqlClient;
 
 namespace Sweeter.Services.ConnectionFactory
 {
-
-
     public class ConnectionFactory : IConnectionFactory
     {
         private ConnectionStrings _string;

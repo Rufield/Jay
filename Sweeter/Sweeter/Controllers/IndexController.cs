@@ -14,14 +14,10 @@ namespace Sweeter.Controllers
         {
             if (action == "signin")
             {
-
                 return RedirectPermanent("/Username");
-
             }
 
             return RedirectPermanent("/Register");
-
-
 
         }
     }

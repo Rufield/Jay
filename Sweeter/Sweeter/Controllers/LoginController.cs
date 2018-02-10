@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Sweeter.DataProviders;
 using Sweeter.Models;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.Logging;
 using Sweeter.Services.HashService;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -36,27 +36,6 @@ namespace Sweeter.Controllers
             return View();
         }
 
-        //string GetHashString(string s)
-        //{
-
-        //    byte[] bytes = Encoding.Unicode.GetBytes(s);
-
-
-        //    MD5CryptoServiceProvider CSP =
-        //        new MD5CryptoServiceProvider();
-
-
-        //    byte[] byteHash = CSP.ComputeHash(bytes);
-
-        //    string hash = string.Empty;
-
-
-        //    foreach (byte b in byteHash)
-        //        hash += string.Format("{0:x2}", b);
-
-        //    return hash;
-        //}
-
         [HttpPost]
         public async Task<IActionResult> OnPostAsync(string email, string password)
         {
@@ -78,7 +57,6 @@ namespace Sweeter.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.Email)
-
                 };
 
                 var claimsIdentity = new ClaimsIdentity(
@@ -121,17 +99,14 @@ namespace Sweeter.Controllers
                     return new AccountModel()
                     {
                         Email = email
-
                     };
 
                 }
                 return null;
+
             }
             return null;
 
         }
-
-
-
     }
 }
