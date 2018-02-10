@@ -1,0 +1,91 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="~/js/require.js"></script>
+
+    <link rel="stylesheet" href="~/lib/src/bootstrap.min.css">
+
+    <link rel="stylesheet" href="~/lib/src/style.css">
+    <link rel="icon" type="image/png" href="~/lib/img/logo.png">
+    <link rel="shortcut icon" href="~/lib/img/logo.png" type="image/png">
+    <title>Registering Jay</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-2 col-xs-1 col-lg-2 col-sm-2"></div>
+        <div class="col-md-8 col-xs-10 col-lg-8 col-sm-8">
+
+            <h1 class="headlabel">
+                Now you need only to register.
+            </h1>
+            <h1 class="headlabel">By "*" are marked fields, that are mandatory.</h1>
+
+            <h1></h1>
+
+        </div>
+        <div class="col-md-2 col-xs-1 col-lg-2 col-sm-2"></div>
+    </div>
+    <div class="forma">
+        <form method="post" >
+
+
+
+            <div class="row">
+                <div class="col-md-3 col-xs-0 col-lg-3 col-sm-3" style="text-align:center">
+                    <p>
+                        <img src="~/lib/img/avatar.jpeg" width=68%>
+                        <div class="row">
+
+                            <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12" style="text-align:center">
+                                <label class="btn btn-default btn-file">Choose your avatar
+                    <p style="text-align:right">
+                        <input type="file" name="avatar" value="avatar" id="avatar" style="display:none">
+                        </label>
+                </div>
+
+            </div>
+    </div>
+    <div class="col-md-6 col-xs-12 col-lg-6 col-sm-6">
+
+        <p><label for="fullname" style="text-align:center">Your Full Name </label>
+        <p><input type="text" name="fullname" id="fullname" class="textin"></input>
+        <p><label for="username" style="text-align:center">Your Username* </label>
+        <p><input type="text" name="username" class="textin" id="username" required></input>
+        <p><label for="email" style="text-align:center">Your E-mail* </label>
+        <p><input type="Email" id="email" name="Email" class="textin" required></input>
+    </div>
+    <div class="col-md-3 col-xs-0 col-lg-3 col-sm-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-xs-0 col-lg-3 col-sm-3"></div>
+        <div class="col-md-6 col-xs-12 col-lg-6 col-sm-6">
+            <p><label for="password" style="text-align:center">Your Password* </label>
+            <p><input type="password" name="password" id="password" class="textin" required></input>
+            <p><label for="password2" style="text-align:center">Repeat Your Password* </label>
+            <p><input type="password" id="password2" name="password2" class="textin" required></input>
+        </div>
+        <div class="col-md-3 col-xs-0 col-lg-3 col-sm-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 col-xs-0 col-lg-3 col-sm-3"></div>
+        <div class="col-md-6 col-xs-12 col-lg-6 col-sm-6">
+            <p style="text-align:center"><input type="submit"  class="but" value="Register" ></input>
+        </div>
+        <div class="col-md-3 col-xs-0 col-lg-3 col-sm-3"></div>
+    </div>
+
+    </form>
+    </div>
+</body>
+</html>

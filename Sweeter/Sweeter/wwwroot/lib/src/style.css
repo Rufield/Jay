@@ -1,0 +1,517 @@
+body
+{
+	background-color:rgba(250,250,250,1.0);
+}
+
+.row
+{
+	margin-left:0;
+	margin-right:0;
+	margin-top:1%;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+	width:70%;
+
+	background-color:rgba(0,184,43,0.5);
+	border-color:rgba(0,184,43,0.5);
+	border-width:1px;
+	font-family:Comic Sans MS;
+}
+.mypost
+{
+	width:94%;
+	margin:3%;
+	margin-top:1%;
+	margin-bottom:1%;
+	resize:none;
+}
+.addpost
+{
+	width:20%;
+	margin-left:77%;
+	margin-bottom:1%;
+	background-color:rgba(0,184,43,0.5);
+	border-color:rgba(0,184,43,0.5);
+	border-width:1px;
+	font-family:Comic Sans MS;
+font-size:20px;
+color:rgba(0,0,0,0.6);
+border-radius:5px;
+}
+.mobilemypost
+{
+	width:94%;
+	margin:3%;
+	margin-top:1%;
+	margin-bottom:1%;
+	resize:none;
+}
+.mobileaddpost
+{
+	width:100%;
+	
+	margin-bottom:1%;
+	background-color:white;
+	border-color:rgba(0,184,43,0.5);
+	border-width:1px;
+	font-family:Comic Sans MS;
+font-size:20px;
+color:rgba(0,0,0,0.6);
+border-radius:5px;
+}
+.addpost:hover{
+	background-color:rgba(250,250,250,1);
+}
+textarea
+{
+
+		border-color:rgba(0,184,43,0.5);
+	border-width:2px;
+	border-style:solid;
+	border-radius:10px;
+		background-color:rgba(253,253,253,1);
+		text-align:left;
+	font-family:Comic Sans MS;
+	font-size:15px;
+	color:rgba(0,0,0,0.6);
+}
+form
+{
+	display:block;
+	margin-top:0.5%;
+	margin-left:0.5%;
+	border-color:rgba(0,184,43,0.5);
+	border-width:2px;
+	border-style:solid;
+	border-radius:20px;
+	height:100%;
+	width:99%;
+}
+label
+{
+		text-align:center;
+	font-family:Comic Sans MS;
+	font-size:18px;
+	color:rgba(0,184,43,0.7);
+	
+}
+.postlabel
+{	text-align:left;
+	font-family:Comic Sans MS;
+	font-size:15px;
+	color:rgba(0,0,0,0.6);
+}
+.commentslabel
+{	text-align:left;
+	font-family:Comic Sans MS;
+	font-size:15px;
+	color:rgba(0,0,0,0.6);
+}
+.likelabel
+{	
+	font-family:Comic Sans MS;
+	font-size:15px;
+	color:rgba(0,0,0,0.6);
+}
+.commentlabel
+{	
+	font-family:Comic Sans MS;
+	font-size:15px;
+	color:rgba(0,0,0,0.6);
+}
+p{
+	margin:0;
+	text-align:center;
+}
+.textin
+{
+	margin:0;
+	border-color:rgba(0,184,43,0.5);
+	border-width:1px;
+	border-style:solid;
+	border-radius:10px;
+	width:77%;
+	height:40px;
+	text-align:center;
+	font-family:Comic Sans MS;
+	font-size:20px;
+	
+}
+.logo
+{
+	width:70%;
+	opacity:0.8;
+}
+.logoleft
+{
+	width:51%;
+	opacity:0.8;
+	margin-top:1.5%;
+
+}
+.mobilelogoleft
+{
+	width:70%;
+	opacity:0.8;
+	margin-top:1.5%;
+
+}
+.mobileavatar
+{
+		width:100%;
+		vertical-align:middle;
+}
+.avatar {
+    width: 100%;
+    vertical-align:middle;
+    margin-top:6%;
+    margin-bottom:3%;
+}
+.navi
+{
+	width:90%;
+	height:60px;
+	margin-top:3%;
+	background-color:rgba(0,184,43,0.5);
+	border-color:rgba(0,184,43,0.5);
+	border-width:1px;
+	font-family:Comic Sans MS;
+font-size:20px;
+color:rgba(0,0,0,0.6);
+border-radius:10px;
+}
+.navi:hover{
+	background-color:rgba(250,250,250,1);
+}
+.line
+{
+	margin-top:5%;
+}
+
+hr
+{
+	margin:0;
+	border-color:rgba(0,184,43,0.5);
+	border-width:2px;
+
+}
+
+.maincontainer
+{
+	margin-top:-1%;
+	border-left-color:rgba(0,184,43,0.5);
+	border-left-width:3px;
+	border-left-style:solid;
+	border-right-color:rgba(0,184,43,0.5);
+	border-right-width:3px;
+	border-right-style:solid;
+}
+.postcontainer
+{
+	background-color:rgba(0,184,43,0.5);
+	border-color:rgba(0,184,43,0.5);
+	border-width:1px;
+	border-radius:10px;
+	font-family:Comic Sans MS;
+font-size:18px;
+color:rgba(0,0,0,0.6);
+margin:3%;
+margin-top:1%;
+margin-bottom:1%;
+width:70%;
+text-align:left;
+position:relative;
+display:inline-block;
+padding:1%;
+}
+.MyInfo {
+    background-color: rgba(0,184,43,0.5);
+    border-color: rgba(0,184,43,0.5);
+    border-width: 1px;
+    border-radius: 10px;
+    margin: 3%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 94%;
+    text-align: left;
+ padding:0.5%;
+}
+.headinfo {
+    text-align: left;
+    font-family: Comic Sans MS;
+    font-size: 20px;
+    color: rgba(0,0,0,0.6);
+}
+    .commentpostcontainer {
+        background-color: rgba(0,184,43,0.5);
+        border-color: rgba(0,184,43,0.5);
+        border-width: 1px;
+        border-radius: 10px;
+        font-family: Comic Sans MS;
+        font-size: 18px;
+        color: rgba(0,0,0,0.6);
+        margin: 3%;
+        margin-top: 1%;
+        margin-bottom: 1%;
+        width: 82%;
+        text-align: left;
+        position: relative;
+        display: inline-block;
+        padding: 1%;
+    }
+.mobilenavbutton
+{
+	width:100%;
+	
+	background-color:white;
+	border-color:rgba(0,184,43,0.5);
+	border-width:1px;
+	border-radius:10px;
+	font-family:Comic Sans MS;
+font-size:18px;
+color:rgba(0,0,0,0.6);
+}
+.mobilesignout
+{
+	margin-left:3%;
+	width:30%;
+	margin-top:1%;
+	margin-bottom:1%;
+	display:inline-block;
+}
+.mobilemypage
+{
+	margin-left:1%;
+	width:30%;
+	margin-top:1%;
+	margin-bottom:1%;
+	display:inline-block;
+}
+.mobilefeeds
+{
+	margin-left:1%;
+	width:30%;
+	margin-top:1%;
+	margin-bottom:1%;
+	display:inline-block;
+}
+.statcontainer
+{
+	display:inline-block;
+
+	vertical-align:center;
+}
+.like
+{
+	vertical-align:middle;
+	width:5%;
+	display:inline-block;
+	
+	margin-left:-2%;
+}
+.commentlike
+{
+	vertical-align:middle;
+	width:5%;
+	display:inline-block;
+	
+	margin-left:-2%;
+}
+.comment
+{
+	vertical-align:middle;
+	width:5%;
+	display:inline-block;
+	
+	margin-left:1%;
+opacity:0.8;
+}
+.likecontainer
+{
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	background-color:rgba(0,184,43,0.5);
+	border-color:rgba(0,184,43,0.5);
+	border-width:1px;
+	border-radius:5px;
+	font-size:16px;
+	font-family:Comic Sans MS;
+	width:5%;
+
+	margin-left:1%;
+
+}
+.notright {
+    background-color: #fcbdbd;
+    border-color: #f00;
+    border-width: 1px;
+    border-radius: 5px;
+}
+.commentcontainer
+{
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	background-color:rgba(0,184,43,0.5);
+	border-color:rgba(0,184,43,0.5);
+	border-width:1px;
+	border-radius:5px;
+	font-size:16px;
+	font-family:Comic Sans MS;
+	width:5%;
+
+	margin-left:1%;
+}
+.headlabel
+{
+	text-align:center;
+	font-family:Comic Sans MS;
+	font-size:25px;
+	color:rgba(0,184,43,0.7);
+}
+.but
+{
+	margin-top:0.5%;
+	margin-bottom:0.5%;
+	width:70%;
+	height:70px;
+	background-color:rgba(0,184,43,0.5);
+	border-color:rgba(0,184,43,0.5);
+	border-width:1px;
+	font-family:Comic Sans MS;
+font-size:20px;
+color:rgba(0,0,0,0.6);
+border-radius:10px;
+
+}
+.addfeedmobile
+{
+	background-color:rgba(0,184,43,0.8);
+	border-top-color:rgba(0,184,43,0.5);
+	border-top-width:3px;
+	border-radius:10px;
+	font-family:Comic Sans MS;
+	display:block;
+	position:fixed;
+	bottom:0;
+	left:0;
+	z-index:100;
+	width:100%;
+	
+}
+.leftside {
+    position: fixed;
+    width:16.67%;
+}
+.rightside {
+    position: fixed;
+    width: 16.66%;
+    right:0;
+    text-align:center;
+}
+affix {
+    position: fixed;
+}
+.mobileheadlabel
+{
+	font-family:Comic Sans MS;
+	font-size:45px;
+	vertical-align:bottom;
+	text-align:center;
+		color:rgba(0,184,43,0.7);
+		top:8%;
+}
+.but:hover{
+	background-color:rgba(250,250,250,1);
+}
+.but:focus
+{
+	border-radius:10px;
+}
+@media screen and (max-width:767px)
+{
+	.headinfo
+    {
+        font-size:18px;
+        text-align:center;
+	}
+	.headlabel{
+		font-size:19px;
+	}
+	.but{
+		font-size:20px;
+	}
+.leftside
+{
+	display:none;
+	
+}
+.rightside
+{
+	display:none;
+}
+	.addfeedform
+	{
+		display:none;
+	}
+	.postcontainer{
+		width:94%;
+	}
+    .commentpostcontainer {
+        width: 94%;
+    }
+	.like
+{
+	vertical-align:middle;
+	width:10%;
+	display:inline-block;
+	margin-top:1%;
+	margin-left:53%;
+}
+    .commentlike {
+        vertical-align: middle;
+        width: 10%;
+        display: inline-block;
+        margin-top: 1%;
+        margin-left: 75%;
+    }
+.likecontainer
+{
+	width:10%;
+	margin-top:-0%;
+	border-radius:10px;
+}
+.comment
+{
+
+	width:10%;
+
+	margin-top:0%;
+
+
+}
+.commentcontainer
+{
+	width:10%;
+	margin-top:0%;
+		border-radius:10px;
+}
+}
+@media screen and (min-width:767px)
+{
+	.headmobile
+	{
+		display:none;
+	}
+	.addfeedmobile
+	{
+		display:none;
+	}
+    .maincontainer
+    {
+margin-left:16.67%;
+    }
+}
