@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <script src="~/js/require.js"></script>
-
+    <script type="text/javascript" src="~/js/AddingPicture.js"></script>
     <link rel="stylesheet" href="~/lib/src/bootstrap.min.css">
 
     <link rel="stylesheet" href="~/lib/src/style.css">
@@ -21,40 +21,34 @@
     <title>Registering Jay</title>
 </head>
 <body>
+    <!--Intoduction-->
     <div class="row">
         <div class="col-md-2 col-xs-1 col-lg-2 col-sm-2"></div>
         <div class="col-md-8 col-xs-10 col-lg-8 col-sm-8">
-
             <h1 class="headlabel">
                 Now you need only to register.
             </h1>
-           
-
             <h1></h1>
-
         </div>
         <div class="col-md-2 col-xs-1 col-lg-2 col-sm-2"></div>
     </div>
+    <!--Picture-->
     <div class="forma">
         <form method="post">
-
-
-
             <div class="row">
                 <div class="col-md-3 col-xs-0 col-lg-3 col-sm-3" style="text-align:center">
                     <p>
                         <img src="~/lib/img/avatar.jpeg" width=68%>
                         <div class="row">
-
                             <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12" style="text-align:center">
                                 <label class="btn btn-default btn-file">Choose your avatar
                     <p style="text-align:right">
-                        <input type="file" name="avatar" value="avatar" id="avatar" style="display:none">
-                        </label>
+                        <input type="file" onchange="upload()" accept="image/*" name="avatar" value="avatar" id="avatar" style="display:none">
                 </div>
-
             </div>
+        </form>
     </div>
+    <!--First part-->
     <div class="col-md-6 col-xs-12 col-lg-6 col-sm-6">
         <h1 class="headlabel">@ViewData["ErrorMessage"]</h1>
         <p><label for="fullname" style="text-align:center">Your Full Name </label>
@@ -65,7 +59,7 @@
         <p><input type="Email" id="email" name="Email" class="textin @ViewData["EmailStat"]" value="@ViewData["Email"]" required></input>
     </div>
     <div class="col-md-3 col-xs-0 col-lg-3 col-sm-3"></div>
-    </div>
+    <!--Second part-->
     <div class="row">
         <div class="col-md-3 col-xs-0 col-lg-3 col-sm-3"></div>
         <div class="col-md-6 col-xs-12 col-lg-6 col-sm-6">
@@ -76,19 +70,18 @@
         </div>
         <div class="col-md-3 col-xs-0 col-lg-3 col-sm-3"></div>
     </div>
-
+    <!--Submit-->
     <div class="row">
         <div class="col-md-3 col-xs-0 col-lg-3 col-sm-3"></div>
         <div class="col-md-6 col-xs-12 col-lg-6 col-sm-6">
             <p style="text-align:center">
 
                 <input type="submit" class="but" value="Register"></input>
-               
-</div>
+
+        </div>
         <div class="col-md-3 col-xs-0 col-lg-3 col-sm-3"></div>
     </div>
 
-    </form>
     </div>
 </body>
 </html>
