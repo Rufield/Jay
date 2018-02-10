@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Sweeter.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using Sweeter.DataProviders;
 
 namespace Sweeter.Controllers
 {
-    
+
     [Route("/Posts")]
     public class PostsController : Controller
     {

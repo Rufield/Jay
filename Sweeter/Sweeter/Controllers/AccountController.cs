@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Sweeter.Models;
-using Dapper;
-using System.Data.SqlClient;
-using Microsoft.AspNetCore.Mvc;
-using Sweeter.DataProviders;
+﻿using Microsoft.AspNetCore.Mvc;
 
 
 
@@ -15,8 +7,8 @@ using Sweeter.DataProviders;
 
 namespace Sweeter.Controllers
 {
- 
-   
+
+
     [Route("/account")]
     public class AccountController : Controller
     {

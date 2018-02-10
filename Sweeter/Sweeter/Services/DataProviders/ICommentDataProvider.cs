@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Sweeter.DataProviders
 {
     using Models;
-    using Dapper;
 
-  public  interface ICommentDataProvider
+    public  interface ICommentDataProvider
     {
         IEnumerable<CommentModel> GetComments();
    IEnumerable<CommentModel> GetCommentsOfPost(int idpost);

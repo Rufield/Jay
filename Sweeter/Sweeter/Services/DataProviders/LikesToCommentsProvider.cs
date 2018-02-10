@@ -1,33 +1,32 @@
-﻿using System;
+﻿using Dapper;
+using Sweeter.Models;
+using Sweeter.Services.ConnectionFactory;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Sweeter.Models;
-using Dapper;
-using System.Data.SqlClient;
-
 
 namespace Sweeter.DataProviders
 {
     public class LikesToCommentsProvider : ILikesToCommentsProvider
     {
-        string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private IConnectionFactory factory;
 
-        private SqlConnection sqlConnection;
+        public LikesToCommentsProvider(IConnectionFactory connection)
+        {
+            factory = connection;
+        }
+
         public void AddLike(LikesToCommentsModel like)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = factory.CreateConnection)
             {
-                sqlConnection.Execute(@"insert into LikesToCommentTable(IDuser,IDcomment)
-      values (@IDauthor, @IDcomment);",
-    new { IDauthor=like.Author.IDuser, IDcomment=like.Comment.IDcomment });
-
+                sqlConnection.Execute(@"insert into LikesToCommentTable(IDuser,IDcomment) values (@IDauthor, @IDcomment);",
+                new { IDauthor=like.Author.IDuser, IDcomment=like.Comment.IDcomment });
             }
         }
 
         public void DeleteLike(int id)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = factory.CreateConnection)
             {
                 sqlConnection.Execute(@"delete from LikesToCommentTable where IDus_com = @id",new { id = id });
             }
@@ -35,7 +34,7 @@ namespace Sweeter.DataProviders
 
         public LikesToCommentsModel GetLike(int id)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = factory.CreateConnection)
             {
                 var like = sqlConnection.Query<LikesToCommentsModel>("select * from LikesToCommentTable where IDus_com = @id", new { id = id }).First();
                 return like;
@@ -44,29 +43,30 @@ namespace Sweeter.DataProviders
 
         public IEnumerable<LikesToCommentsModel> GetLikes()
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = factory.CreateConnection)
             {
                 var likes = sqlConnection.Query<LikesToCommentsModel>("select * from LikesToCommentTable").ToList();
                 return likes;
             }
         }
+
         public IEnumerable<LikesToCommentsModel> GetLikesOfComment(int idcomment)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = factory.CreateConnection)
             {
                 var likes = sqlConnection.Query<LikesToCommentsModel>("select * from LikesToCommentTable where IDcomment=@idcomment", new { idcomment = idcomment }).ToList();
                 return likes;
             }
         }
+
         public IEnumerable<LikesToCommentsModel> GetLikesOfAuthor(int idauthor)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = factory.CreateConnection)
             {
                 var likes = sqlConnection.Query<LikesToCommentsModel>("select * from LikesToCommentTable where IDuser=@iduser", new { iduser = idauthor }).ToList();
                 return likes;
             }
         }
     }
-  
 }
 

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Dapper;
+﻿using System.Collections.Generic;
 
 namespace Sweeter.DataProviders
 {
     using Models;
- 
-   public interface IPostDataProvider
+
+    public interface IPostDataProvider
     {
         IEnumerable<PostsModel> GetPosts();
         IEnumerable<PostsModel> GetPostsOfAuthor( int idauthor);
