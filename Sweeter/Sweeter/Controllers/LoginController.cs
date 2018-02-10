@@ -5,33 +5,30 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Sweeter.DataProviders;
 using Sweeter.Models;
-using System.Security.Cryptography;
 using System.Security.Claims;
-using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Logging;
-
+using Sweeter.Services.HashService;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Sweeter.Controllers
 {
-    
+
     [Route("/Username")]
     public class LoginController : Controller
     {
-
         private readonly ILogger _logger;
-
-
-
         private IAccountDataProvider accountDataProvider;
-        public LoginController(IAccountDataProvider accountData, ILogger<LoginController> logger)
+        private IHashService _hasher;
+
+        public LoginController(IAccountDataProvider accountData, IHashService hasher, ILogger<LoginController> logger)
         {
             this.accountDataProvider = accountData;
-            _logger = logger;
+            this._hasher = hasher;
+            this._logger = logger;
         }
         // GET: /<controller>/
         public IActionResult Index()
@@ -39,52 +36,49 @@ namespace Sweeter.Controllers
             return View();
         }
 
-        string GetHashString(string s)
-        {
+        //string GetHashString(string s)
+        //{
 
-            byte[] bytes = Encoding.Unicode.GetBytes(s);
-
-
-            MD5CryptoServiceProvider CSP =
-                new MD5CryptoServiceProvider();
+        //    byte[] bytes = Encoding.Unicode.GetBytes(s);
 
 
-            byte[] byteHash = CSP.ComputeHash(bytes);
+        //    MD5CryptoServiceProvider CSP =
+        //        new MD5CryptoServiceProvider();
 
-            string hash = string.Empty;
+
+        //    byte[] byteHash = CSP.ComputeHash(bytes);
+
+        //    string hash = string.Empty;
 
 
-            foreach (byte b in byteHash)
-                hash += string.Format("{0:x2}", b);
+        //    foreach (byte b in byteHash)
+        //        hash += string.Format("{0:x2}", b);
 
-            return hash;
-        }
+        //    return hash;
+        //}
 
-       
-      
-        
         [HttpPost]
         public async Task<IActionResult> OnPostAsync(string email, string password)
         {
-           
+
 
             if (ModelState.IsValid)
             {
-                
 
-                var user = await AuthenticateUser(email,password);
+
+                var user = await AuthenticateUser(email, password);
 
                 if (user == null)
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return RedirectToAction("Index","Index");
+                    return RedirectToAction("Index", "Index");
                 }
 
-                
+
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.Email)
-                    
+
                 };
 
                 var claimsIdentity = new ClaimsIdentity(
@@ -92,14 +86,14 @@ namespace Sweeter.Controllers
 
                 var authProperties = new AuthenticationProperties
                 {
-                    
+
                 };
 
                 await HttpContext.SignInAsync(
                     CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(claimsIdentity),
                     authProperties);
-                
+
 
                 _logger.LogInformation($"User {user.Email} logged in at {DateTime.UtcNow}.");
 
@@ -115,35 +109,29 @@ namespace Sweeter.Controllers
             // For demonstration purposes, authenticate a user
             // with a static email address. Ignore the password.
             // Assume that checking the database takes 500ms
-            
+
             await Task.Delay(500);
             IEnumerable<AccountModel> accs = accountDataProvider.GetAccountsByEmail(email);
 
             if (accs.Count() != 0)
             {
-                
-                    if (accs.First().Password.Equals(GetHashString(password)))
-                    {
+
+                if (accs.First().Password.Equals(_hasher.GetHashString(password)))
+                {
                     return new AccountModel()
                     {
                         Email = email
 
-                        };
+                    };
 
-                    }
+                }
                 return null;
-                    
-                
-
-
-               
-
             }
             return null;
-         
+
         }
 
-       
-        
+
+
     }
 }

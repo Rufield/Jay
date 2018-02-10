@@ -1,46 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Sweeter.DataProviders;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Http;
+using Sweeter.Services.ConnectionFactory;
+using Sweeter.Services.HashService;
+using Microsoft.Extensions.Logging;
 
 namespace Sweeter
 {
     public class Startup
     {
-		public Startup(IConfiguration configuration)
-		{
-		Configuration = configuration;
-		}
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-		public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           
+            services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
             services.AddTransient<IAccountDataProvider, AccountDataProvider>();
-           services.AddTransient<IPostDataProvider, PostDataProvider>();
-        services.AddTransient<ICommentDataProvider, CommentDataProvider>();
-		services.AddTransient<ILikesToCommentsProvider, LikesToCommentsProvider>();
-          services.AddTransient<ILikesToPostsProvider, LikesToPostsProvider>();
+            services.AddTransient<IPostDataProvider, PostDataProvider>();
+            services.AddTransient<ICommentDataProvider, CommentDataProvider>();
+            services.AddTransient<ILikesToCommentsProvider, LikesToCommentsProvider>();
+            services.AddTransient<ILikesToPostsProvider, LikesToPostsProvider>();
+            services.AddTransient<IHashService, HashService>();
+            services.AddTransient<IConnectionFactory, ConnectionFactory>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
- .AddCookie();
+                .AddCookie();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            // Add framework services.
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
