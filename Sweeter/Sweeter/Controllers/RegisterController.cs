@@ -46,17 +46,26 @@ namespace Sweeter.Controllers
                 {
                     if (accountDataProvider.GetAccountsByUsername(account.Username).Count() == 0)
                     {
+                        byte[] ImageData;
+                        var filepath = Path.GetTempFileName();
                         if (avatar != null)
                         {
-                            byte[] ImageData;
-                            var filepath = Path.GetTempFileName();
                             using (Stream fs = avatar.OpenReadStream())
                             {
                                 ImageData = new byte[fs.Length];
                                 fs.Read(ImageData, 0, ImageData.Length);
                             }
-                            account.Avatar = ImageData;
                         }
+                        else
+                        {
+                            
+                            using (FileStream FS = new FileStream("wwwroot/lib/img/Avatar.jpeg", FileMode.Open))
+                            {
+                                ImageData = new byte[FS.Length];
+                                FS.Read(ImageData, 0, ImageData.Length);
+                            }
+                        }
+                        account.Avatar = ImageData;
                         account.Password = GetHashString(account.Password);
                         accountDataProvider.AddAccount(account);
                         return RedirectToAction("Index", "Login");
