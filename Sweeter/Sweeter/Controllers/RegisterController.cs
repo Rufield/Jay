@@ -2,23 +2,22 @@
 using Microsoft.AspNetCore.Mvc;
 using Sweeter.DataProviders;
 using Sweeter.Models;
+using System.Security.Cryptography;
+using System.Text;
 using System.IO;
 using Microsoft.AspNetCore.Http;
-using Sweeter.Services.HashService;
+using System.Collections.Generic;
 
 namespace Sweeter.Controllers
 {
-
+   
     [Route("/Register")]
     public class RegisterController : Controller
     {
         private IAccountDataProvider accountDataProvider;
-        private IHashService _hasher;
-
-        public RegisterController(IAccountDataProvider accountData, IHashService hasher)
+        public RegisterController(IAccountDataProvider accountData)
         {
             this.accountDataProvider = accountData;
-            this._hasher = hasher;
         }
 
         // GET: /<controller>/
@@ -26,17 +25,17 @@ namespace Sweeter.Controllers
         {
             return View();
         }
-        //string GetHashString(string s)
-        //{
-        //    byte[] bytes = Encoding.Unicode.GetBytes(s);
-        //    MD5CryptoServiceProvider CSP =
-        //        new MD5CryptoServiceProvider();
-        //    byte[] byteHash = CSP.ComputeHash(bytes);
-        //    string hash = string.Empty;
-        //    foreach (byte b in byteHash)
-        //        hash += string.Format("{0:x2}", b);
-        //    return hash;
-        //}
+        string GetHashString(string s)
+        {
+            byte[] bytes = Encoding.Unicode.GetBytes(s);
+            MD5CryptoServiceProvider CSP =
+                new MD5CryptoServiceProvider();
+            byte[] byteHash = CSP.ComputeHash(bytes);
+            string hash = string.Empty;
+            foreach (byte b in byteHash)
+                hash += string.Format("{0:x2}", b);
+            return hash;
+        }
 
         [HttpPost]
         public IActionResult Index(AccountModel account, IFormFile avatar)
@@ -47,18 +46,27 @@ namespace Sweeter.Controllers
                 {
                     if (accountDataProvider.GetAccountsByUsername(account.Username).Count() == 0)
                     {
+                        byte[] ImageData;
+                        var filepath = Path.GetTempFileName();
                         if (avatar != null)
                         {
-                            byte[] ImageData;
-                            var filepath = Path.GetTempFileName();
                             using (Stream fs = avatar.OpenReadStream())
                             {
                                 ImageData = new byte[fs.Length];
                                 fs.Read(ImageData, 0, ImageData.Length);
                             }
-                            account.Avatar = ImageData;
                         }
-                        account.Password = _hasher.GetHashString(account.Password);
+                        else
+                        {
+                            
+                            using (FileStream FS = new FileStream("wwwroot/lib/img/Avatar.jpeg", FileMode.Open))
+                            {
+                                ImageData = new byte[FS.Length];
+                                FS.Read(ImageData, 0, ImageData.Length);
+                            }
+                        }
+                        account.Avatar = ImageData;
+                        account.Password = GetHashString(account.Password);
                         accountDataProvider.AddAccount(account);
                         return RedirectToAction("Index", "Login");
                     }
