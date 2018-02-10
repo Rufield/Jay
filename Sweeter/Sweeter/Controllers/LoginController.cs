@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Sweeter.DataProviders;
 using Sweeter.Models;
-using System.Security.Cryptography;
-using System.Text;
 using Sweeter.Services.HashService;
 
 
@@ -14,7 +10,7 @@ using Sweeter.Services.HashService;
 
 namespace Sweeter.Controllers
 {
-    
+
     [Route("/Username")]
     public class LoginController : Controller
     {

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sweeter.DataProviders;
+using Sweeter.Services.ConnectionFactory;
 using Sweeter.Services.HashService;
 
 namespace Sweeter
@@ -30,6 +27,7 @@ namespace Sweeter
             services.AddTransient<ILikesToCommentsProvider, LikesToCommentsProvider>();
             services.AddTransient<ILikesToPostsProvider, LikesToPostsProvider>();
             services.AddTransient<IHashService, HashService>();
+            services.AddTransient<IConnectionFactory, ConnectionFactory>();
             services.AddMvc();
         }
 

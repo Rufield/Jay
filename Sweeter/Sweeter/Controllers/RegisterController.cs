@@ -2,16 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Sweeter.DataProviders;
 using Sweeter.Models;
-using System.Security.Cryptography;
-using System.Text;
 using System.IO;
 using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
 using Sweeter.Services.HashService;
 
 namespace Sweeter.Controllers
 {
-   
+
     [Route("/Register")]
     public class RegisterController : Controller
     {
