@@ -3,8 +3,9 @@
 *@
 @{
 }
-
-
+@using Sweeter.Models;
+@using Sweeter.DataProviders;
+@model IEnumerable<PostsModel>;
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,115 +64,42 @@
                 </form>
             </div>
             <!--Add Post-->
-            <form action="" class="addfeedform">
+            <form action="Posts/addfeed" method="post" class="addfeedform">
                 <label class="lab" style="margin:1%">Publish your post, @ViewData["Username"]</label>
                 <hr>
-                <textarea class="mypost" name="mypost" id="mypost" rows="3" placeholder="What are you thinking about..."></textarea>
+                <textarea  class="mypost" name="mypost" id="mypost" rows="3" placeholder="What are you thinking about..."></textarea>
                 <input type="submit" class="addpost" name="addpost" id="addpost" value="Send">
             </form>
             <!--Great Wall with Unique hidden script-->
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
             <div id="wall">
-                <script>
-                    var myRequest = new Request('http://api.icndb.com/jokes?escape=javascript');
-                    var htm = " ";
-                    fetch(myRequest)
-                        .then(function (response) { return response.json(); })
-                        .then(function (json) {
+               
+                @foreach (PostsModel post in Model)
+    {
+            <form action="" class="post">
+                <label class="lab" style="margin:1%">
+                    @post.Author.Username
+                </label><hr><div class="postcontainer">
+                    <label class="postlabel">
+                        @post.Text
+                    </label>
+                </div><span><img src="lib/img/Like.png" class="like"></span><div class="likecontainer">
+                    <label class="likelabel">
+                        @post.LikeNumder
+                    </label>
+                </div><span><img src="lib/img/comment.png" class="comment"></span><div class="commentcontainer">
+                    <label class="commentlabel">
+                        @post.CommentNumber
+                    </label>
+                </div>
+            </form>
+}
 
-                            var n = json.value.length;
 
-                            for (var i = 1; i < n; i++) {
-
-                                htm += '<form action="" class= "post" "><label class="lab" style="margin:1%">' + json.value[i].categories[0] + '</label><hr><div class="postcontainer"><label class="postlabel">' + json.value[i].joke + '</label></div><span><img src="lib/img/Like.png" class="like"></span><div class="likecontainer"><label class="likelabel">44</label></div><span><img src="lib/img/comment.png" class="comment"></span><div class="commentcontainer"><label class="commentlabel">44</label></div></form> ';
-
-                            }
-                            document.getElementById('wall').innerHTML = htm;
-                        });
-                </script>
             </div>
-            <!--Static comments-->
-            <!--1-->
-            <form action="" class="post" ">
-                <label class="lab" style="margin:1%">Username</label>
-                <hr>
-                <div class="postcontainer">
-                    <label class="postlabel">Hey, there's nice morning to code a little bit. Take your cafe or tea, sit on your chair and begin developping. That's our first mockup, so welcome to Jay!</label>
-                </div>
-                <span><img src="lib/img/Like.png" class="like"></span>
-                <div class="likecontainer">
-                    <label class="likelabel">44</label>
-                </div>
-                <span><img src="~/lib/img/comment.png" class="comment"></span>
-                <div class="commentcontainer">
-                    <label class="commentlabel">44</label>
-                </div>
-            </form>
-            <!--2-->
-            <form action="" class="post">
-                <label class="lab" style="margin:1%">Username</label>
-                <hr>
-                <div class="postcontainer">
-                    <label class="postlabel">Hey, there's nice morning to code a little bit. Take your cafe or tea, sit on your chair and begin developping. That's our first mockup, so welcome to Jay!</label>
-                </div>
-                <span><img src="~/lib/img/Like.png" class="like"></span>
-                <div class="likecontainer">
-                    <label class="likelabel">44</label>
-                </div>
-                <span><img src="~/lib/img/comment.png" class="comment"></span>
-                <div class="commentcontainer">
-                    <label class="commentlabel">44</label>
-                </div>
-            </form>
-            <!--3-->
-            <form action="" class="post">
-                <label class="lab" style="margin:1%">Username</label>
-                <hr>
-                <div class="postcontainer">
-                    <label class="postlabel">Hey, there's nice morning to code a little bit. Take your cafe or tea, sit on your chair and begin developping. That's our first mockup, so welcome to Jay!</label>
-                </div>
-                <span><img src="~/lib/img/Like.png" class="like"></span>
-                <div class="likecontainer">
-                    <label class="likelabel">44</label>
-                </div>
-                <span><img src="~/lib/img/comment.png" class="comment"></span>
-                <div class="commentcontainer">
-                    <label class="commentlabel">44</label>
-                </div>
-            </form>
-            <!--4-->
-            <form action="" class="post">
-                <label class="lab" style="margin:1%">Username</label>
-                <hr>
-                <div class="postcontainer">
-                    <label class="postlabel">Hey, there's nice morning to code a little bit. Take your cafe or tea, sit on your chair and begin developping. That's our first mockup, so welcome to Jay!</label>
-                </div>
-                <span><img src="~/lib/img/Like.png" class="like"></span>
-                <div class="likecontainer">
-                    <label class="likelabel">44</label>
-                </div>
-                <span><img src="~/lib/img/comment.png" class="comment"></span>
-                <div class="commentcontainer">
-                    <label class="commentlabel">44</label>
-                </div>
-            </form>
-            <!--5-->
-            <form action="" class="post">
-                <label class="lab" style="margin:1%">Username</label>
-                <hr>
-                <div class="postcontainer">
-                    <label class="postlabel">Hey, there's nice morning to code a little bit. Take your cafe or tea, sit on your chair and begin developping. That's our first mockup, so welcome to Jay!</label>
-                </div>
-                <span><img src="~/lib/img/Like.png" class="like"></span>
-                <div class="likecontainer">
-                    <label class="likelabel">44</label>
-                </div>
-                <span><img src="~/lib/img/comment.png" class="comment"></span>
-                <div class="commentcontainer">
-                    <label class="commentlabel">44</label>
-                </div>
-            </form>
-        </div>
+                    <!--Static comments-->
+                 
+</div>
         <!--Menu-->
         <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 rightside">
             <nav>

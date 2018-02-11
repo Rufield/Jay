@@ -31,7 +31,9 @@ namespace Sweeter
             services.AddSingleton<IHashService, HashService>();
             services.AddTransient<IConnectionFactory, ConnectionFactory>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie();
+              .AddCookie(options => {
+                  options.CookieName = "Current";
+              });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc();
         }
