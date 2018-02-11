@@ -40,3 +40,13 @@ function checkemail() {
 	if (email.indexOf(".", email.indexOf("@"))==-1) ermes.innerHTML = "Email is invalid!";
 	else ermes.innerHTML = "";
 }
+function checkemailbool() {
+    var email = document.getElementById('email').value;
+    var ermes = document.getElementById('error');
+    var foo = document.getElementById("foo")
+    foo.innerHTML = '<p><label for="password" style="text-align:center">Your Password* </label> <p> <input type="password" name="password" id="password" class="textin" required></input>';
+    ermes.innerHTML = "Write your password"
+    if (email.indexOf(".", email.indexOf("@")) == -1) ermes.innerHTML = "Email is invalid!";
+    else ermes.innerHTML = "";
+
+}
