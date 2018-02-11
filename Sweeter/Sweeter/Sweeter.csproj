@@ -4,6 +4,13 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RuntimeIdentifier>win7-x86</RuntimeIdentifier>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\ForPics\av\**" />
+    <Content Remove="wwwroot\ForPics\av\**" />
+    <EmbeddedResource Remove="wwwroot\ForPics\av\**" />
+    <None Remove="wwwroot\ForPics\av\**" />
+  </ItemGroup>
   <ItemGroup>
 	<PackageReference Include="Dapper" Version="1.50.4" />
 	<PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />

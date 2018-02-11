@@ -152,41 +152,6 @@ CREATE TABLE [dbo].[AccountTable](
 ) ON [PRIMARY]
 GO
 
-CREATE TABLE [dbo].[CommentTable](
-	[IDcomment] [bigint] IDENTITY(1, 1) NOT NULL,
-	[IDpost] [bigint] NOT NULL,
-	[IDuser] [bigint] NOT NULL,
-	[Text] [text] NOT NULL,
-	[LikeNumder] [int] NOT NULL,
- CONSTRAINT [PK_CommentTable] PRIMARY KEY CLUSTERED 
-(
-	[IDcomment] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-
-CREATE TABLE [dbo].[LikesToCommentTable](
-	[IDus_com] [bigint] IDENTITY(1, 1) NOT NULL,
-	[IDuser] [bigint] NOT NULL,
-	[IDcomment] [bigint] NOT NULL,
- CONSTRAINT [PK_LikesToCommentTable] PRIMARY KEY CLUSTERED 
-(
-	[IDus_com] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
-CREATE TABLE [dbo].[LikesToPostTable](
-	[IDus_post] [bigint] IDENTITY(1, 1) NOT NULL,
-	[IDuser] [bigint] NOT NULL,
-	[IDpost] [bigint] NOT NULL,
- CONSTRAINT [PK_LikesToPostTable] PRIMARY KEY CLUSTERED 
-(
-	[IDus_post] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
 CREATE TABLE [dbo].[PostTable](
 	[IDpost] [bigint] IDENTITY(1, 1) NOT NULL,
 	[IDuser] [bigint] NOT NULL,
@@ -201,148 +166,102 @@ CREATE TABLE [dbo].[PostTable](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[PostTable]  WITH CHECK ADD  CONSTRAINT [FK_PostTable_AccountTable] FOREIGN KEY([IDuser])
-REFERENCES [dbo].[AccountTable] ([IDuser])
+CREATE TABLE [dbo].[CommentTable](
+	[IDcomment] [bigint] IDENTITY(1, 1) NOT NULL,
+	[IDpost] [bigint] NOT NULL,
+	[IDuser] [bigint] NOT NULL,
+	[Text] [text] NOT NULL,
+	[LikeNumder] [int] NOT NULL,
+ CONSTRAINT [PK_CommentTable] PRIMARY KEY CLUSTERED 
+(
+	[IDcomment] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[PostTable] CHECK CONSTRAINT [FK_PostTable_AccountTable]
+CREATE TABLE [dbo].[LikesToPostTable](
+	[IDus_post] [bigint] IDENTITY(1, 1) NOT NULL,
+	[IDuser] [bigint] NOT NULL,
+	[IDpost] [bigint] NOT NULL,
+ CONSTRAINT [PK_LikesToPostTable] PRIMARY KEY CLUSTERED 
+(
+	[IDus_post] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[CommentTable]  WITH CHECK ADD  CONSTRAINT [FK_CommentTable_PostTable] FOREIGN KEY([IDpost])
-REFERENCES [dbo].[PostTable] ([IDpost])
+CREATE TABLE [dbo].[LikesToCommentTable](
+	[IDus_com] [bigint] IDENTITY(1, 1) NOT NULL,
+	[IDuser] [bigint] NOT NULL,
+	[IDcomment] [bigint] NOT NULL,
+ CONSTRAINT [PK_LikesToCommentTable] PRIMARY KEY CLUSTERED 
+(
+	[IDus_com] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[CommentTable] CHECK CONSTRAINT [FK_CommentTable_PostTable]
+ALTER TABLE [dbo].[PostTable] WITH CHECK ADD CONSTRAINT [FK_PostTable_AccountTable]
+	FOREIGN KEY ([IDuser]) REFERENCES [dbo].[AccountTable] ([IDuser])
 GO
 
-ALTER TABLE [dbo].[LikesToCommentTable]  WITH CHECK ADD  CONSTRAINT [FK_LikesToCommentTable_AccountTable] FOREIGN KEY([IDuser])
-REFERENCES [dbo].[AccountTable] ([IDuser])
+ALTER TABLE [dbo].[CommentTable] WITH CHECK ADD CONSTRAINT [FK_CommentTable_AccountTable]
+	FOREIGN KEY ([IDuser]) REFERENCES [dbo].[AccountTable] ([IDuser])
 GO
 
-ALTER TABLE [dbo].[LikesToCommentTable] CHECK CONSTRAINT [FK_LikesToCommentTable_AccountTable]
+ALTER TABLE [dbo].[LikesToPostTable] WITH CHECK ADD CONSTRAINT [FK_LikesToPostTable_AccountTable]
+	FOREIGN KEY ([IDuser]) REFERENCES [dbo].[AccountTable] ([IDuser])
 GO
 
-ALTER TABLE [dbo].[LikesToCommentTable]  WITH CHECK ADD  CONSTRAINT [FK_LikesToCommentTable_CommentTable] FOREIGN KEY([IDcomment])
-REFERENCES [dbo].[CommentTable] ([IDcomment])
+ALTER TABLE [dbo].[LikesToCommentTable] WITH CHECK ADD CONSTRAINT [FK_LikesToCommentTable_AccountTable]
+	FOREIGN KEY ([IDuser]) REFERENCES [dbo].[AccountTable] ([IDuser])
 GO
 
-ALTER TABLE [dbo].[LikesToCommentTable] CHECK CONSTRAINT [FK_LikesToCommentTable_CommentTable]
+ALTER TABLE [dbo].[CommentTable] WITH CHECK ADD CONSTRAINT [FK_CommentTable_PostTable]
+	FOREIGN KEY ([IDpost]) REFERENCES [dbo].[PostTable] ([IDpost])
 GO
 
-ALTER TABLE [dbo].[LikesToPostTable]  WITH CHECK ADD  CONSTRAINT [FK_LikesToPostTable_AccountTable] FOREIGN KEY([IDuser])
-REFERENCES [dbo].[AccountTable] ([IDuser])
+ALTER TABLE [dbo].[LikesToPostTable] WITH CHECK ADD CONSTRAINT [FK_LikesToPostTable_PostTable]
+	FOREIGN KEY ([IDpost]) REFERENCES [dbo].[PostTable] ([IDpost])
 GO
 
-ALTER TABLE [dbo].[LikesToPostTable] CHECK CONSTRAINT [FK_LikesToPostTable_AccountTable]
+ALTER TABLE [dbo].[LikesToCommentTable] WITH CHECK ADD CONSTRAINT [FK_LikesToCommentTable_CommentTable]
+	FOREIGN KEY ([IDcomment]) REFERENCES [dbo].[CommentTable] ([IDcomment])
 GO
 
-ALTER TABLE [dbo].[LikesToPostTable]  WITH CHECK ADD  CONSTRAINT [FK_LikesToPostTable_PostTable] FOREIGN KEY([IDpost])
-REFERENCES [dbo].[PostTable] ([IDpost])
+CREATE TRIGGER [DELETE_AccountTable]
+   ON dbo.[AccountTable]
+   INSTEAD OF DELETE
+AS 
+BEGIN
+ SET NOCOUNT ON;
+ DELETE FROM [LikesToCommentTable] WHERE IDuser IN (SELECT IDuser FROM DELETED)
+ DELETE FROM [LikesToPostTable] WHERE IDuser IN (SELECT IDuser FROM DELETED)
+ DELETE FROM [CommentTable] WHERE IDuser IN (SELECT IDuser FROM DELETED)
+ DELETE FROM [PostTable] WHERE IDuser IN (SELECT IDuser FROM DELETED)
+ DELETE FROM [AccountTable] WHERE IDuser IN (SELECT IDuser FROM DELETED)
+END
 GO
 
-ALTER TABLE [dbo].[LikesToPostTable] CHECK CONSTRAINT [FK_LikesToPostTable_PostTable]
+CREATE TRIGGER [DELETE_PostTable]
+   ON dbo.[PostTable]
+   INSTEAD OF DELETE
+AS 
+BEGIN
+ SET NOCOUNT ON;
+ DELETE FROM [LikesToPostTable] WHERE IDpost IN (SELECT IDpost FROM DELETED)
+ DELETE FROM [CommentTable] WHERE IDpost IN (SELECT IDpost FROM DELETED)
+ DELETE FROM [PostTable] WHERE IDpost IN (SELECT IDpost FROM DELETED)
+END
 GO
 
-INSERT INTO [dbo].[AccountTable]
-           ([Name]
-           ,[Email]
-           ,[Password]
-           ,[Username]
-           ,[Avatar])
-     VALUES
-           ('Vasa'
-           ,'Nub@gmail.com'
-           ,'123'
-           ,'Nub'
-           ,NULL)
-INSERT INTO [dbo].[AccountTable]
-           ([Name]
-           ,[Email]
-           ,[Password]
-           ,[Username]
-           ,[Avatar])
-     VALUES
-           ('Lilo'
-           ,'Lilo@gmail.com'
-           ,'321'
-           ,'Master'
-           ,NULL)
-INSERT INTO [dbo].[AccountTable]
-           ([Name]
-           ,[Email]
-           ,[Password]
-           ,[Username]
-           ,[Avatar])
-     VALUES
-           ('Bob'
-           ,'Bob@gmail.com'
-           ,'huk'
-           ,'Hucker'
-           ,NULL)
-INSERT INTO [dbo].[PostTable]
-           ([IDuser]
-           ,[Text]
-           ,[PublicDate]
-           ,[LikeNumder]
-           ,[CommentNumber])
-     VALUES
-           (1
-           ,'Hi'
-           ,1998
-           ,1
-           ,1)
-INSERT INTO [dbo].[PostTable]
-           ([IDuser]
-           ,[Text]
-           ,[PublicDate]
-           ,[LikeNumder]
-           ,[CommentNumber])
-     VALUES
-           (2
-           ,'Hi'
-           ,1998
-           ,2
-           ,2)
-INSERT INTO [dbo].[PostTable]
-           ([IDuser]
-           ,[Text]
-           ,[PublicDate]
-           ,[LikeNumder]
-           ,[CommentNumber])
-     VALUES
-           (3
-           ,'Hi'
-           ,1998
-           ,3
-           ,3)
-INSERT INTO [dbo].[CommentTable]
-           ([IDpost]
-           ,[IDuser]
-           ,[Text]
-           ,[LikeNumder])
-     VALUES
-           (1
-           ,1
-           ,'I am first'
-           ,1)
-INSERT INTO [dbo].[CommentTable]
-           ([IDpost]
-           ,[IDuser]
-           ,[Text]
-           ,[LikeNumder])
-     VALUES
-           (2
-           ,2
-           ,'Ohhhh, Its my first comment'
-           ,2)
-INSERT INTO [dbo].[CommentTable]
-           ([IDpost]
-           ,[IDuser]
-           ,[Text]
-           ,[LikeNumder])
-     VALUES
-           (3
-           ,3
-           ,'Good. Its good idea'
-           ,3)
+CREATE TRIGGER [DELETE_CommentTable]
+   ON dbo.[CommentTable]
+   INSTEAD OF DELETE
+AS 
+BEGIN
+ SET NOCOUNT ON;
+ DELETE FROM [LikesToCommentTable] WHERE IDcomment IN (SELECT IDcomment FROM DELETED)
+ DELETE FROM [CommentTable] WHERE IDcomment IN (SELECT IDcomment FROM DELETED)
+END
 GO

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sweeter.DataProviders;
 using Sweeter.Models;
-using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -26,7 +25,7 @@ namespace Sweeter.Controllers
 
         
         [HttpGet]
-        public ActionResult Index(int id = 80003)
+        public ActionResult Index(int id)
         {
             //int id = Convert.ToInt32(Request.Cookies["0"]);
             IEnumerable<PostsModel> feeds = postDataProvider.GetPosts();

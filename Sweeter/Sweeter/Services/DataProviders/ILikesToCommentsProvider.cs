@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-
+﻿using Sweeter.Models;
+using System.Collections.Generic;
 
 namespace Sweeter.DataProviders
 {
-    using Models;
-    interface ILikesToCommentsProvider
+    public interface ILikesToCommentsProvider
     {
         IEnumerable<LikesToCommentsModel> GetLikes();
         IEnumerable<LikesToCommentsModel> GetLikesOfComment(int idcomment);
@@ -12,9 +11,6 @@ namespace Sweeter.DataProviders
         LikesToCommentsModel GetLike(int id);
 
         void AddLike(LikesToCommentsModel like);
-
-        
-
         void DeleteLike(int id);
     }
 }
