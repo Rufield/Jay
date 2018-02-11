@@ -17,6 +17,7 @@
     <title>Jay Feeds</title>
 </head>
 <body>
+    <!--Profile Pic and Logo-->
     <div class="row">
         <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 leftside">
             <div class="logoleftt" style="text-align:center">
@@ -24,32 +25,31 @@
                 <img src="~/lib/img/logo.png" class="logoleft">
             </div>
             <hr class="line">
-            <img src="~/lib/img/Avatar.jpeg " class="avatar ">
+            <img src=@ViewData["Pic"] class="avatar ">
             <hr class="line ">
         </div>
+        <!--Same Mobile-->
         <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8 maincontainer">
             <div class="headmobile">
                 <div class="row">
                     <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
                         <img src="~/lib/img/logo.png" class="mobilelogoleft">
-
                     </div>
                     <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
                         <h1 class="mobileheadlabel">JAY</h1>
-
                     </div>
                     <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 " style="text-align:center;">
-                        <img src="~/lib/img/Avatar.jpeg" class="mobileavatar">
+                        <img src=@ViewData["Pic"] class="mobileavatar">
 
                     </div>
                 </div>
             </div>
+            <!--Mobile Menu-->
             <div class="addfeedmobile">
                 <form action="" class="addfeedformmobile">
-<textarea class="mobilemypost" name="mypost" id="mypost" rows="3" placeholder="What are you thinking about..."></textarea>
+                    <textarea class="mobilemypost" name="mypost" id="mypost" rows="3" placeholder="What are you thinking about..."></textarea>
                     <input type="submit" class="mobileaddpost" name="addpost" id="addpost" value="Send">
                     <hr style="border-color:rgba(0,0,0,0.6)">
-
                     <div class="mobilesignout">
                         <button class="mobilenavbutton">Sign out</button>
                     </div>
@@ -62,18 +62,16 @@
 
                 </form>
             </div>
-
+            <!--Add Post-->
             <form action="" class="addfeedform">
-                <label class="lab" style="margin:1%">Publish your post, Username</label>
+                <label class="lab" style="margin:1%">Publish your post, @ViewData["Username"]</label>
                 <hr>
-<textarea class="mypost" name="mypost" id="mypost" rows="3" placeholder="What are you thinking about..."></textarea><input type="submit" class="addpost" name="addpost" id="addpost" value="Send">
-
+                <textarea class="mypost" name="mypost" id="mypost" rows="3" placeholder="What are you thinking about..."></textarea>
+                <input type="submit" class="addpost" name="addpost" id="addpost" value="Send">
             </form>
+            <!--Great Wall with Unique hidden script-->
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
-            
-            
             <div id="wall">
-                
                 <script>
                     var myRequest = new Request('http://api.icndb.com/jokes?escape=javascript');
                     var htm = " ";
@@ -90,18 +88,13 @@
                             }
                             document.getElementById('wall').innerHTML = htm;
                         });
-
                 </script>
             </div>
-
-          
-
+            <!--Static comments-->
+            <!--1-->
             <form action="" class="post" ">
                 <label class="lab" style="margin:1%">Username</label>
                 <hr>
-
-
-
                 <div class="postcontainer">
                     <label class="postlabel">Hey, there's nice morning to code a little bit. Take your cafe or tea, sit on your chair and begin developping. That's our first mockup, so welcome to Jay!</label>
                 </div>
@@ -113,14 +106,11 @@
                 <div class="commentcontainer">
                     <label class="commentlabel">44</label>
                 </div>
-
             </form>
+            <!--2-->
             <form action="" class="post">
                 <label class="lab" style="margin:1%">Username</label>
                 <hr>
-
-
-
                 <div class="postcontainer">
                     <label class="postlabel">Hey, there's nice morning to code a little bit. Take your cafe or tea, sit on your chair and begin developping. That's our first mockup, so welcome to Jay!</label>
                 </div>
@@ -132,14 +122,11 @@
                 <div class="commentcontainer">
                     <label class="commentlabel">44</label>
                 </div>
-
             </form>
+            <!--3-->
             <form action="" class="post">
                 <label class="lab" style="margin:1%">Username</label>
                 <hr>
-
-
-
                 <div class="postcontainer">
                     <label class="postlabel">Hey, there's nice morning to code a little bit. Take your cafe or tea, sit on your chair and begin developping. That's our first mockup, so welcome to Jay!</label>
                 </div>
@@ -151,15 +138,11 @@
                 <div class="commentcontainer">
                     <label class="commentlabel">44</label>
                 </div>
-
             </form>
-
+            <!--4-->
             <form action="" class="post">
                 <label class="lab" style="margin:1%">Username</label>
                 <hr>
-
-
-
                 <div class="postcontainer">
                     <label class="postlabel">Hey, there's nice morning to code a little bit. Take your cafe or tea, sit on your chair and begin developping. That's our first mockup, so welcome to Jay!</label>
                 </div>
@@ -171,14 +154,11 @@
                 <div class="commentcontainer">
                     <label class="commentlabel">44</label>
                 </div>
-
             </form>
+            <!--5-->
             <form action="" class="post">
                 <label class="lab" style="margin:1%">Username</label>
                 <hr>
-
-
-
                 <div class="postcontainer">
                     <label class="postlabel">Hey, there's nice morning to code a little bit. Take your cafe or tea, sit on your chair and begin developping. That's our first mockup, so welcome to Jay!</label>
                 </div>
@@ -190,16 +170,16 @@
                 <div class="commentcontainer">
                     <label class="commentlabel">44</label>
                 </div>
-
             </form>
         </div>
-
+        <!--Menu-->
         <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 rightside">
             <nav>
                 <button class="navi">My Page</button>
                 <button class="navi">Feeds</button>
-                @Html.ActionLink("Log out","Logout", "LogOut")
-                <button type="button" class="navi" >Sign out</button>
+                @Html.ActionLink("Log out", "Logout", "LogOut")
+                <button type="button" class="navi">Log Out</button>
+
             </nav>
             <hr class="line">
         </div>

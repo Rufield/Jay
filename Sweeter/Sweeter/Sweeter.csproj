@@ -21,5 +21,8 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\ForPics\" />
+  </ItemGroup>
 
 </Project>
