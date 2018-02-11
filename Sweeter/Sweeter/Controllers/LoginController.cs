@@ -53,10 +53,10 @@ namespace Sweeter.Controllers
                     return RedirectToAction("Index", "Index");
                 }
 
-
+                AccountModel account = accountDataProvider.GetAccountByEmail(user.Email);
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, user.Email)
+                    new Claim("Current",account.IDuser.ToString())
                 };
 
                 var claimsIdentity = new ClaimsIdentity(
@@ -78,7 +78,8 @@ namespace Sweeter.Controllers
                 return RedirectToAction("Index", "Posts");
             }
 
-            // Something failed. Redisplay the form.
+
+
             return RedirectToAction("Index", "Login");
         }
 

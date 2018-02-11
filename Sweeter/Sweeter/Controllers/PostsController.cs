@@ -26,8 +26,9 @@ namespace Sweeter.Controllers
 
         
         [HttpGet]
-        public ActionResult Index(int id = 80003)
+        public ActionResult Index()
         {
+            int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
             //int id = Convert.ToInt32(Request.Cookies["0"]);
             IEnumerable<PostsModel> feeds = postDataProvider.GetPosts();
             AccountModel account = accountDataProvider.GetAccount(id);
@@ -39,7 +40,7 @@ namespace Sweeter.Controllers
             }
             ViewData["Pic"] = path.Substring(7);
             ViewData["Username"] = account.Username;
-            return View();
+            return View(feeds);
         }
              
 
