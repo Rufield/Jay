@@ -64,7 +64,7 @@
                 </form>
             </div>
             <!--Add Post-->
-            <form action="" class="addfeedform">
+            <form action="Posts/addfeed" method="post" class="addfeedform">
                 <label class="lab" style="margin:1%">Publish your post, @ViewData["Username"]</label>
                 <hr>
                 <textarea class="mypost" name="mypost" id="mypost" rows="3" placeholder="What are you thinking about..."></textarea>
@@ -73,12 +73,12 @@
             <!--Great Wall with Unique hidden script-->
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
             <div id="wall">
-
+               
                 @foreach (PostsModel post in Model)
     {
             <form action="" class="post">
                 <label class="lab" style="margin:1%">
-                   username
+                    @post.Author.Username
                 </label><hr><div class="postcontainer">
                     <label class="postlabel">
                         @post.Text
@@ -95,7 +95,7 @@
             </form>
 }
 
-                
+
             </div>
                     <!--Static comments-->
                  

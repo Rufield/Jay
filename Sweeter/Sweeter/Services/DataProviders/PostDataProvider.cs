@@ -22,7 +22,7 @@ namespace Sweeter.DataProviders
             {
                 sqlConnection.Execute(@"insert into PostTable(IDuser,Text,PublicDate, LikeNumder, CommentNumber)
                 values (@IDauthor,@Text,@PublicDate, @LikeNumder, @CommentNumber);",
-                new { IDauthor = post.Author.IDuser, Text = post.Text, PublicDate = post.PublicDate, LikesNumber = post.LikeNumder, CommentNumber = post.CommentNumber });
+                new { IDauthor = post.Author.IDuser, Text = post.Text, PublicDate = post.PublicDate, LikeNumder = post.LikeNumder, CommentNumber = post.CommentNumber });
             }
         }
 
