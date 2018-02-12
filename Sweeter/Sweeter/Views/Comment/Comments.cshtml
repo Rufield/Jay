@@ -56,8 +56,9 @@
                 </div>
             </div>
             <div class="addfeedmobile">
-                <form action="" class="addfeedformmobile">
-<textarea class="mobilemypost" name="mypost" id="mypost" rows="3">What are you thinking about...</textarea>
+                <form action="Comment/addcomment" method="post" class="addfeedformmobile">
+                    <input type="hidden" value="@ViewData["ID"]" name="id" />
+<textarea class="mobilemypost" name="mypost" id="mypost" rows="3" placeholder="What are you thinking about..."></textarea>
                     <input type="submit" class="mobileaddpost" name="addpost" id="addpost" value="Send">
                     <hr style="border-color:rgba(0,0,0,0.6)">
 
