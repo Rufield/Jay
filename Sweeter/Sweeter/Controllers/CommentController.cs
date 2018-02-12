@@ -28,14 +28,7 @@ namespace Sweeter.Controllers
         {
             int idd = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
             AccountModel account = accountDataProvider.GetAccount(idd);
-            byte[] ImageData = account.Avatar;
             idPost = id;
-            string path = "wwwroot/ForPics/av" + idd.ToString() + ".jpeg";
-            using (FileStream fs = new FileStream(path, FileMode.Create))
-            {
-                fs.Write(ImageData, 0, ImageData.Length);
-            }
-            ViewData["Pic"] = path.Substring(7);
             ViewData["Username"] = account.Username;
             PostsModel post = postDataProvider.GetPost(id);
             ViewData["PostText"] = post.Text;
@@ -86,7 +79,7 @@ LikeNumber=0,
             CommentModel comment=new CommentModel
             {
                 Author = Author,
-               LikeNumber=0,
+                LikeNumber=0,
                 IDuser = idd,
                 IDpost=post.IDpost,
                 Post=post,
@@ -129,3 +122,10 @@ LikeNumber=0,
           */
     }
 }
+            //byte[] ImageData = account.Avatar;
+            //string path = "wwwroot/ForPics/av" + idd.ToString() + ".jpeg";
+            //using (FileStream fs = new FileStream(path, FileMode.Create))
+            //{
+            //    fs.Write(ImageData, 0, ImageData.Length);
+            //}
+            //ViewData["Pic"] = path.Substring(7);

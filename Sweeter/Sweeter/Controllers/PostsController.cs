@@ -39,15 +39,7 @@ namespace Sweeter.Controllers
                 //int id = Convert.ToInt32(Request.Cookies["0"]);
                 IEnumerable<PostsModel> feeds = postDataProvider.GetPosts();
                 IEnumerable<PostsModel> feedsnew=feeds.Reverse();
-
                 AccountModel account = accountDataProvider.GetAccount(id);
-                byte[] ImageData = account.Avatar;
-                string path = "wwwroot/ForPics/av" + id.ToString() + ".jpeg";
-                using (FileStream fs = new FileStream(path, FileMode.Create))
-                {
-                    fs.Write(ImageData, 0, ImageData.Length);
-                }
-                ViewData["Pic"] = path.Substring(7);
                 ViewData["Username"] = account.Username;
                 foreach (PostsModel p in feedsnew)
                 {
@@ -76,6 +68,8 @@ namespace Sweeter.Controllers
             postDataProvider.AddPost(Mypost);
             return RedirectPermanent("/Posts");
         }
+
+
             // GET api/values
             /*[HttpGet]
              * 
@@ -111,3 +105,10 @@ namespace Sweeter.Controllers
 
         }
 }
+                //byte[] ImageData = account.Avatar;
+                //string path = "wwwroot/ForPics/av" + id.ToString() + ".jpeg";
+                //using (FileStream fs = new FileStream(path, FileMode.Create))
+                //{
+                //    fs.Write(ImageData, 0, ImageData.Length);
+                //}
+                //ViewData["Pic"] = path.Substring(7);
