@@ -27,7 +27,7 @@
                 <img src="~/lib/img/logo.png" class="logoleft">
             </div>
             <hr class="line">
-            <img src=@ViewData["Pic"] class="avatar ">
+            <img src="~/lib/img/Avatar.jpeg" class="avatar ">
             <hr class="line ">
         </div>
         <!--Same Mobile-->
@@ -41,7 +41,7 @@
                         <h1 class="mobileheadlabel">JAY</h1>
                     </div>
                     <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 " style="text-align:center;">
-                        <img src=@ViewData["Pic"] class="mobileavatar">
+                        <img src="~/lib/img/Avatar.jpeg" class="mobileavatar">
 
                     </div>
                 </div>
@@ -95,20 +95,14 @@
                     </div>
                 </form>
 }
-
-
             </div>
-                    <!--Static comments-->
-                 
 </div>
         <!--Menu-->
         <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 rightside">
             <nav>
-                <button class="navi">My Page</button>
+                <button class="navi" onclick="location.href='@Url.Action("Index","MyPage")' ">My Page</button>
                 <button class="navi" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
-                
                 <button type="button" class="navi" onclick="location.href='@Url.Action("Logout","LogOut")' ">Log Out</button>
-
             </nav>
             <hr class="line">
         </div>
