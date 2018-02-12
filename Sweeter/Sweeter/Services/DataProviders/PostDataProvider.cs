@@ -34,7 +34,7 @@ namespace Sweeter.DataProviders
             }
         }
 
-        public PostsModel GetPost(int id)
+        public PostsModel GetPost(int? id)
         {
             using (var sqlConnection = factory.CreateConnection)
             {
@@ -65,8 +65,8 @@ namespace Sweeter.DataProviders
         {
             using (var sqlConnection = factory.CreateConnection)
             {
-                sqlConnection.Execute(@"update PostTable set IDuser=@IDauthor,Text=@Text,PublicDate=@PublicDate, LikeNumder=@LikeNumder, CommentNumber=@CommentNumber where IDpost = @id;",
-                new { IDauthor=post.Author.IDuser, Text= post.Text, PublicDate= post.PublicDate,LikesNumber=post.LikeNumder, CommentNumber=post.CommentNumber, id=post.IDpost });
+                sqlConnection.Execute(@"update PostTable set IDuser=@IDauthor,Text=@Text,PublicDate=@PublicDate, LikeNumder=@LikeNumber, CommentNumber=@CommentNumber where IDpost = @id;",
+                new { IDauthor=post.Author.IDuser, Text= post.Text, PublicDate= post.PublicDate,LikeNumber=post.LikeNumder, CommentNumber=post.CommentNumber, id=post.IDpost });
             }
         }
     }

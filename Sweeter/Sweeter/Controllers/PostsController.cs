@@ -13,10 +13,12 @@ namespace Sweeter.Controllers
     {
         private IPostDataProvider postDataProvider;
         private IAccountDataProvider accountDataProvider;
-        public PostsController(IPostDataProvider postData, IAccountDataProvider accountData)
+        private ICommentDataProvider commentDataProvider;
+        public PostsController(IPostDataProvider postData, IAccountDataProvider accountData, ICommentDataProvider commentData)
         {
             this.postDataProvider = postData;
             this.accountDataProvider = accountData;
+            this.commentDataProvider = commentData;
         }
         //public IActionResult Index()
         //{
@@ -50,6 +52,7 @@ namespace Sweeter.Controllers
                 foreach (PostsModel p in feedsnew)
                 {
                     p.Author = accountDataProvider.GetAccount(p.IDuser);
+                    p.CommentNumber = commentDataProvider.GetCommentsOfPost(p.IDpost).Count();
                 }
                 return View(feedsnew);
             }

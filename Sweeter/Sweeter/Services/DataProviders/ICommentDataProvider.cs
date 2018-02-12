@@ -6,7 +6,7 @@ namespace Sweeter.DataProviders
     public  interface ICommentDataProvider
     {
         IEnumerable<CommentModel> GetComments();
-        IEnumerable<CommentModel> GetCommentsOfPost(int idpost);
+        IEnumerable<CommentModel> GetCommentsOfPost(int? idpost);
         CommentModel GetComment(int id);
 
         void DeleteComment(int id);
