@@ -30,7 +30,7 @@ namespace Sweeter.Controllers
             AccountModel account = accountDataProvider.GetAccount(idd);
             byte[] ImageData = account.Avatar;
             idPost = id;
-            string path = "wwwroot/ForPics/av" + id.ToString() + ".jpeg";
+            string path = "wwwroot/ForPics/av" + idd.ToString() + ".jpeg";
             using (FileStream fs = new FileStream(path, FileMode.Create))
             {
                 fs.Write(ImageData, 0, ImageData.Length);

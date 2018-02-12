@@ -105,9 +105,9 @@
         <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 rightside">
             <nav>
                 <button class="navi">My Page</button>
-                <button class="navi">Feeds</button>
-                @Html.ActionLink("Log out", "Logout", "LogOut")
-                <button type="button" class="navi">Log Out</button>
+                <button class="navi" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
+                
+                <button type="button" class="navi" onclick="location.href='@Url.Action("Logout","LogOut")' ">Log Out</button>
 
             </nav>
             <hr class="line">
