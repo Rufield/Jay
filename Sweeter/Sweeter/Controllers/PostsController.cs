@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Sweeter.DataProviders;
 using Sweeter.Models;
 using System.Collections.Generic;
@@ -7,18 +8,20 @@ using System.Linq;
 
 namespace Sweeter.Controllers
 {
-
     [Route("/Posts")]
     public class PostsController : Controller
     {
         private IPostDataProvider postDataProvider;
         private IAccountDataProvider accountDataProvider;
         private ICommentDataProvider commentDataProvider;
-        public PostsController(IPostDataProvider postData, IAccountDataProvider accountData, ICommentDataProvider commentData)
+        private ILogger<PostsController> _logger;
+
+        public PostsController(IPostDataProvider postData, IAccountDataProvider accountData, ICommentDataProvider commentData, ILogger<PostsController> logger)
         {
             this.postDataProvider = postData;
             this.accountDataProvider = accountData;
             this.commentDataProvider = commentData;
+            _logger = logger;
         }
         //public IActionResult Index()
         //{
@@ -54,6 +57,7 @@ namespace Sweeter.Controllers
                     p.Author = accountDataProvider.GetAccount(p.IDuser);
                     p.CommentNumber = commentDataProvider.GetCommentsOfPost(p.IDpost).Count();
                 }
+                _logger.LogInformation($"All is good, user {account.IDuser} look at new posts");
                 return View(feedsnew);
             }
             else return RedirectPermanent("/Username");
@@ -74,6 +78,7 @@ namespace Sweeter.Controllers
                 Text=mypost
             };
             postDataProvider.AddPost(Mypost);
+            _logger.LogInformation($"Post {Mypost.IDpost} created by user {Author.IDuser}");
             return RedirectPermanent("/Posts");
         }
             // GET api/values
@@ -109,5 +114,5 @@ namespace Sweeter.Controllers
                 await this.postDataProvider.UpdatePost(post);
             }*/
 
-        }
+    }
 }

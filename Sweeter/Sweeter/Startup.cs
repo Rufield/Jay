@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Sweeter.DataProviders;
 using Sweeter.Services.ConnectionFactory;
 using Sweeter.Services.HashService;
+using Sweeter.Services.LoggerService;
 
 namespace Sweeter
 {
@@ -30,6 +32,7 @@ namespace Sweeter
             services.AddTransient<ILikesToPostsProvider, LikesToPostsProvider>();
             services.AddSingleton<IHashService, HashService>();
             services.AddTransient<IConnectionFactory, ConnectionFactory>();
+            services.AddTransient<ILogger, LoggerService>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
               .AddCookie(options => {
                   options.CookieName = "Current";

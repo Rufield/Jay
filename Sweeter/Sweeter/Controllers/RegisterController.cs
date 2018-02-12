@@ -1,24 +1,24 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Sweeter.DataProviders;
 using Sweeter.Models;
 using Sweeter.Services.HashService;
-using System.IO;
 using System.Linq;
 
 namespace Sweeter.Controllers
 {
-
     [Route("/Register")]
     public class RegisterController : Controller
     {
         private IAccountDataProvider accountDataProvider;
         private IHashService _hasher;
+        private ILogger<RegisterController> _logger;
 
-        public RegisterController(IAccountDataProvider accountData, IHashService hasher)
+        public RegisterController(IAccountDataProvider accountData, IHashService hasher, ILogger<RegisterController> logger)
         {
             accountDataProvider = accountData;
             _hasher = hasher;
+            _logger = logger;
         }
 
         // GET: /<controller>/
@@ -38,12 +38,14 @@ namespace Sweeter.Controllers
                     {
                         account.Password = _hasher.GetHashString(account.Password);
                         accountDataProvider.AddAccount(account);
+                        _logger.LogInformation($"New user{account.IDuser} {account.Name} register with Email {account.Email} and username {account.Username}.");
                         return RedirectToAction("Index", "Login");
                     }
                     else
                     {
                         SetBack();
                         ViewData["Error"] = "This Username is already in use.";
+                        _logger.LogInformation($"User {account.IDuser} with Email {account.Email} want to username {account.Username}, but it's alredy in use" );
                         return View();
                     }
                 }
@@ -51,6 +53,7 @@ namespace Sweeter.Controllers
                 {
                     SetBack();
                     ViewData["Error"] = "This Email is already in use.";
+                    _logger.LogInformation($"User {account.IDuser} {account.Name} forgive that Email {account.Email} alredy in use");
                     return View();
                 }
             }
@@ -58,8 +61,10 @@ namespace Sweeter.Controllers
             {
                 SetBack();
                 ViewData["Error"] = "Some other problem has occured. Please, recheck the info.";
+                _logger.LogInformation($"User {account.IDuser} {account.Name} with Email {account.Email} had some problems");
                 return View();
             }
+
             void SetBack()
             {
                 ViewData["Name"] = account.Name;

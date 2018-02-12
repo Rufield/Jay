@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 using Sweeter.DataProviders;
 using Sweeter.Models;
 using Sweeter.Services.HashService;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -16,7 +15,6 @@ using System.Threading.Tasks;
 
 namespace Sweeter.Controllers
 {
-
     [Route("/Username")]
     public class LoginController : Controller
     {
@@ -39,12 +37,8 @@ namespace Sweeter.Controllers
         [HttpPost]
         public async Task<IActionResult> OnPostAsync(string email, string password)
         {
-
-
             if (ModelState.IsValid)
             {
-
-
                 var user = await AuthenticateUser(email, password);
 
                 if (user == null)
@@ -73,13 +67,10 @@ namespace Sweeter.Controllers
                     authProperties);
 
 
-                _logger.LogInformation($"User {user.Email} logged in at {DateTime.UtcNow}.");
-
+                _logger.LogInformation($"User {account.IDuser} successful login with Email {account.Email}");
                 return RedirectToAction("Index", "Posts");
             }
-
-
-
+            _logger.LogInformation($"Model is not valid");
             return RedirectToAction("Index", "Login");
         }
 
@@ -94,14 +85,12 @@ namespace Sweeter.Controllers
 
             if (accs.Count() != 0)
             {
-
                 if (accs.First().Password.Equals(_hasher.GetHashString(password)))
                 {
                     return new AccountModel()
                     {
                         Email = email
                     };
-
                 }
                 return null;
 

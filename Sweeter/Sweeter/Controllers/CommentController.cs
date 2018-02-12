@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Sweeter.DataProviders;
 using Sweeter.Models;
 using System.Collections.Generic;
@@ -16,13 +17,17 @@ namespace Sweeter.Controllers
         private IAccountDataProvider accountDataProvider;
         private ICommentDataProvider commentDataProvider;
         private IPostDataProvider postDataProvider;
-        public CommentController(IPostDataProvider postData, IAccountDataProvider accountData, ICommentDataProvider commentData)
+        private ILogger<CommentController> _logger;
+
+        public CommentController(IPostDataProvider postData, IAccountDataProvider accountData, ICommentDataProvider commentData, ILogger<CommentController> logger)
         {
             this.postDataProvider = postData;
             this.accountDataProvider = accountData;
             this.commentDataProvider = commentData;
+            _logger = logger;
         }
-     public   int? idPost;
+
+        public   int? idPost;
         [HttpGet]
         public IActionResult Comments(int? id)
         {
@@ -35,6 +40,7 @@ namespace Sweeter.Controllers
             {
                 fs.Write(ImageData, 0, ImageData.Length);
             }
+
             ViewData["Pic"] = path.Substring(7);
             ViewData["Username"] = account.Username;
             PostsModel post = postDataProvider.GetPost(id);
@@ -49,28 +55,30 @@ namespace Sweeter.Controllers
             post.CommentNumber = comments.Count();
             post.Author = Author;
             postDataProvider.UpdatePost(post);
+
             foreach (CommentModel com in comments)
-                {
+            {
                 com.Post = post;
                 com.Author = accountDataProvider.GetAccount(com.IDuser);
-
             }
+
             if (comments.Count() == 0)
             {
                 comments.Concat(new[]{new CommentModel
                 {
-Text="There are no comments here yet",
-Author=new AccountModel
-{
-    Username="Admin"
-},
-LikeNumber=0,
-
-            
-                } });
+                    Text="There are no comments here yet",
+                    Author=new AccountModel
+                    {
+                        Username="Admin"
+                    },
+                    LikeNumber=0,
+                }});
             }
+
+            _logger.LogInformation($"User {account.IDuser} see all comments of post {post.IDpost}.");
             return View(comments);
         }
+
         [HttpPost("addcomment")]
         public IActionResult NewComment(int id, string mypost)
         {
@@ -86,13 +94,14 @@ LikeNumber=0,
             CommentModel comment=new CommentModel
             {
                 Author = Author,
-               LikeNumber=0,
+                LikeNumber=0,
                 IDuser = idd,
                 IDpost=post.IDpost,
                 Post=post,
                 Text = mypost
             };
             commentDataProvider.AddComment(comment);
+            _logger.LogInformation($"User {Author.IDuser} create the comment {comment.IDcomment} on post {comment.IDpost}");
             return  RedirectPermanent("/Comment?id="+id);
         }
         /*  private ICommentDataProvider commentDataProvider;
