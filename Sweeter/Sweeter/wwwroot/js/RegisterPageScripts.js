@@ -35,11 +35,35 @@ function clearerror() {
 }
 
 function checkemail() {
-	var email = document.getElementById('email').value;
+	var email = document.getElementById('email');
 	var ermes = document.getElementById('error');
-	if (email.indexOf(".", email.indexOf("@"))==-1) ermes.innerHTML = "Email is invalid!";
-	else ermes.innerHTML = "";
+	var emailval = document.getElementById('email').value;
+	var len = emailval.length - 1;
+	var ind = emailval.indexOf(".", emailval.indexOf("@"));
+	var indat = emailval.indexOf("@");
+	len = len - ind;
+	if (ind == -1) { // *@*
+		ermes.innerHTML = "Email is invalid!";
+		email.classList.add("notright");
+	}
+	else if (ind - indat == 1) { //*@.*
+		ermes.innerHTML = "Email is invalid!";
+		email.classList.add("notright");
+	}
+	else if (len > 3) { //*@-.-
+		ermes.innerHTML = "Email is invalid!";
+		email.classList.add("notright");
+	}
+	else if (len < 1) { //*@-.-
+		ermes.innerHTML = "Email is invalid!";
+		email.classList.add("notright");
+	}
+	else {
+		ermes.innerHTML = "";
+		email.classList.remove("notright");
+	}
 }
+
 function checkemailbool() {
     var email = document.getElementById('email').value;
     var ermes = document.getElementById('error');
