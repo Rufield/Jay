@@ -140,7 +140,7 @@ GO
 
 CREATE TABLE [dbo].[AccountTable](
 	[IDuser] [bigint] IDENTITY(1, 1) NOT NULL,
-	[Name] [nvarchar](50) NOT NULL,
+	[Name] [nvarchar](50) NULL,
 	[Email] [nvarchar](50) NOT NULL,
 	[Password] [nvarchar](50) NOT NULL,
 	[Username] [nvarchar](50) NOT NULL,
