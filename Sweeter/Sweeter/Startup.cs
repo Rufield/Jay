@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Sweeter.DataProviders;
 using Sweeter.Services.ConnectionFactory;
+using Sweeter.Services.DataProviders;
 using Sweeter.Services.HashService;
 using Sweeter.Services.LoggerService;
 
@@ -30,6 +31,7 @@ namespace Sweeter
             services.AddTransient<ICommentDataProvider, CommentDataProvider>();
             services.AddTransient<ILikesToCommentsProvider, LikesToCommentsProvider>();
             services.AddTransient<ILikesToPostsProvider, LikesToPostsProvider>();
+            services.AddTransient<IUnsubscribesDataProvider, UnsubscribesDataProvider>();
             services.AddSingleton<IHashService, HashService>();
             services.AddTransient<IConnectionFactory, ConnectionFactory>();
             services.AddTransient<ILogger, LoggerService>();

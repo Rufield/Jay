@@ -5,6 +5,8 @@ using Sweeter.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Sweeter.Services.DataProviders;
+using Sweeter.Services.Comparer;
 
 namespace Sweeter.Controllers
 {
@@ -14,22 +16,25 @@ namespace Sweeter.Controllers
         private IPostDataProvider postDataProvider;
         private IAccountDataProvider accountDataProvider;
         private ICommentDataProvider commentDataProvider;
+        private IUnsubscribesDataProvider unsubscribesDataProvider;
         private ILogger<PostsController> _logger;
 
-        public PostsController(IPostDataProvider postData, IAccountDataProvider accountData, ICommentDataProvider commentData, ILogger<PostsController> logger)
+        public PostsController(IPostDataProvider postData, IAccountDataProvider accountData, ICommentDataProvider commentData, IUnsubscribesDataProvider unsubscribesData, ILogger<PostsController> logger)
         {
             this.postDataProvider = postData;
             this.accountDataProvider = accountData;
             this.commentDataProvider = commentData;
+            this.unsubscribesDataProvider = unsubscribesData;
             _logger = logger;
         }
+       
         //public IActionResult Index()
         //{
         //    return View();
         //}
-       
 
-        
+
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -38,12 +43,25 @@ namespace Sweeter.Controllers
             if (id != 0)
             {
 
-
+                IEnumerable<UnsubscribesModel> unsubscribes = unsubscribesDataProvider.GetUnsubscribesOfUser(id);
                 //int id = Convert.ToInt32(Request.Cookies["0"]);
                 IEnumerable<PostsModel> feeds = postDataProvider.GetPosts();
-                IEnumerable<PostsModel> feedsnew=feeds.Reverse();
+                IEnumerable<PostsModel> feedsrev=feeds.Reverse();
                 AccountModel account = accountDataProvider.GetAccount(id);
                 ViewData["Username"] = account.Username;
+                IEnumerable<PostsModel> deletedposts;
+                IEnumerable<PostsModel> feedsnew=feedsrev;
+                if (unsubscribes.Count() != 0)
+                {
+                    deletedposts = postDataProvider.GetPostsOfAuthor(unsubscribes.First().IDus_pas);
+                    foreach (UnsubscribesModel un in unsubscribes)
+                    {
+                        IEnumerable<PostsModel> temp = postDataProvider.GetPostsOfAuthor(un.IDus_pas);
+                        deletedposts = deletedposts.Concat(temp);
+                    }
+                    var Comparer = new PostComparer();
+                    feedsnew = feedsrev.Except<PostsModel>(deletedposts, Comparer);
+                }
                 foreach (PostsModel p in feedsnew)
                 {
                     p.Author = accountDataProvider.GetAccount(p.IDuser);
