@@ -257,6 +257,9 @@ padding:1%;
 .editProfile:hover {
     background-color: rgba(250,250,250,1);
 }
+.auser:hover{
+    cursor:pointer;
+}
 .headinfo {
     text-align: left;
     font-family: Comic Sans MS;

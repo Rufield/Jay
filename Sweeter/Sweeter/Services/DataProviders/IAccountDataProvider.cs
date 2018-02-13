@@ -9,6 +9,7 @@ namespace Sweeter.DataProviders
         IEnumerable<AccountModel> GetAccountsByEmail(string Email);
         IEnumerable<AccountModel> GetAccountsByUsername(string username);
         AccountModel GetAccount(int id);
+        AccountModel GetAccount(int? id);
         AccountModel GetAccountByEmail(string Email);
 
         void AddAccount(AccountModel account);

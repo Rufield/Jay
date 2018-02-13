@@ -41,7 +41,14 @@ namespace Sweeter.DataProviders
                 return account;
             }
         }
-
+        public AccountModel GetAccount(int? id)
+        {
+            using (var sqlConnection = factory.CreateConnection)
+            {
+                var account = sqlConnection.Query<AccountModel>("select * from AccountTable where IDuser = @id", new { id = id }).First();
+                return account;
+            }
+        }
         public AccountModel GetAccountByEmail(string Email)
         {
             using (var sqlConnection = factory.CreateConnection)

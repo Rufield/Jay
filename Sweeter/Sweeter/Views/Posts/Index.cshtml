@@ -78,7 +78,7 @@
                 @foreach (PostsModel post in Model)
     {
                 <form action="" class="post">
-                    <label class="lab" style="margin:1%">
+                    <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})'">
                         @post.Author.Username
                     </label><hr><div class="postcontainer">
                         <label class="postlabel">

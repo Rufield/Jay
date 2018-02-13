@@ -60,7 +60,14 @@ namespace Sweeter.DataProviders
                 return posts;
             }
         }
-
+        public IEnumerable<PostsModel> GetPostsOfAuthor(int? idauthor)
+        {
+            using (var sqlConnection = factory.CreateConnection)
+            {
+                var posts = sqlConnection.Query<PostsModel>("select * from PostTable where IDuser=@IDuser", new { IDuser = idauthor }).ToList();
+                return posts;
+            }
+        }
         public void UpdatePost(PostsModel post)
         {
             using (var sqlConnection = factory.CreateConnection)

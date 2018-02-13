@@ -7,6 +7,7 @@ namespace Sweeter.DataProviders
     {
         IEnumerable<PostsModel> GetPosts();
         IEnumerable<PostsModel> GetPostsOfAuthor( int idauthor);
+        IEnumerable<PostsModel> GetPostsOfAuthor(int? idauthor);
         PostsModel GetPost(int? id);
        
         void DeletePost(int id);

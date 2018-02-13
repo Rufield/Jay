@@ -94,7 +94,7 @@
                 @foreach (CommentModel comment in Model)
     {
             <form action="" class="post">
-                <label class="lab" style="margin:1%">
+                <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=comment.IDuser})' ">
                     @comment.Author.Username
                 </label><hr><div class="commentpostcontainer">
                     <label class="postlabel">

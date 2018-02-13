@@ -73,8 +73,8 @@ namespace Sweeter.Controllers
             _logger.LogInformation($"Post {Mypost.IDpost} created by user {Author.IDuser}");
             return RedirectPermanent("/Posts");
         }
-
-
+        
+      
             // GET api/values
             /*[HttpGet]
              * 
