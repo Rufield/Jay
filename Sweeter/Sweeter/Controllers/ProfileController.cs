@@ -30,7 +30,7 @@ namespace Sweeter.Controllers
             {
                 AccountModel account = accountDataProvider.GetAccount(id);
                 _logger.LogInformation($"User {account.IDuser} has successful download the Profile page");
-                if(account.Avatar == null)
+                if (account.Avatar == null)
                     using (FileStream FS = new FileStream("wwwroot/lib/img/Avatar.jpeg", FileMode.Open))
                     {
                         byte[] ImageData = new byte[FS.Length];
@@ -54,15 +54,17 @@ namespace Sweeter.Controllers
             {
                 AccountModel Oldaccount = accountDataProvider.GetAccount(id);
                 AccountModel account = new AccountModel
-            {
-                Name = Faccount.Name,
-                Username = Faccount.Username,
-                Email = Faccount.Email
-            };
-            account.Avatar = UploadingPicture(Faccount.Avatar);
-            account.Password = "0";
-            if (ModelState.IsValid)
-            {
+                {
+                    Name = Faccount.Name,
+                    Username = Faccount.Username,
+                    Email = Faccount.Email
+                };
+                account.Avatar = UploadingPicture(Faccount.Avatar);
+                if (account.Avatar == null)
+                    account.Avatar = Oldaccount.Avatar;
+                account.Password = "0";
+                if (ModelState.IsValid)
+                {
                     if (account.Email != Oldaccount.Email)
                     {
                         _logger.LogInformation($"User Email {Faccount.Email} != {Oldaccount.Email}");
@@ -122,8 +124,6 @@ namespace Sweeter.Controllers
 
         private IActionResult Update(AccountModel Oldaccount, AccountModel account)
         {
-            if (account.Avatar == null)
-                account.Avatar = Oldaccount.Avatar;
             account.Password = Oldaccount.Password;
             account.IDuser = Oldaccount.IDuser;
             accountDataProvider.UpdateAccount(account);

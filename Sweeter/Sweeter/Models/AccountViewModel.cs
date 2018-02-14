@@ -15,7 +15,6 @@ namespace Sweeter.Models
         [Required]
         public string Email { get; set; }
         public string Name { get; set; }
-        [Required]
         public IFormFile Avatar { get; set; }
         public string Password { get; set; }
         public List<PostsModel> MyPosts { get; set; }
