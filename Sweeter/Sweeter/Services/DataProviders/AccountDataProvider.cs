@@ -87,8 +87,8 @@ namespace Sweeter.DataProviders
             using (var sqlConnection = factory.CreateConnection)
             {
 
-                sqlConnection.Execute(@"update AccountTable set Fullname=@Fullname, Email=@Email, Password=@Password, Username=@Username, Avatar=@Avatar where ID = @id;",
-                new { Fullname= account.Name, Email= account.Email, Password= account.Password,Username= account.Username, Avatar=account.Avatar, id= account.IDuser });
+                sqlConnection.Execute(@"update AccountTable set Name=@Name, Email=@Email, Password=@Password, Username=@Username, Avatar=@Avatar where iduser = @iduser;",
+                new { Name = account.Name, Email= account.Email, Password= account.Password,Username= account.Username, Avatar=account.Avatar, iduser = account.IDuser });
             }
         }
     }

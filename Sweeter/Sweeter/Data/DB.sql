@@ -155,7 +155,7 @@ GO
 CREATE TABLE [dbo].[PostTable](
 	[IDpost] [bigint] IDENTITY(1, 1) NOT NULL,
 	[IDuser] [bigint] NOT NULL,
-	[Text] [text] NOT NULL,
+	[Text] [ntext] NOT NULL,
 	[PublicDate] [datetime] NOT NULL,
 	[LikeNumder] [int] NOT NULL,
 	[CommentNumber] [int] NOT NULL,
@@ -170,7 +170,7 @@ CREATE TABLE [dbo].[CommentTable](
 	[IDcomment] [bigint] IDENTITY(1, 1) NOT NULL,
 	[IDpost] [bigint] NOT NULL,
 	[IDuser] [bigint] NOT NULL,
-	[Text] [text] NOT NULL,
+	[Text] [ntext] NOT NULL,
 	[LikeNumder] [int] NOT NULL,
  CONSTRAINT [PK_CommentTable] PRIMARY KEY CLUSTERED 
 (
@@ -197,6 +197,17 @@ CREATE TABLE [dbo].[LikesToCommentTable](
  CONSTRAINT [PK_LikesToCommentTable] PRIMARY KEY CLUSTERED 
 (
 	[IDus_com] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[UnsubscribesTable](
+	[Id] [bigint] IDENTITY(1, 1) NOT NULL,
+	[IDus_ac] [bigint] NULL,
+	[IDus_pas] [bigint] NULL,
+ CONSTRAINT [PK_UnsubscribesTable] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO

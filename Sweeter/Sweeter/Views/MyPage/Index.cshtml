@@ -33,6 +33,7 @@
             <hr class="line ">
             <img src="~/lib/img/Avatar.jpeg " class="avatar ">
             <hr class="line ">
+       <button class="navi" onclick="location.href='@Url.Action("Index","Profile")' ">Edit</button>
         </div>
         <!--Same mobile-->
         <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8 maincontainer">
@@ -79,7 +80,6 @@
                     <h1 class="headinfo">Name: @ViewData["UserName"]</h1>
                     <h1 class="headinfo">Email: @ViewData["Email"]</h1>
                 </div>
-                <input type="submit" class="editProfile" name="EditProfile" id="editProfile" value="Edit">
             </form>
             <!--Add Post -->
             <form action="MyPage/addfeed" method="post" class="addfeedform">
@@ -92,25 +92,25 @@
             <div id="wall">
 
                 @foreach (PostsModel post in Model)
-                {
-                    <form action="" class="post">
-                        <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
-                            @post.Author.Username
-                        </label><hr><div class="postcontainer">
-                            <label class="postlabel">
-                                @post.Text
-                            </label>
-                        </div><span><img src="lib/img/Like.png" class="like"></span><div class="likecontainer">
-                            <label class="likelabel" id="PostID_@post.IDpost">
-                                @post.LikeNumder
-                            </label>
-                        </div><span><img src="~/lib/img/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span><div class="commentcontainer">
-                            <label class="commentlabel">
-                                @post.CommentNumber
-                            </label>
-                        </div>
-                    </form>
-                }
+        {
+            <form action="" class="post">
+                <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
+                    @post.Author.Username
+                </label><hr><div class="postcontainer">
+                    <label class="postlabel">
+                        @post.Text
+                    </label>
+                </div><span><img src="lib/img/Like.png" class="like"></span><div class="likecontainer">
+                    <label class="likelabel" id="PostID_@post.IDpost">
+                        @post.LikeNumder
+                    </label>
+                </div><span><img src="~/lib/img/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span><div class="commentcontainer">
+                    <label class="commentlabel">
+                        @post.CommentNumber
+                    </label>
+                </div>
+            </form>
+}
             </div>
         </div>
             <!--Menu-->
