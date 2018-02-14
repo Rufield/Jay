@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Sweeter.DataProviders;
 using Sweeter.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -35,6 +36,7 @@ namespace Sweeter.Controllers
             AccountModel account = accountDataProvider.GetAccount(idd);
             idPost = id;
             ViewData["Username"] = account.Username;
+            ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
             PostsModel post = postDataProvider.GetPost(id);
             ViewData["PostText"] = post.Text;
             ViewData["PostAuth"] = accountDataProvider.GetAccount(post.IDuser).Username;

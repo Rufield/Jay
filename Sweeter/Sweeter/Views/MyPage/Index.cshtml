@@ -31,7 +31,7 @@
                 <img src="~/lib/img/logo.png" class="logoleft ">
             </div>
             <hr class="line ">
-            <img src="~/lib/img/Avatar.jpeg " class="avatar ">
+            <img src=@ViewData["Pic"] class="avatar">
             <hr class="line ">
             <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 leftside">
                 <button class="navi" onclick="location.href='@Url.Action("Index","Profile")' ">Edit</button>

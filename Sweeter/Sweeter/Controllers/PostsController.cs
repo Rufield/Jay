@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using Sweeter.Services.DataProviders;
 using Sweeter.Services.Comparer;
+using System;
 
 namespace Sweeter.Controllers
 {
@@ -49,6 +50,7 @@ namespace Sweeter.Controllers
                 IEnumerable<PostsModel> feedsrev=feeds.Reverse();
                 AccountModel account = accountDataProvider.GetAccount(id);
                 ViewData["Username"] = account.Username;
+                ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
                 IEnumerable<PostsModel> deletedposts;
                 IEnumerable<PostsModel> feedsnew=feedsrev;
                 if (unsubscribes.Count() != 0)

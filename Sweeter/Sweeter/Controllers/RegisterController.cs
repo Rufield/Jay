@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Sweeter.DataProviders;
 using Sweeter.Models;
 using Sweeter.Services.HashService;
+using System.IO;
 using System.Linq;
 
 namespace Sweeter.Controllers
@@ -37,6 +38,12 @@ namespace Sweeter.Controllers
                     if (accountDataProvider.GetAccountsByUsername(account.Username).Count() == 0)
                     {
                         account.Password = _hasher.GetHashString(account.Password);
+                        using (FileStream FS = new FileStream("wwwroot/lib/img/Avatar.jpeg", FileMode.Open))
+                        {
+                            byte[] ImageData = new byte[FS.Length];
+                            FS.Read(ImageData, 0, ImageData.Length);
+                            account.Avatar = ImageData;
+                        }
                         accountDataProvider.AddAccount(account);
                         _logger.LogInformation($"New user{account.IDuser} {account.Name} register with Email {account.Email} and username {account.Username}.");
                         return RedirectToAction("Index", "Login");

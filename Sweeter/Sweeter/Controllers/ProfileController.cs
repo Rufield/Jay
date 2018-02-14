@@ -29,64 +29,68 @@ namespace Sweeter.Controllers
             if (id != 0)
             {
                 AccountModel account = accountDataProvider.GetAccount(id);
-                if (account.Avatar != null)
-                {
-                    byte[] ImageData = account.Avatar;
-                    string path = "wwwroot/ForPics/av" + account.IDuser.ToString() + ".jpeg";
-                    using (FileStream fs = new FileStream(path, FileMode.Create))
-                    {
-                        fs.Write(ImageData, 0, ImageData.Length);
-                    }
-                    ViewData["Pic"] = path.Substring(7);
-                    return View(account);
-                }
-                else
-                {
-
+                _logger.LogInformation($"User {account.IDuser} has successful download the Profile page");
+                if(account.Avatar == null)
                     using (FileStream FS = new FileStream("wwwroot/lib/img/Avatar.jpeg", FileMode.Open))
                     {
-                      //  ImageData = new byte[FS.Length];
-                     //   FS.Read(ImageData, 0, ImageData.Length);
+                        byte[] ImageData = new byte[FS.Length];
+                        FS.Read(ImageData, 0, ImageData.Length);
+                        account.Avatar = ImageData;
                     }
-                    _logger.LogInformation($"User {account.IDuser} has successful download the Profile page");
-                    return View(account);
-                }
+                return View(account);
             }
             else
             {
-                _logger.LogInformation($"");
+                _logger.LogInformation($"Not find id in cookie");
                 return RedirectPermanent("/Username");
             }
-            }
+        }
 
         [HttpPost]
-        public IActionResult Index(AccountModel account, IFormFile avatar)
+        public IActionResult Index(AccountViewModel Faccount)
         {
-            if (Valid(account))
+            int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            if (id != 0)
             {
-                int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
-                if (id != 0)
-                {
-                    AccountModel Oldaccount = accountDataProvider.GetAccount(id);
+                AccountModel Oldaccount = accountDataProvider.GetAccount(id);
+                AccountModel account = new AccountModel
+            {
+                Name = Faccount.Name,
+                Username = Faccount.Username,
+                Email = Faccount.Email
+            };
+            account.Avatar = UploadingPicture(Faccount.Avatar);
+            account.Password = "0";
+            if (ModelState.IsValid)
+            {
                     if (account.Email != Oldaccount.Email)
                     {
-                        _logger.LogInformation($"User Email {account.Email} != {Oldaccount.Email}");
-                        return RedirectToAction("Password", new { account });
+                        _logger.LogInformation($"User Email {Faccount.Email} != {Oldaccount.Email}");
+                        if (accountDataProvider.GetAccountsByEmail(account.Email).Count() == 0)
+                        {
+
+                            return CheckUsername(Oldaccount, account);
+                        }
+                        else
+                        {
+                            ViewData["Error"] = "This Email is already in use.";
+                            return View(account);
+                        }
+                        //return RedirectToAction("Password", account);
                     }
                     else
                     {
-                        _logger.LogInformation($"Maybe {account.IDuser} user's Email {account.Email} = {Oldaccount.Email}");
-                        return CheckUsername(Oldaccount, account, avatar);
+                        _logger.LogInformation($"Maybe {Faccount.IDuser} user's Email {Faccount.Email} = {Oldaccount.Email}");
+                        return CheckUsername(Oldaccount, account);
                     }
                 }
                 else
                 {
-                    _logger.LogInformation($"Model of user {account.IDuser} not valid");
-                    ViewData["Pic"] = avatar.FileName;
+                    _logger.LogInformation($"Model of user {Faccount.IDuser} not valid");
                     return View(account);
                 }
             }
-            else return RedirectPermanent("/Username");
+            else return RedirectToAction("/Username");
         }
 
         [HttpGet("/pas")]
@@ -96,13 +100,13 @@ namespace Sweeter.Controllers
         }
 
 
-        private IActionResult CheckUsername(AccountModel Oldaccount, AccountModel account, IFormFile avatar)
+        private IActionResult CheckUsername(AccountModel Oldaccount, AccountModel account)
         {
             if (account.Username != Oldaccount.Username)
             {
                 if (accountDataProvider.GetAccountsByUsername(account.Username).Count() == 0)
                 {
-                    return Update(Oldaccount, account, avatar);
+                    return Update(Oldaccount, account);
                 }
                 else
                 {
@@ -112,34 +116,21 @@ namespace Sweeter.Controllers
             }
             else
             {
-                return Update(Oldaccount, account, avatar);
+                return Update(Oldaccount, account);
             }
         }
 
-        private IActionResult Update(AccountModel Oldaccount, AccountModel account, IFormFile avatar)
+        private IActionResult Update(AccountModel Oldaccount, AccountModel account)
         {
-            byte[] ImageData;
-            var filepath = Path.GetTempFileName();
-            if (avatar != null)
-            {
-                using (Stream fs = avatar.OpenReadStream())
-                {
-                    ImageData = new byte[fs.Length];
-                    fs.Read(ImageData, 0, ImageData.Length);
-                }
-            }
-            else
-            {
-                ImageData = Oldaccount.Avatar;
-            }
-            account.Avatar = ImageData;
+            if (account.Avatar == null)
+                account.Avatar = Oldaccount.Avatar;
             account.Password = Oldaccount.Password;
             account.IDuser = Oldaccount.IDuser;
             accountDataProvider.UpdateAccount(account);
             return RedirectToAction("Index", "MyPage");
         }
 
-        private bool Valid(AccountModel account)
+        private bool Valid(AccountViewModel account)
         {
             if (account.Name == "")
                 return false;
@@ -153,6 +144,25 @@ namespace Sweeter.Controllers
             else
                 return true;
 
+        }
+
+        private byte[] UploadingPicture(IFormFile Avatar)
+        {
+            if (Avatar != null)
+            {
+                byte[] imageData = null;
+                // считываем переданный файл в массив байтов
+                using (var binaryReader = new BinaryReader(Avatar.OpenReadStream()))
+                {
+                    imageData = binaryReader.ReadBytes((int)Avatar.Length);
+                }
+                // установка массива байтов
+                return imageData;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

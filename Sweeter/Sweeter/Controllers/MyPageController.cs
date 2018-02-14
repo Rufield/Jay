@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sweeter.DataProviders;
 using Sweeter.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -34,6 +35,7 @@ namespace Sweeter.Controllers
                 AccountModel account = accountDataProvider.GetAccount(id);
                 ViewData["Username"] = account.Username;
                 ViewData["Email"] = account.Email;
+                ViewData["Pic"] = "data:image/jpeg;base64," +Convert.ToBase64String(account.Avatar);
                 foreach (PostsModel p in feedsnew)
                 {
                     p.Author = accountDataProvider.GetAccount(p.IDuser);
