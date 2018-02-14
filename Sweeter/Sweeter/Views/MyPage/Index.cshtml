@@ -33,86 +33,88 @@
             <hr class="line ">
             <img src="~/lib/img/Avatar.jpeg " class="avatar ">
             <hr class="line ">
-       <button class="navi" onclick="location.href='@Url.Action("Index","Profile")' ">Edit</button>
-        </div>
-        <!--Same mobile-->
-        <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8 maincontainer">
-            <div class="headmobile">
-                <div class="row">
-                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
-                        <img src="~/lib/img/logo.png" class="mobilelogoleft">
-
-                    </div>
-                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
-                        <h1 class="mobileheadlabel">JAY</h1>
-
-                    </div>
-                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 " style="text-align:center;">
-                        <img src="~/lib/img/Avatar.jpeg" class="mobileavatar">
-
-                    </div>
+            <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 leftside">
+                <button class="navi" onclick="location.href='@Url.Action("Index","Profile")' ">Edit</button>
                 </div>
             </div>
-            <!--Add Post Mobile-->
-            <div class="addfeedmobile">
-                <form action="MyPage/addfeed" method="post" class="addfeedformmobile">
+            <!--Same mobile-->
+            <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8 maincontainer">
+                <div class="headmobile">
+                    <div class="row">
+                        <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
+                            <img src="~/lib/img/logo.png" class="mobilelogoleft">
+
+                        </div>
+                        <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
+                            <h1 class="mobileheadlabel">JAY</h1>
+
+                        </div>
+                        <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 " style="text-align:center;">
+                            <img src="~/lib/img/Avatar.jpeg" class="mobileavatar">
+
+                        </div>
+                    </div>
+                </div>
+                <!--Add Post Mobile-->
+                <div class="addfeedmobile">
+                    <form action="MyPage/addfeed" method="post" class="addfeedformmobile">
 <textarea class="mobilemypost" name="mypost" id="mypost" rows="3">What are you thinking about...</textarea>
-                    <input type="submit" class="mobileaddpost" name="addpost" id="addpost" value="Send">
-                    <hr style="border-color:rgba(0,0,0,0.6)">
+                        <input type="submit" class="mobileaddpost" name="addpost" id="addpost" value="Send">
+                        <hr style="border-color:rgba(0,0,0,0.6)">
 
-                    <div class="mobilesignout">
-                        <button class="mobilenavbutton">Sign out</button>
-                    </div>
-                    <div class="mobilemypage">
-                        <button class="mobilenavbutton">My Page</button>
-                    </div>
-                    <div class="mobilefeeds">
-                        <button class="mobilenavbutton">Feeds</button>
-                    </div>
+                        <div class="mobilesignout">
+                            <button class="mobilenavbutton">Sign out</button>
+                        </div>
+                        <div class="mobilemypage">
+                            <button class="mobilenavbutton">My Page</button>
+                        </div>
+                        <div class="mobilefeeds">
+                            <button class="mobilenavbutton">Feeds</button>
+                        </div>
 
+                    </form>
+                </div>
+                <!--Info-->
+                <form action="" method="get" class="myInfoForm">
+                    <label class="lab" style="margin:1%">@ViewData["UserName"]</label>
+                    <hr>
+                    <div class="MyInfo">
+                        <h1 class="headinfo">Name: @ViewData["UserName"]</h1>
+                        <h1 class="headinfo">Email: @ViewData["Email"]</h1>
+                    </div>
                 </form>
-            </div>
-            <!--Info-->
-            <form action="" method="get" class="myInfoForm">
-                <label class="lab" style="margin:1%">@ViewData["UserName"]</label>
-                <hr>
-                <div class="MyInfo">
-                    <h1 class="headinfo">Name: @ViewData["UserName"]</h1>
-                    <h1 class="headinfo">Email: @ViewData["Email"]</h1>
-                </div>
-            </form>
-            <!--Add Post -->
-            <form action="MyPage/addfeed" method="post" class="addfeedform">
-                <label class="lab" style="margin:1%">Publish your post, @ViewData["UserName"]</label>
-                <hr>
-                <textarea class="mypost" name="mypost" id="mypost" rows="3" placeholder="What are you thinking about..."></textarea>
-                <input type="submit" class="addpost" name="addpost" id="addpost" value="Send">
-            </form>
-            <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
-            <div id="wall">
+                <!--Add Post -->
+                <form action="MyPage/addfeed" method="post" class="addfeedform">
+                    <label class="lab" style="margin:1%">Publish your post, @ViewData["UserName"]</label>
+                    <hr>
+                    <textarea class="mypost" name="mypost" id="mypost" rows="3" placeholder="What are you thinking about..."></textarea>
+                    <input type="submit" class="addpost" name="addpost" id="addpost" value="Send">
+                </form>
+                <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
+                <div id="wall">
 
-                @foreach (PostsModel post in Model)
-        {
-            <form action="" class="post">
-                <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
-                    @post.Author.Username
-                </label><hr><div class="postcontainer">
-                    <label class="postlabel">
-                        @post.Text
-                    </label>
-                </div><span><img src="lib/img/Like.png" class="like"></span><div class="likecontainer">
-                    <label class="likelabel" id="PostID_@post.IDpost">
-                        @post.LikeNumder
-                    </label>
-                </div><span><img src="~/lib/img/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span><div class="commentcontainer">
-                    <label class="commentlabel">
-                        @post.CommentNumber
-                    </label>
+                    @foreach (PostsModel post in Model)
+            {
+                <form action="" class="post">
+                    <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
+                        @post.Author.Username
+                    </label><hr><div class="postcontainer">
+                        <label class="postlabel">
+                            @post.Text
+                        </label>
+                    </div><span><img src="lib/img/Like.png" class="like"></span><div class="likecontainer">
+                        <label class="likelabel" id="PostID_@post.IDpost">
+                            @post.LikeNumder
+                        </label>
+                    </div><span><img src="~/lib/img/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span><div class="commentcontainer">
+                        <label class="commentlabel">
+                            @post.CommentNumber
+                        </label>
+                    </div>
+                </form>
+    }
                 </div>
-            </form>
-}
             </div>
-        </div>
             <!--Menu-->
             <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 rightside">
                 <nav>
