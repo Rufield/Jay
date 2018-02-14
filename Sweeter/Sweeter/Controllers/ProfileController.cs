@@ -30,13 +30,13 @@ namespace Sweeter.Controllers
             {
                 AccountModel account = accountDataProvider.GetAccount(id);
                 _logger.LogInformation($"User {account.IDuser} has successful download the Profile page");
-                if (account.Avatar == null)
+                /*if (account.Avatar == null)
                     using (FileStream FS = new FileStream("wwwroot/lib/img/Avatar.jpeg", FileMode.Open))
                     {
                         byte[] ImageData = new byte[FS.Length];
                         FS.Read(ImageData, 0, ImageData.Length);
                         account.Avatar = ImageData;
-                    }
+                    }*/
                 return View(account);
             }
             else
@@ -75,6 +75,7 @@ namespace Sweeter.Controllers
                         }
                         else
                         {
+                            _logger.LogInformation($"This Email is already in use.");
                             ViewData["Error"] = "This Email is already in use.";
                             return View(account);
                         }
@@ -112,6 +113,7 @@ namespace Sweeter.Controllers
                 }
                 else
                 {
+                    _logger.LogInformation($"This Username is already in use.");
                     ViewData["Error"] = "This Username is already in use.";
                     return View(account);
                 }
@@ -127,10 +129,11 @@ namespace Sweeter.Controllers
             account.Password = Oldaccount.Password;
             account.IDuser = Oldaccount.IDuser;
             accountDataProvider.UpdateAccount(account);
+            _logger.LogInformation($"Update success");
             return RedirectToAction("Index", "MyPage");
         }
 
-        private bool Valid(AccountViewModel account)
+        /*private bool Valid(AccountViewModel account)
         {
             if (account.Name == "")
                 return false;
@@ -144,7 +147,7 @@ namespace Sweeter.Controllers
             else
                 return true;
 
-        }
+        }*/
 
         private byte[] UploadingPicture(IFormFile Avatar)
         {
