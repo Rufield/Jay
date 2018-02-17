@@ -29,6 +29,14 @@ function check() {
 	}
 }
 
+function checkUsername() {
+    var username = document.getElementById('username').value;
+    var regexp = /[a-z0-9]/i;
+    var ermes = document.getElementById('error');
+    if (!regexp.test(username)) ermes.innerHTML = "Username may contain only letters from English alphabet and numbers!";
+    else ermes.innerHTML = "";
+}
+
 function clearerror() {
 	var ermes = document.getElementById('error');
 	ermes.innerHTML = "";

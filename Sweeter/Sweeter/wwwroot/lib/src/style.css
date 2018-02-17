@@ -78,6 +78,13 @@ textarea
 	font-size:15px;
 	color:rgba(0,0,0,0.6);
 }
+
+.search {
+    border:none;
+    font-family: Comic Sans MS;
+    width:200px;
+}
+
 form
 {
 	display:block;

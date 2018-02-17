@@ -143,7 +143,7 @@ CREATE TABLE [dbo].[AccountTable](
 	[Name] [nvarchar](50) NULL,
 	[Email] [nvarchar](50) NOT NULL,
 	[Password] [nvarchar](50) NOT NULL,
-	[Username] [nvarchar](50) NOT NULL,
+	[Username] [varchar](50) NOT NULL,
 	[Avatar] [varbinary](MAX) NULL,
  CONSTRAINT [PK_AccountTable] PRIMARY KEY CLUSTERED 
 (

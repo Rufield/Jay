@@ -60,7 +60,7 @@ namespace Sweeter.Controllers
                 {
                     SetBack();
                     ViewData["Error"] = "This Email is already in use.";
-                    _logger.LogInformation($"User {account.IDuser} {account.Name} forgive that Email {account.Email} alredy in use");
+                    _logger.LogInformation($"User {account.IDuser} {account.Name} forgive that Email {account.Email} is alredy in use");
                     return View();
                 }
             }

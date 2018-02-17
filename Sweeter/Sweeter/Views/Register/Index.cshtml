@@ -37,7 +37,7 @@
                     <div class="col-md-2 col-xs-1 col-lg-2 col-sm-2"></div> <!--Offset-->
                     <div class="col-md-8 col-xs-10 col-lg-8 col-sm-8">
                         <p><label for="username" style="text-align:center">Your Username* </label>
-                        <p><input type="text" name="username" class="textin" id="username" value=@ViewData["Username"] onchange="clearerror()" required></input>
+                        <p><input type="text" name="username" class="textin" id="username" value=@ViewData["Username"] onchange="checkUsername()" required></input>
                         <p><label for="email" style="text-align:center">Your E-mail*</label>
                         <p><input type="email" id="email" name="Email" class="textin" value=@ViewData["Email"] oninput="checkemail()" required></input>
                             <!--Second part-->

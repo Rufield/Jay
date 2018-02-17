@@ -1,0 +1,79 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Sweeter.Models;
+@using Sweeter.DataProviders;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="~/lib/src/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/src/style.css">
+    <link rel="icon" type="image/png" href="~/lib/img/logo.png">
+    <link rel="shortcut icon" href="~/lib/img/logo.png" type="image/png">
+    <title>Search</title>
+</head>
+<body>
+    <!--Profile Pic and Logo-->
+    <div class="row">
+        <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 leftside">
+            <div class="logoleftt" style="text-align:center">
+                <h1 class="headlabel" style="font-size:35px; margin-top:-2%;">JAY</h1>
+                <img src="~/lib/img/logo.png" class="logoleft">
+            </div>
+            <hr class="line">
+            <img src=@ViewData["Pic"] class="avatar ">
+            <hr class="line ">
+        </div>
+        <!--Same Mobile-->
+        <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8 maincontainer">
+            <div class="headmobile">
+                <div class="row">
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
+                        <img src="~/lib/img/logo.png" class="mobilelogoleft">
+                    </div>
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
+                        <h1 class="mobileheadlabel">JAY</h1>
+                    </div>
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 " style="text-align:center;">
+                        <img src="~/lib/img/Avatar.jpeg" class="mobileavatar">
+
+                    </div>
+                </div>
+            </div>
+        <form action="search" method="post">
+            <input type="search" name="searchinfo" placeholder="Search the Jay" />
+            <input type="submit" name="search" value="Search"/>
+        </form>
+        <div id="wall">
+
+            @if (Model != null)
+            {
+            @foreach (AccountModel post in Model)
+            {
+            <form action="" class="post">
+                <label class="lab auser" style="margin:1%" >
+                    @post.Username
+                    </label>
+            </form>
+            }
+            }
+        </div>
+        </div>
+        <!--Menu-->
+        <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 rightside">
+            <nav>
+                <button class="navi" onclick="location.href='@Url.Action("Index","MyPage")' ">My Page</button>
+                <button class="navi" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
+                <button class="navi" onclick="location.href='@Url.Action("Index","Search")' ">Search</button>
+                <button type="button" class="navi" onclick="location.href='@Url.Action("Logout","LogOut")' ">Log Out</button>
+            </nav>
+            <hr class="line">
+        </div>
+    </div>
+</body>
+</html>

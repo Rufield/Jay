@@ -93,40 +93,55 @@ namespace Sweeter.Controllers
             _logger.LogInformation($"Post {Mypost.IDpost} created by user {Author.IDuser}");
             return RedirectPermanent("/Posts");
         }
-        
-      
-            // GET api/values
-            /*[HttpGet]
-             * 
-            private IPostDataProvider postDataProvider;
-            public PostsController(IPostDataProvider postData)
-            {
-                this.postDataProvider = postData;
-            }
-            public async Task<IEnumerable<PostsModel>> Get()
-            {
-                return await this.postDataProvider.GetPosts();
-            }
 
-            // GET api/values/5
-            [HttpGet("{id}")]
-            public async Task<PostsModel> Get(int id)
+        [HttpPost("search")]
+        public IActionResult Search(string searchinfo)
+        {
+            int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            if (id != 0)
             {
-                return await this.postDataProvider.GetPost(id); ;
+                IEnumerable<AccountModel> SearchResult = accountDataProvider.SearchAccountsByUsername(searchinfo);
+                AccountModel account = accountDataProvider.GetAccount(id);
+                ViewData["Username"] = account.Username;
+                ViewData["Email"] = account.Email;
+                ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
+                return View("~/Views/Search/Search.cshtml",SearchResult);
             }
+            else return RedirectPermanent("/Posts");
+        }
 
-            // POST api/values
-            [HttpPost]
-            public async void Post([FromBody]PostsModel postsModel)
-            {
-                await this.postDataProvider.AddPost(postsModel);
+        // GET api/values
+        /*[HttpGet]
+         * 
+        private IPostDataProvider postDataProvider;
+        public PostsController(IPostDataProvider postData)
+        {
+            this.postDataProvider = postData;
+        }
+        public async Task<IEnumerable<PostsModel>> Get()
+        {
+            return await this.postDataProvider.GetPosts();
+        }
 
-            }
-            [HttpPut("{id}")]
-            public async Task Put(int id, [FromBody]PostsModel post)
-            {
-                await this.postDataProvider.UpdatePost(post);
-            }*/
+        // GET api/values/5
+        [HttpGet("{id}")]
+        public async Task<PostsModel> Get(int id)
+        {
+            return await this.postDataProvider.GetPost(id); ;
+        }
+
+        // POST api/values
+        [HttpPost]
+        public async void Post([FromBody]PostsModel postsModel)
+        {
+            await this.postDataProvider.AddPost(postsModel);
+
+        }
+        [HttpPut("{id}")]
+        public async Task Put(int id, [FromBody]PostsModel post)
+        {
+            await this.postDataProvider.UpdatePost(post);
+        }*/
 
     }
 }

@@ -25,6 +25,16 @@ namespace Sweeter.DataProviders
             }
         }
 
+        public IEnumerable<AccountModel> SearchAccountsByUsername(string username)
+        {
+            using (var sqlConnection = factory.CreateConnection)
+            {
+                IEnumerable<AccountModel> accounts = sqlConnection.Query<AccountModel>("select * from AccountTable").ToList();
+                accounts = accounts.Where(x=>x.Username.Contains(username));
+                return accounts;
+            }
+        }
+
         public void DeleteAccount(int id)
         {
             using (var sqlConnection = factory.CreateConnection)

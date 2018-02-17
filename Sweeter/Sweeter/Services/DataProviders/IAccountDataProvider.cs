@@ -8,6 +8,7 @@ namespace Sweeter.DataProviders
         IEnumerable<AccountModel> GetAccounts();
         IEnumerable<AccountModel> GetAccountsByEmail(string Email);
         IEnumerable<AccountModel> GetAccountsByUsername(string username);
+        IEnumerable<AccountModel> SearchAccountsByUsername(string username);
         AccountModel GetAccount(int id);
         AccountModel GetAccount(int? id);
         AccountModel GetAccountByEmail(string Email);
