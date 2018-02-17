@@ -9,7 +9,7 @@ namespace Sweeter.Models
         public int IDpost { get; set; }
         public PostsModel Post { get; set; }
         public string Text { get; set; }
-        public int LikeNumber { get; set; }
+        public int LikeNumder { get; set; }
         public List<LikesToCommentsModel> Comments { get; set; }
         public AccountModel Author { get; set; }
 }

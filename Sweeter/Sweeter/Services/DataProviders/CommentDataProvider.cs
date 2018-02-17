@@ -21,7 +21,7 @@ namespace Sweeter.DataProviders
             {
                 sqlConnection.Execute(@"insert into CommentTable(IDpost, IDuser,Text, LikeNumder)
                 values (@IDpost, @IDauthor,@Text, @LikeNumber);",
-                new { IDpost=comment.Post.IDpost, IDauthor=comment.Author.IDuser, Text=comment.Text, LikeNumber=comment.LikeNumber });
+                new { IDpost=comment.Post.IDpost, IDauthor=comment.Author.IDuser, Text=comment.Text, LikeNumber=comment.LikeNumder });
             }
         }
 
@@ -33,7 +33,14 @@ namespace Sweeter.DataProviders
                 return comment;
             }
         }
-
+        public CommentModel GetComment(int? id)
+        {
+            using (var sqlConnection = factory.CreateConnection)
+            {
+                var comment = sqlConnection.Query<CommentModel>("select * from CommentTable where IDcomment = @id", new { id = id }).First();
+                return comment;
+            }
+        }
         public IEnumerable<CommentModel> GetComments()
         {
             using (var sqlConnection = factory.CreateConnection)
@@ -56,8 +63,8 @@ namespace Sweeter.DataProviders
         {
             using (var sqlConnection = factory.CreateConnection)
             {
-                sqlConnection.Execute(@"update CommentTable set IDpost=@IDpost, IDuser=@IDauthor,Text=@Text, LikeNumber=@LikeNumder where IDcomment = @id;",
-                new {IDpost= comment.Post.IDpost, IDauthor=comment.Author.IDuser,Text=comment.Text,LikeNumber=comment.LikeNumber, id=comment.IDcomment });
+                sqlConnection.Execute(@"update CommentTable set IDpost=@IDpost, IDuser=@IDauthor,Text=@Text, LikeNumder=@LikeNumber where IDcomment = @id;",
+                new {IDpost= comment.Post.IDpost, IDauthor=comment.Author.IDuser,Text=comment.Text,LikeNumber=comment.LikeNumder, id=comment.IDcomment });
             }
         }
 

@@ -65,7 +65,7 @@ namespace Sweeter.Controllers
                     {
                         Username="Admin"
                     },
-                    LikeNumber=0,
+                    LikeNumder=0,
                 }});
             }
 
@@ -88,7 +88,7 @@ namespace Sweeter.Controllers
             CommentModel comment=new CommentModel
             {
                 Author = Author,
-                LikeNumber=0,
+                LikeNumder=0,
                 IDuser = idd,
                 IDpost=post.IDpost,
                 Post=post,

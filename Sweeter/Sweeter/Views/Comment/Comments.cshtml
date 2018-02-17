@@ -17,6 +17,7 @@
     <script data-main="scripts/main" src="~/js/require.js"></script>
     <link rel="stylesheet" href="~/lib/src/style.css">
     <link rel="icon" type="image/png" href="~/lib/img/logo.png">
+    <script src="~/js/jquery-3.2.1.min.js"></script>
     <link rel="shortcut icon" href="~/lib/img/logo.png" type="image/png">
     <title>Jay Feeds</title>
 
@@ -100,14 +101,33 @@
                     <label class="postlabel">
                         @comment.Text
                     </label>
-                </div><span><img src="lib/img/Like.png" class="commentlike"></span><div class="likecontainer">
-                    <label class="likelabel">
-                        @comment.LikeNumber
+                </div><span><img src="lib/img/Like.png" class="commentlike" data-id="@comment.IDcomment"></span><div class="likecontainer">
+                    <label class="likelabel" id="@comment.IDcomment">
+                        @comment.LikeNumder
                     </label>
                 </div>
             </form>
 }
-               
+                
+                <script>
+    $(document).ready(function () {
+        $(".commentlike").bind("click", function () {
+            var link = $(this);
+            var id = link.data('id');
+            $.ajax({
+                url: "@Url.Action("LikesToComments","Like")",
+                type: "POST",
+                data: { id: id },
+                dataType: "text",
+                success: function (result) {
+
+                    $('#'+id).html(result);
+
+                }
+            });
+        });
+    });
+                </script>
 
 
             </div>

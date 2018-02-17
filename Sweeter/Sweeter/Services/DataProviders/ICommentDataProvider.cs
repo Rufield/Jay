@@ -8,7 +8,7 @@ namespace Sweeter.DataProviders
         IEnumerable<CommentModel> GetComments();
         IEnumerable<CommentModel> GetCommentsOfPost(int? idpost);
         CommentModel GetComment(int id);
-
+        CommentModel GetComment(int? id);
         void DeleteComment(int id);
         void AddComment(CommentModel comment);
         void UpdateComment(CommentModel comment);

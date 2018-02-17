@@ -32,21 +32,21 @@ namespace Sweeter.DataProviders
             }
         }
 
-        public LikesToCommentsModel GetLike(int id)
+        public LikesToCommentsModel GetLike(int iduser,int?idcomment)
         {
             using (var sqlConnection = factory.CreateConnection)
             {
-                var like = sqlConnection.Query<LikesToCommentsModel>("select * from LikesToCommentTable where IDus_com = @id", new { id = id }).First();
+                var like = sqlConnection.Query<LikesToCommentsModel>("select * from LikesToCommentTable where IDuser=@iduser and IDcomment=@idcomment ", new { iduser = iduser, idcomment=idcomment }).First();
                 return like;
             }
         }
 
-        public IEnumerable<LikesToCommentsModel> GetLikes()
+        public IEnumerable<LikesToCommentsModel> GetLikes(int iduser,int?idcomment)
         {
             using (var sqlConnection = factory.CreateConnection)
             {
-                var likes = sqlConnection.Query<LikesToCommentsModel>("select * from LikesToCommentTable").ToList();
-                return likes;
+                var like = sqlConnection.Query<LikesToCommentsModel>("select * from LikesToCommentTable where IDuser=@iduser and IDcomment=@idcomment ", new { iduser = iduser, idcomment = idcomment }).ToList();
+                return like;
             }
         }
 

@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="~/lib/src/bootstrap.min.css">
     <link rel="stylesheet" href="~/lib/src/style.css">
     <link rel="icon" type="image/png" href="~/lib/img/logo.png">
+    <script src="~/js/jquery-3.2.1.min.js"></script>
     <link rel="shortcut icon" href="~/lib/img/logo.png" type="image/png">
     <title>Jay Feeds</title>
 </head>
@@ -94,7 +95,7 @@
                 <div id="wall">
 
                     @foreach (PostsModel post in Model)
-            {
+    {
                 <form action="" class="post">
                     <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
                         @post.Author.Username
@@ -102,8 +103,8 @@
                         <label class="postlabel">
                             @post.Text
                         </label>
-                    </div><span><img src="lib/img/Like.png" class="like"></span><div class="likecontainer">
-                        <label class="likelabel" id="PostID_@post.IDpost">
+                    </div><span><img src="lib/img/Like.png" class="like" data-id="@post.IDpost"></span><div class="likecontainer">
+                        <label class="likelabel" id="@post.IDpost">
                             @post.LikeNumder
                         </label>
                     </div><span><img src="~/lib/img/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span><div class="commentcontainer">
@@ -112,7 +113,27 @@
                         </label>
                     </div>
                 </form>
-    }
+}
+                    
+                    <script>
+    $(document).ready(function () {
+        $(".like").bind("click", function () {
+            var link = $(this);
+            var id = link.data('id');
+            $.ajax({
+                url: "@Url.Action("LikesToPosts","Like")",
+                type: "POST",
+                data: { id: id },
+                dataType: "text",
+                success: function (result) {
+
+                    $('#'+id).html(result);
+
+                }
+            });
+        });
+    });
+                    </script>
                 </div>
             </div>
             <!--Menu-->

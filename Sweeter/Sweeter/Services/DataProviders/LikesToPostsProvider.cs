@@ -60,11 +60,11 @@ namespace Sweeter.DataProviders
             }
         }
 
-        public IEnumerable<LikesToPostsModel> GetLikesOfAuthor(int idauthor)
+        public IEnumerable<LikesToPostsModel> GetLikes(int idauthor,int? idpost)
         {
             using (var sqlConnection = factory.CreateConnection)
             {
-                var likes = sqlConnection.Query<LikesToPostsModel>("select * from LikesToPostTable where IDuser=@iduser",new { iduser = idauthor }).ToList();
+                var likes = sqlConnection.Query<LikesToPostsModel>("select * from LikesToPostTable where IDuser=@iduser and IDpost=@idpost",new { iduser = idauthor, idpost=idpost }).ToList();
                 return likes;
             }
         }

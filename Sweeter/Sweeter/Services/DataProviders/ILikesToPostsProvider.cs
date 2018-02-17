@@ -7,7 +7,7 @@ namespace Sweeter.DataProviders
     {
         IEnumerable<LikesToPostsModel> GetLikes();
         IEnumerable<LikesToPostsModel> GetLikesOfPost(int idpost);
-        IEnumerable<LikesToPostsModel> GetLikesOfAuthor(int idauthor);
+        IEnumerable<LikesToPostsModel> GetLikes(int idauthor,int? idpost);
         LikesToPostsModel GetLike(int id);
 
         void AddLike(LikesToPostsModel like);

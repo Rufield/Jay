@@ -220,6 +220,12 @@ p{
     border-bottom-left-radius:20px;
     border-top-left-radius:20px;
 }
+.like:hover{
+    cursor:pointer;
+}
+.commentlike:hover{
+    cursor:pointer;
+}
 .navi
 {
 	width:90%;
