@@ -45,23 +45,25 @@
                     </div>
                 </div>
             </div>
-            <form action="Search/search" method="post">
-                <input type="search" name="searchinfo" placeholder="Search the Jay" />
-                <input type="submit" name="search" />
+            <form action="/Search/search" method="post" class="search">
+                <input type="search" name="searchinfo" placeholder="Search users in Jay" class="SearchInput" />
+                <input type="submit" name="search" class="SearchButton" value="Search" />
             </form>
+            <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
             <div id="wall">
 
                 @if (Model != null)
-                {
-                    @foreach (AccountModel post in Model)
-                    {
-                        <form action="" class="post">
-                            <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})'">
-                                @post.Username
-                            </label>
-                        </form>
-                    }
-                }
+        {
+            @foreach (AccountModel post in Model)
+    {
+        <form action="" class="post">
+            <img src="data:image/jpeg;base64,@Convert.ToBase64String(post.Avatar)" class="SearchAvatar ">
+            <label class="lab auser" style="margin:1%; font-size:25px" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})'">
+                @post.Username
+            </label>
+        </form>
+}
+}
             </div>
         </div>
         <!--Menu-->

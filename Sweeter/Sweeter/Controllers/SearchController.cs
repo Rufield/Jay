@@ -51,6 +51,7 @@ namespace Sweeter.Controllers
                 ViewData["Username"] = account.Username;
                 ViewData["Email"] = account.Email;
                 ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
+                
                 return View(SearchResult);
             }
             else return RedirectPermanent("/Search");

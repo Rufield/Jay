@@ -63,10 +63,12 @@
 
                 </form>
             </div>
-            <form action="Posts/search" method="post">
-                <input type="search" name="searchinfo" placeholder="Search the Jay" />
-                <input type="submit" name="search" />
+            <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
+            <form action="Posts/search" method="post" class="search">
+                <input type="search" name="searchinfo" placeholder="Search users in Jay" class="SearchInput" />
+                <input type="submit" name="search" value="Search" class="SearchButton" />
             </form>
+            <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
             <!--Add Post-->
             <form action="Posts/addfeed" method="post" class="addfeedform">
                 <label class="lab" style="margin:1%">Publish your post, @ViewData["Username"]</label>
