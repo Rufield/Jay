@@ -51,16 +51,20 @@ namespace Sweeter.Controllers
         {
             int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
             AccountModel Author = accountDataProvider.GetAccount(id);
-            PostsModel Mypost = new PostsModel
+            if (mypost != null)
             {
-                Author = Author,
-                LikeNumder = 0,
-                CommentNumber = 0,
-                IDuser = id,
-                Text = mypost
-            };
-            postDataProvider.AddPost(Mypost);
-            return RedirectPermanent("/MyPage");
+                PostsModel Mypost = new PostsModel
+                {
+                    Author = Author,
+                    LikeNumder = 0,
+                    CommentNumber = 0,
+                    IDuser = id,
+                    Text = mypost
+                };
+                postDataProvider.AddPost(Mypost);
+                return Redirect("/MyPage");
+            }
+            return Redirect("/MyPage");
         }
     }
 }

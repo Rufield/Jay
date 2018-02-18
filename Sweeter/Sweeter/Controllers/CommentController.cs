@@ -83,21 +83,24 @@ namespace Sweeter.Controllers
             PostsModel post = postDataProvider.GetPost(id);
             post.CommentNumber++;
             AccountModel AuthorPost = accountDataProvider.GetAccount(post.IDuser);
-          
-            post.Author = AuthorPost;
-            postDataProvider.UpdatePost(post);
-            CommentModel comment=new CommentModel
+            if (mypost != null)
             {
-                Author = Author,
-                LikeNumder=0,
-                IDuser = idd,
-                IDpost=post.IDpost,
-                Post=post,
-                Text = mypost
-            };
-            commentDataProvider.AddComment(comment);
-            _logger.LogInformation($"User {Author.IDuser} create the comment {comment.IDcomment} on post {comment.IDpost}");
-            return  RedirectPermanent("/Comment?id="+id);
+                post.Author = AuthorPost;
+                postDataProvider.UpdatePost(post);
+                CommentModel comment = new CommentModel
+                {
+                    Author = Author,
+                    LikeNumder = 0,
+                    IDuser = idd,
+                    IDpost = post.IDpost,
+                    Post = post,
+                    Text = mypost
+                };
+                commentDataProvider.AddComment(comment);
+                _logger.LogInformation($"User {Author.IDuser} create the comment {comment.IDcomment} on post {comment.IDpost}");
+                return Redirect("/Comment?id=" + id);
+            }
+            return Redirect("/Comment?id=" + id);
         }
         /*  private ICommentDataProvider commentDataProvider;
           public CommentController(ICommentDataProvider commentData)
