@@ -97,12 +97,12 @@ button:focus{
 .mobileaddpost {
     width: 100%;
     margin-bottom: 1%;
-    background-color: white;
+    background-color: rgba(210,210,210,1);
     border-color: rgba(191, 133, 248,0.5);
     border-width: 1px;
     font-family: Comic Sans MS;
     font-size: 20px;
-    color: rgba(0,0,0,0.6);
+    color: rgba(0,0,0,0.9);
     border-radius: 5px;
 }
 .addpost:hover{
@@ -251,6 +251,7 @@ select:focus{
 {
 		width:100%;
 		vertical-align:bottom;
+        margin-top:20%;
 }
 .avatar {
     width: 100%;
@@ -329,7 +330,7 @@ hr {
     margin: 3%;
     margin-top: 1%;
     margin-bottom: 1%;
-    width: 94%;
+    width: 70%;
     text-align: left;
     padding: 0.5%;
     display: inline-block;
@@ -379,13 +380,13 @@ hr {
 }
 .mobilenavbutton {
     width: 100%;
-    background-color: white;
+    background-color: (210,210,210,1);
     border-color: rgba(191, 133, 248,0.5);
     border-width: 1px;
     border-radius: 10px;
     font-family: Comic Sans MS;
     font-size: 18px;
-    color: rgba(0,0,0,0.6);
+    color: rgba(0,0,0,0.9);
 }
 .mobilesignout
 {
@@ -611,6 +612,16 @@ affix {
 	margin-top:0%;
 		border-radius:10px;
 }
+.MyInfo
+{
+	width:94%;
+	display:block;
+}
+.editProfile{
+	display:block;
+	margin-left:3%;
+	width:94%;
+}
 }
 @media screen and (min-width:767px)
 {
@@ -626,4 +637,8 @@ affix {
     {
 margin-left:16.67%;
     }
+	.editMobProfile
+	{
+		display:none;
+	}
 }

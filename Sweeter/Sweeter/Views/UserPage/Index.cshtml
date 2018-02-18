@@ -49,7 +49,7 @@
 
                     </div>
                     <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 " style="text-align:center;">
-                        <img src="~/lib/img/Avatar.jpeg" class="mobileavatar">
+                        <img src=@ViewData["Pic"] class="mobileavatar">
 
                     </div>
                 </div>
@@ -59,13 +59,13 @@
                 <form action="MyPage/addfeed" method="post" class="addfeedformmobile">
 
                     <div class="mobilesignout">
-                        <button class="mobilenavbutton">Sign out</button>
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Logout","LogOut")' ">Sign out</button>
                     </div>
                     <div class="mobilemypage">
-                        <button class="mobilenavbutton">My Page</button>
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","MyPage")' ">My Page</button>
                     </div>
                     <div class="mobilefeeds">
-                        <button class="mobilenavbutton">Feeds</button>
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
                     </div>
 
                 </form>
@@ -74,7 +74,7 @@
             <form class="myInfoForm">
                 <label class="lab" style="margin:1%">@ViewData["UserName"]</label>
                 <hr>
-                <div class="MyInfo" style="width:70%">
+                <div class="MyInfo" >
                     <h1 class="headinfo">Name: @ViewData["UserName"]</h1>
                     <h1 class="headinfo">Email: @ViewData["Email"]</h1>
                 </div>

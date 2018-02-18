@@ -245,10 +245,10 @@ p{
 	margin-top:1.5%;
 
 }
-.mobileavatar
-{
-		width:100%;
-		vertical-align:bottom;
+.mobileavatar {
+    width: 100%;
+    vertical-align: bottom;
+    margin-top: 20%;
 }
 .avatar {
     width: 100%;
@@ -332,7 +332,7 @@ padding:1%;
     margin: 3%;
     margin-top: 1%;
     margin-bottom: 1%;
-    width: 94%;
+    width: 70%;
     text-align: left;
  padding:0.5%;
  display: inline-block;
@@ -627,6 +627,16 @@ affix {
 	margin-top:0%;
 		border-radius:10px;
 }
+.MyInfo
+{
+	width:94%;
+	display:block;
+}
+.editProfile{
+	display:block;
+	margin-left:3%;
+	width:94%;
+}
 }
 @media screen and (min-width:767px)
 {
@@ -642,4 +652,8 @@ affix {
     {
 margin-left:16.67%;
     }
+	.editMobProfile
+	{
+		display:none;
+	}
 }

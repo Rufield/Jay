@@ -40,10 +40,25 @@
                         <h1 class="mobileheadlabel">JAY</h1>
                     </div>
                     <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 " style="text-align:center;">
-                        <img src="~/lib/img/Avatar.jpeg" class="mobileavatar">
+                        <img src=@ViewData["Pic"] class="mobileavatar">
 
                     </div>
                 </div>
+            </div>
+            <div class="addfeedmobile">
+                <form action="MyPage/addfeed" method="post" class="addfeedformmobile">
+
+                    <div class="mobilesignout">
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Logout","LogOut")' ">Sign out</button>
+                    </div>
+                    <div class="mobilemypage">
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","MyPage")' ">My Page</button>
+                    </div>
+                    <div class="mobilefeeds">
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
+                    </div>
+
+                </form>
             </div>
             <form action="/Search/search" method="post" class="search">
                 <input type="search" name="searchinfo" placeholder="Search users in Jay" class="SearchInput" />

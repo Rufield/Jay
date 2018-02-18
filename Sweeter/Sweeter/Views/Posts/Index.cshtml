@@ -48,7 +48,7 @@
                         <h1 class="mobileheadlabel">JAY</h1>
                     </div>
                     <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 " style="text-align:center;">
-                        <img src="~/lib/img/Avatar.jpeg" class="mobileavatar">
+                        <img src=@ViewData["Pic"] class="mobileavatar">
                     </div>
                 </div>
             </div>
@@ -59,13 +59,13 @@
                     <input type="submit" class="mobileaddpost" name="addpost" id="addpost" value="Send">
                     <hr style="border-color:rgba(0,0,0,0.6)">
                     <div class="mobilesignout">
-                        <button class="mobilenavbutton">Sign out</button>
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Logout","LogOut")' ">Sign out</button>
                     </div>
                     <div class="mobilemypage">
-                        <button class="mobilenavbutton">My Page</button>
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","MyPage")' ">My Page</button>
                     </div>
                     <div class="mobilefeeds">
-                        <button class="mobilenavbutton">Feeds</button>
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
                     </div>
 
                 </form>
