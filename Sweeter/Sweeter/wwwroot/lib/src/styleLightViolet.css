@@ -1,6 +1,6 @@
 body
 {
-	background-color:rgba(0,21,25,1.0);
+	background-color:rgba(250,250,250,1.0);
 }
 
 .row
@@ -16,7 +16,6 @@ body
     border-radius: 20px;
     border-bottom-right-radius: 0px;
     border-top-right-radius: 0px;
-	background-color: rgba(250,250,250,1);
     width: 80%;
     display: inline-block;
     font-family: Comic Sans MS;
@@ -26,9 +25,7 @@ body
 {
     outline:none;
 }
-button:focus{
-	outline:none;
-}
+
 .SearchButton {
     border-radius: 0px;
     border-bottom-right-radius: 20px;
@@ -41,16 +38,10 @@ button:focus{
     border-width: 2px;
     font-family: Comic Sans MS;
     font-size: 18px;
-	color:rgba(0,0,0,0.9);
 }
     .SearchButton:hover {
         background-color: rgba(250,250,250,1);
     }
-	
-	
-	.btn-default{
-		color:rgba(0,0,0,0.9);
-	}
 .SearchInput:focus
 {
     outline:none;
@@ -82,7 +73,7 @@ button:focus{
     border-width: 1px;
     font-family: Comic Sans MS;
     font-size: 20px;
-    color: rgba(0,0,0,0.9);
+    color: rgba(0,0,0,0.6);
     border-radius: 5px;
 }
 .mobilemypost
@@ -112,16 +103,13 @@ textarea {
     border-width: 2px;
     border-style: solid;
     border-radius: 10px;
-    background-color: rgba(250,250,250,1);
+    background-color: rgba(253,253,253,1);
     text-align: left;
     font-family: Comic Sans MS;
     font-size: 15px;
-    color: rgba(0,0,0,0.9);
+    color: rgba(0,0,0,0.6);
 }
-input:focus
-{
-	outline:none;
-}
+
 .search {
     border:none;
     font-family: Comic Sans MS;
@@ -149,25 +137,25 @@ label {
 {	text-align:left;
 	font-family:Comic Sans MS;
 	font-size:15px;
-	color:rgba(0,0,0,0.9);
+	color:rgba(0,0,0,0.6);
 }
 .commentslabel
 {	text-align:left;
 	font-family:Comic Sans MS;
 	font-size:15px;
-	color:rgba(0,0,0,0.9);
+	color:rgba(0,0,0,0.6);
 }
 .likelabel
 {	
 	font-family:Comic Sans MS;
 	font-size:15px;
-	color:rgba(0,0,0,0.9);
+	color:rgba(0,0,0,0.6);
 }
 .commentlabel
 {	
 	font-family:Comic Sans MS;
 	font-size:15px;
-	color:rgba(0,0,0,0.9);
+	color:rgba(0,0,0,0.6);
 }
 p{
 	margin:0;
@@ -235,7 +223,7 @@ p{
     border-width: 1px;
     font-family: Comic Sans MS;
     font-size: 20px;
-    color: rgba(0,0,0,0.9);
+    color: rgba(0,0,0,0.6);
     border-radius: 10px;
 }
 .navi:hover{
@@ -268,7 +256,7 @@ hr {
     border-radius: 10px;
     font-family: Comic Sans MS;
     font-size: 18px;
-    color: rgba(0,0,0,0.9);
+    color: rgba(0,0,0,0.6);
     margin: 3%;
     margin-top: 1%;
     margin-bottom: 1%;
@@ -301,7 +289,7 @@ hr {
     border-width: 1px;
     font-family: Comic Sans MS;
     font-size: 20px;
-    color: rgba(0,0,0,0.9);
+    color: rgba(0,0,0,0.6);
     border-radius: 5px;
     display: inline-block;
 }
@@ -315,7 +303,7 @@ hr {
     text-align: left;
     font-family: Comic Sans MS;
     font-size: 20px;
-    color: rgba(0,0,0,0.9);
+    color: rgba(0,0,0,0.6);
 }
 .commentpostcontainer {
     background-color: rgba(191, 133, 248,0.5);
@@ -324,7 +312,7 @@ hr {
     border-radius: 10px;
     font-family: Comic Sans MS;
     font-size: 18px;
-    color: rgba(0,0,0,0.9);
+    color: rgba(0,0,0,0.6);
     margin: 3%;
     margin-top: 1%;
     margin-bottom: 1%;
@@ -451,7 +439,7 @@ hr {
     border-width: 1px;
     font-family: Comic Sans MS;
     font-size: 20px;
-    color: rgba(0,0,0,0.9);
+    color: rgba(0,0,0,0.6);
     border-radius: 10px;
 }
 .addfeedmobile {

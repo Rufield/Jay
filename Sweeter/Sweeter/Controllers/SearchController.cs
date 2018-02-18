@@ -25,7 +25,7 @@ namespace Sweeter.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Search()
         {
             int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
             if (id != 0)
@@ -44,17 +44,21 @@ namespace Sweeter.Controllers
         public IActionResult Search(string searchinfo)
         {
             int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
-            if (id != 0)
+            if (searchinfo != null)
             {
-                IEnumerable<AccountModel> SearchResult = accountDataProvider.SearchAccountsByUsername(searchinfo);
-                AccountModel account = accountDataProvider.GetAccount(id);
-                ViewData["Username"] = account.Username;
-                ViewData["Email"] = account.Email;
-                ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
-                
-                return View(SearchResult);
+                if (id != 0)
+                {
+                    IEnumerable<AccountModel> SearchResult = accountDataProvider.SearchAccountsByUsername(searchinfo);
+                    AccountModel account = accountDataProvider.GetAccount(id);
+                    ViewData["Username"] = account.Username;
+                    ViewData["Email"] = account.Email;
+                    ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
+
+                    return View(SearchResult);
+                }
+                else return Redirect("/Search");
             }
-            else return RedirectPermanent("/Search");
+            else return Redirect("/Search");
         }
     }
 }
