@@ -29,6 +29,7 @@ namespace Sweeter.Controllers
             if (id != 0)
             {
                 AccountModel account = accountDataProvider.GetAccount(id);
+                ViewData["Style"] = account.Style;
                 _logger.LogInformation($"User {account.IDuser} has successful download the Profile page");
                 /*if (account.Avatar == null)
                     using (FileStream FS = new FileStream("wwwroot/lib/img/Avatar.jpeg", FileMode.Open))
@@ -53,11 +54,13 @@ namespace Sweeter.Controllers
             if (id != 0)
             {
                 AccountModel Oldaccount = accountDataProvider.GetAccount(id);
+                if (Faccount.Style == null) Faccount.Style = Oldaccount.Style;
                 AccountModel account = new AccountModel
                 {
                     Name = Faccount.Name,
                     Username = Faccount.Username,
-                    Email = Faccount.Email
+                    Email = Faccount.Email,
+                    Style=Faccount.Style
                 };
                 account.Avatar = UploadingPicture(Faccount.Avatar);
                 if (account.Avatar == null)

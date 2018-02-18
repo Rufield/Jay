@@ -16,6 +16,7 @@ namespace Sweeter.Models
         [Required]
         public string Password { get; set; }
         public List<PostsModel> MyPosts { get; set; }
+        public string Style { get; set; }
     }
 
 

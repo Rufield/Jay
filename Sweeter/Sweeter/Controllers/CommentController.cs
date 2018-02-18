@@ -37,6 +37,7 @@ namespace Sweeter.Controllers
             idPost = id;
             ViewData["Username"] = account.Username;
             ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
+            ViewData["Style"] = account.Style;
             PostsModel post = postDataProvider.GetPost(id);
             ViewData["PostText"] = post.Text;
             ViewData["PostAuth"] = accountDataProvider.GetAccount(post.IDuser).Username;

@@ -49,6 +49,7 @@ namespace Sweeter.Controllers
                 IEnumerable<PostsModel> feeds = postDataProvider.GetPosts();
                 IEnumerable<PostsModel> feedsrev=feeds.Reverse();
                 AccountModel account = accountDataProvider.GetAccount(id);
+                ViewData["Style"] = account.Style;
                 ViewData["Username"] = account.Username;
                 ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
                 IEnumerable<PostsModel> deletedposts;
@@ -104,6 +105,7 @@ namespace Sweeter.Controllers
                 {
                     IEnumerable<AccountModel> SearchResult = accountDataProvider.SearchAccountsByUsername(searchinfo);
                     AccountModel account = accountDataProvider.GetAccount(id);
+                    ViewData["Style"]=account.Style;
                     ViewData["Username"] = account.Username;
                     ViewData["Email"] = account.Email;
                     ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);

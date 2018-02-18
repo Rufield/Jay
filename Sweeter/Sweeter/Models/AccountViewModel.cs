@@ -18,5 +18,6 @@ namespace Sweeter.Models
         public IFormFile Avatar { get; set; }
         public string Password { get; set; }
         public List<PostsModel> MyPosts { get; set; }
+        public string Style { get; set; }
     }
 }

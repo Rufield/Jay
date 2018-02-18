@@ -34,6 +34,7 @@ namespace Sweeter.Controllers
                 AccountModel account = accountDataProvider.GetAccount(id);
                 ViewData["Username"] = account.Username;
                 ViewData["Email"] = account.Email;
+                ViewData["Style"] = account.Style;
                 ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
                 return View();
             }
@@ -52,6 +53,7 @@ namespace Sweeter.Controllers
                     AccountModel account = accountDataProvider.GetAccount(id);
                     ViewData["Username"] = account.Username;
                     ViewData["Email"] = account.Email;
+                    ViewData["Style"] = account.Style;
                     ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
 
                     return View(SearchResult);

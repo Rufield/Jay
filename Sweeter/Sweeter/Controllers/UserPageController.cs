@@ -37,7 +37,7 @@ namespace Sweeter.Controllers
             ViewData["ID"] = id;
             AccountModel account = accountDataProvider.GetAccount(id);
             AccountModel accountmy = accountDataProvider.GetAccount(idUs);
-
+            ViewData["Style"] = accountmy.Style;
             ViewData["Username"] = account.Username;
             ViewData["Email"] = account.Email;
             if(account.Avatar!=null)

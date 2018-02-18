@@ -44,6 +44,7 @@ namespace Sweeter.Controllers
                             FS.Read(ImageData, 0, ImageData.Length);
                             account.Avatar = ImageData;
                         }
+                        account.Style = "Green";
                         accountDataProvider.AddAccount(account);
                         _logger.LogInformation($"New user{account.IDuser} {account.Name} register with Email {account.Email} and username {account.Username}.");
                         return RedirectToAction("Index", "Login");

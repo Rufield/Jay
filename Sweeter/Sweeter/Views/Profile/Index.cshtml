@@ -13,7 +13,7 @@
     <script src="~/js/require.js"></script>
     <script type="text/javascript" src="~/js/RegisterPageScripts.js"></script>
     <link rel="stylesheet" href="~/lib/src/bootstrap.min.css">
-    <link rel="stylesheet" href="~/lib/src/style.css">
+    <link rel="stylesheet" href="~/lib/src/style_@ViewData["Style"] .css">
     <link rel="icon" type="image/png" href="~/lib/img/logo.png">
     <link rel="shortcut icon" href="~/lib/img/logo.png" type="image/png">
     <title>Your profile</title>
@@ -47,6 +47,16 @@
     </div>
     <!--First part-->
     <div class="col-md-6 col-xs-12 col-lg-6 col-sm-6">
+        <p>
+            <select size="1" name="Style" id="Style" class="select">
+                <option disabled selected>Choose your style</option>
+                <option value="Green" class="Green">Green</option>
+                <option value="Black" class="Black">Black</option>
+                <option value="Violet" class="Violet">Violet</option>
+                <option value="LightViolet" class="LightViolet">Light Violet</option>
+                <option value="Blue" class="Blue">Blue</option>
+            </select>
+        </p>
         <p><label for="username" style="text-align:center">Your Username </label>
         <p><input type="text" name="username" class="textin" id="username" value=@Model.Username onchange="clearerror()" required></input>
         <p><label for="email" style="text-align:center">Your E-mail*</label>
