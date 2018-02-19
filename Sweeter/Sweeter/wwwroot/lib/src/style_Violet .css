@@ -48,7 +48,7 @@ body
 }
 .Violet
 {
-	color:rgba(89, 6, 167,1.0);
+	color:rgba(89, 6, 167, 1.0);
 }
 .LightViolet
 {
@@ -179,6 +179,22 @@ label {
 	font-family:Comic Sans MS;
 	font-size:15px;
 	color:rgba(0,0,0,0.6);
+}
+.DeletePostButton {
+    border-radius: 10px;
+    float: right;
+    text-align: center;
+    margin-top: 0.7%;
+    margin-right: 1%;
+    padding: 0%;
+    width: 4%;
+    display: inline-block;
+    background-color: rgba(89, 6, 167,0.5);
+    border-color: rgba(89, 6, 167,0.5);
+    border-width: 2px;
+    font-family: Comic Sans MS;
+    font-size: 17px;
+    color: rgba(0,0,0,0.6);
 }
 .commentslabel
 {	text-align:left;
@@ -401,7 +417,7 @@ hr {
 {
 	display:inline-block;
 
-	vertical-align:center;
+	vertical-align:central;
 }
 .like
 {

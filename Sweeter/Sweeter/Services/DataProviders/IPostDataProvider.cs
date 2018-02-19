@@ -10,9 +10,8 @@ namespace Sweeter.DataProviders
         IEnumerable<PostsModel> GetPostsOfAuthor(int? idauthor);
         PostsModel GetPost(int? id);
        
-        void DeletePost(int id);
+        void DeletePost(int? id);
         void AddPost(PostsModel post);
         void UpdatePost(PostsModel post);
-       
     }
 }

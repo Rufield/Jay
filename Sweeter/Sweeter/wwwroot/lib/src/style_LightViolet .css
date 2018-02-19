@@ -180,6 +180,18 @@ label {
 	font-size:15px;
 	color:rgba(0,0,0,0.6);
 }
+.DeletePostButton {
+    border-radius: 5px;
+    display: normal;
+    margin-left: 622px;
+    width: 35px;
+    background-color: rgba(191, 133, 248,0.5);
+    border-color: rgba(191, 133, 248,0.5);
+    border-width: 2px;
+    font-family: Comic Sans MS;
+    font-size: 18px;
+    color: rgba(0,0,0,0.6);
+}
 .commentslabel
 {	text-align:left;
 	font-family:Comic Sans MS;
@@ -401,7 +413,7 @@ hr {
 {
 	display:inline-block;
 
-	vertical-align:center;
+	vertical-align:central;
 }
 .like
 {

@@ -327,3 +327,7 @@ ASALocalRun/
 
 # MSBuild Binary and Structured Log
 *.binlog
+/Sweeter/Sweeter/wwwroot/lib/bootstrap
+/Sweeter/Sweeter/wwwroot/lib/jquery
+/Sweeter/Sweeter/wwwroot/lib/jquery-validation
+/Sweeter/Sweeter/wwwroot/lib/jquery-validation-unobtrusive

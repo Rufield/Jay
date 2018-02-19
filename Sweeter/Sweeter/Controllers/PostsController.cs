@@ -2,12 +2,11 @@
 using Microsoft.Extensions.Logging;
 using Sweeter.DataProviders;
 using Sweeter.Models;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Sweeter.Services.DataProviders;
 using Sweeter.Services.Comparer;
+using Sweeter.Services.DataProviders;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Sweeter.Controllers
 {
@@ -28,13 +27,6 @@ namespace Sweeter.Controllers
             this.unsubscribesDataProvider = unsubscribesData;
             _logger = logger;
         }
-       
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-
 
         [HttpGet]
         public IActionResult Index()
@@ -47,13 +39,13 @@ namespace Sweeter.Controllers
                 IEnumerable<UnsubscribesModel> unsubscribes = unsubscribesDataProvider.GetUnsubscribesOfUser(id);
                 //int id = Convert.ToInt32(Request.Cookies["0"]);
                 IEnumerable<PostsModel> feeds = postDataProvider.GetPosts();
-                IEnumerable<PostsModel> feedsrev=feeds.Reverse();
+                IEnumerable<PostsModel> feedsrev = feeds.Reverse();
                 AccountModel account = accountDataProvider.GetAccount(id);
                 ViewData["Style"] = account.Style;
                 ViewData["Username"] = account.Username;
                 ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
                 IEnumerable<PostsModel> deletedposts;
-                IEnumerable<PostsModel> feedsnew=feedsrev;
+                IEnumerable<PostsModel> feedsnew = feedsrev;
                 if (unsubscribes.Count() != 0)
                 {
                     deletedposts = postDataProvider.GetPostsOfAuthor(unsubscribes.First().IDus_pas);
@@ -109,7 +101,7 @@ namespace Sweeter.Controllers
                 {
                     IEnumerable<AccountModel> SearchResult = accountDataProvider.SearchAccountsByUsername(searchinfo);
                     AccountModel account = accountDataProvider.GetAccount(id);
-                    ViewData["Style"]=account.Style;
+                    ViewData["Style"] = account.Style;
                     ViewData["Username"] = account.Username;
                     ViewData["Email"] = account.Email;
                     ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
@@ -118,48 +110,13 @@ namespace Sweeter.Controllers
                 else return Redirect("/Posts");
             }
             else return Redirect("/Posts");
-
         }
 
-        // GET api/values
-        /*[HttpGet]
-         * 
-        private IPostDataProvider postDataProvider;
-        public PostsController(IPostDataProvider postData)
+        [HttpPost("DeletePost")]
+        public string DeletePost(int? id)
         {
-            this.postDataProvider = postData;
+            postDataProvider.DeletePost(id);
+            return "";
         }
-        public async Task<IEnumerable<PostsModel>> Get()
-        {
-            return await this.postDataProvider.GetPosts();
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public async Task<PostsModel> Get(int id)
-        {
-            return await this.postDataProvider.GetPost(id); ;
-        }
-
-        // POST api/values
-        [HttpPost]
-        public async void Post([FromBody]PostsModel postsModel)
-        {
-            await this.postDataProvider.AddPost(postsModel);
-
-        }
-        [HttpPut("{id}")]
-        public async Task Put(int id, [FromBody]PostsModel post)
-        {
-            await this.postDataProvider.UpdatePost(post);
-        }*/
-
     }
 }
-                //byte[] ImageData = account.Avatar;
-                //string path = "wwwroot/ForPics/av" + id.ToString() + ".jpeg";
-                //using (FileStream fs = new FileStream(path, FileMode.Create))
-                //{
-                //    fs.Write(ImageData, 0, ImageData.Length);
-                //}
-                //ViewData["Pic"] = path.Substring(7);

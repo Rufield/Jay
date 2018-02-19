@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Sweeter.Models
@@ -15,7 +14,5 @@ namespace Sweeter.Models
         public int CommentNumber { get; set; }
         public List<CommentModel> Comments { get; set; }
         public string Text { get; set; }
-
-       
     }
 }

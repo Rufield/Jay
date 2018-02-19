@@ -26,7 +26,7 @@ namespace Sweeter.DataProviders
             }
         }
 
-        public void DeletePost(int id)
+        public void DeletePost(int? id)
         {
             using (var sqlConnection = factory.CreateConnection)
             {
