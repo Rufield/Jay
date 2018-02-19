@@ -3,10 +3,9 @@
 *@
 @{
 }
-
 @using Sweeter.Models;
-@using Sweeter.DataProviders;
 @model IEnumerable<PostsModel>;
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,23 +31,20 @@
             <hr class="line ">
             <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 leftside">
                 <button class="navi" onclick="location.href='@Url.Action("Index","Profile")' ">Edit</button>
-                </div>
             </div>
+        </div>
             <!--Same mobile-->
             <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8 maincontainer">
                 <div class="headmobile">
                     <div class="row">
                         <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
                             <img src="~/lib/img/_@ViewData["Style"]/logo.png" class="mobilelogoleft">
-
                         </div>
                         <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
                             <h1 class="mobileheadlabel">JAY</h1>
-
                         </div>
                         <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 " style="text-align:center;">
                             <img src=@ViewData["Pic"] class="mobileavatar">
-
                         </div>
                     </div>
                 </div>
@@ -68,7 +64,6 @@
                         <div class="mobilefeeds">
                             <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
                         </div>
-
                     </form>
                 </div>
                 <!--Info-->
@@ -80,7 +75,6 @@
                         <h1 class="headinfo">Email: @ViewData["Email"]</h1>
                     </div>
                     <input type="button" class="editProfile editMobProfile" onclick="location.href='@Url.Action("Index","Profile")'" value="Edit">
-
                 </form>
                 <!--Add Post -->
                 <form action="MyPage/addfeed" method="post" class="addfeedform">
@@ -91,7 +85,6 @@
                 </form>
                 <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
                 <div id="wall">
-
                 @foreach (PostsModel post in Model)
                 {
                     <form id="post_@post.IDpost">
@@ -120,8 +113,7 @@
                             </label>
                         </div>
                     </form>
-                }
-                    
+                }     
                 <script>
                     $(document).ready(function () {
                         $(".like").bind("click", function () {
