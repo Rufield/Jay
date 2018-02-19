@@ -4,25 +4,19 @@
 @{
 }
 @using Sweeter.Models;
-
-
-
 @model IEnumerable<PostsModel>;
  
 <!DOCTYPE html>
 <html>
-<head>
-   
+<head> 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="~/lib/src/bootstrap.min.css">
     <link rel="stylesheet" href="~/lib/src/style_@ViewData["Style"] .css">
     <link rel="icon" type="image/png" href="~/lib/img/logo.png">
     <script src="~/js/jquery-3.2.1.min.js"></script>
-
     <link rel="shortcut icon" href="~/lib/img/logo.png" type="image/png">
     <title>Jay Feeds</title>
-    
 </head>
 <body>
     <!--Profile Pic and Logo-->
@@ -66,7 +60,6 @@
                     <div class="mobilefeeds">
                         <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
                     </div>
-
                 </form>
             </div>
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
@@ -85,7 +78,6 @@
             <!--Great Wall with Unique hidden script-->
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
             <div id="wall">
-
             @foreach (PostsModel post in Model)
             {
                 <form id="post_@post.IDpost">

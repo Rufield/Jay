@@ -2,15 +2,14 @@ body
 {
 	background-color:rgba(0,21,25,1.0);
 }
-
 .row
 {
 	margin-left:0;
 	margin-right:0;
 	margin-top:1%;
 }
-
-.SearchInput {
+.SearchInput
+{
     border-color: rgba(191, 133, 248,0.5);
     border-width: 2px;
     border-style: solid;
@@ -27,10 +26,12 @@ body
 {
     outline:none;
 }
-button:focus{
+button:focus
+{
 	outline:none;
 }
-.SearchButton {
+.SearchButton
+{
     border-radius: 0px;
     border-bottom-right-radius: 20px;
     border-top-right-radius: 20px;
@@ -56,7 +57,8 @@ button:focus{
 {
     outline:none;
 }
-.btn-file {
+.btn-file
+{
     position: relative;
     overflow: hidden;
     width: 70%;
@@ -65,7 +67,6 @@ button:focus{
     border-width: 1px;
     font-family: Comic Sans MS;
 }
-
 .mypost
 {
 	width:94%;
@@ -74,7 +75,8 @@ button:focus{
 	margin-bottom:1%;
 	resize:none;
 }
-.addpost {
+.addpost
+{
     width: 20%;
     margin-left: 77%;
     margin-bottom: 1%;
@@ -94,7 +96,8 @@ button:focus{
 	margin-bottom:1%;
 	resize:none;
 }
-.mobileaddpost {
+.mobileaddpost
+{
     width: 100%;
     margin-bottom: 1%;
     background-color: rgba(210,210,210,1);
@@ -105,10 +108,12 @@ button:focus{
     color: rgba(0,0,0,0.9);
     border-radius: 5px;
 }
-.addpost:hover{
+.addpost:hover
+{
 	background-color:rgba(250,250,250,1);
 }
-textarea {
+textarea
+{
     border-color: rgba(191, 133, 248,0.5);
     border-width: 2px;
     border-style: solid;
@@ -123,13 +128,14 @@ input:focus
 {
 	outline:none;
 }
-.search {
+.search
+{
     border:none;
     font-family: Comic Sans MS;
     width:200px;
 }
-
-form {
+form
+{
     display: block;
     margin-top: 0.5%;
     margin-left: 0.5%;
@@ -140,7 +146,8 @@ form {
     height: 100%;
     width: 99%;
 }
-label {
+label
+{
     text-align: center;
     font-family: Comic Sans MS;
     font-size: 18px;
@@ -187,11 +194,13 @@ label {
 	font-size:15px;
 	color:rgba(0,0,0,0.9);
 }
-p{
+p
+{
 	margin:0;
 	text-align:center;
 }
-.textin {
+.textin
+{
     margin: 0;
     border-color: rgba(191, 133, 248,0.5);
     border-width: 1px;
@@ -247,13 +256,16 @@ p{
 {
 	color:rgba(18,161,190,1.0);
 }
-input:focus{
+input:focus
+{
 	outline:none;
 }	
-button:focus{
+button:focus
+{
 	outline:none;
 }
-select:focus{
+select:focus
+{
 	outline:none;
 }
 .logo
@@ -266,14 +278,12 @@ select:focus{
 	width:51%;
 	opacity:0.8;
 	margin-top:1.5%;
-
 }
 .mobilelogoleft
 {
 	width:70%;
 	opacity:0.8;
 	margin-top:1.5%;
-
 }
 .mobileavatar
 {
@@ -281,24 +291,29 @@ select:focus{
     vertical-align:bottom;
     margin-top:20%;
 }
-.avatar {
+.avatar
+{
     width: 100%;
     vertical-align:middle;
     margin-top:6%;
     margin-bottom:3%;
 }
-.SearchAvatar{
+.SearchAvatar
+{
     width:30%;
     border-bottom-left-radius:20px;
     border-top-left-radius:20px;
 }
-.like:hover{
+.like:hover
+{
     cursor:pointer;
 }
-.commentlike:hover{
+.commentlike:hover
+{
     cursor:pointer;
 }
-.navi {
+.navi
+{
     width: 90%;
     height: 60px;
     margin-top: 3%;
@@ -310,21 +325,22 @@ select:focus{
     color: rgba(0,0,0,0.9);
     border-radius: 10px;
 }
-.navi:hover{
+.navi:hover
+{
 	background-color:rgba(250,250,250,1);
 }
 .line
 {
 	margin-top:5%;
 }
-
-hr {
+hr
+{
     margin: 0;
     border-color: rgba(191, 133, 248,0.5);
     border-width: 2px;
 }
-
-.maincontainer {
+.maincontainer
+{
     margin-top: -1%;
     border-left-color: rgba(191, 133, 248,0.5);
     border-left-width: 3px;
@@ -333,7 +349,8 @@ hr {
     border-right-width: 3px;
     border-right-style: solid;
 }
-.postcontainer {
+.postcontainer
+{
     background-color: rgba(191, 133, 248,0.5);
     border-color: rgba(191, 133, 248,0.5);
     border-width: 1px;
@@ -350,7 +367,8 @@ hr {
     display: inline-block;
     padding: 1%;
 }
-.MyInfo {
+.MyInfo
+{
     background-color: rgba(191, 133, 248,0.5);
     border-color: rgba(191, 133, 248,0.5);
     border-width: 1px;
@@ -363,7 +381,8 @@ hr {
     padding: 0.5%;
     display: inline-block;
 }
-.editProfile {
+.editProfile
+{
     width: 20%;
     margin-right: 3%;
     margin-bottom: 1.25%;
@@ -377,23 +396,27 @@ hr {
     border-radius: 5px;
     display: inline-block;
 }
-.editProfile:hover {
+.editProfile:hover
+{
     background-color: rgba(250,250,250,1);
 }
 .auser
 {
     display: inline-block;
 }
-.auser:hover{
+.auser:hover
+{
     cursor:pointer;
 }
-.headinfo {
+.headinfo
+{
     text-align: left;
     font-family: Comic Sans MS;
     font-size: 20px;
     color: rgba(0,0,0,0.9);
 }
-.commentpostcontainer {
+.commentpostcontainer
+{
     background-color: rgba(191, 133, 248,0.5);
     border-color: rgba(191, 133, 248,0.5);
     border-width: 1px;
@@ -410,7 +433,8 @@ hr {
     display: inline-block;
     padding: 1%;
 }
-.mobilenavbutton {
+.mobilenavbutton
+{
     width: 100%;
     background-color: (210,210,210,1);
     border-color: rgba(191, 133, 248,0.5);
@@ -463,7 +487,8 @@ hr {
 	display:inline-block;
 	margin-left:-2%;
 }
-.comment {
+.comment
+{
     background-image: url(/lib/img/comment.png) ;
     vertical-align: middle;
     width: 5%;
@@ -476,7 +501,8 @@ hr {
 {
     cursor:pointer;
 }
-.likecontainer {
+.likecontainer
+{
     text-align: center;
     vertical-align: middle;
     display: inline-block;
@@ -489,13 +515,15 @@ hr {
     width: 5%;
     margin-left: 1%;
 }
-.notright {
+.notright
+{
     background-color: #fcbdbd;
     border-color: #f00;
     border-width: 1px;
     border-radius: 5px;
 }
-.commentcontainer {
+.commentcontainer
+{
     text-align: center;
     vertical-align: middle;
     display: inline-block;
@@ -508,13 +536,15 @@ hr {
     width: 5%;
     margin-left: 1%;
 }
-.headlabel {
+.headlabel
+{
     text-align: center;
     font-family: Comic Sans MS;
     font-size: 25px;
     color: rgba(191, 133, 248,0.7);
 }
-.but {
+.but
+{
     margin-top: 0.5%;
     margin-bottom: 0.5%;
     width: 70%;
@@ -527,7 +557,8 @@ hr {
     color: rgba(0,0,0,0.9);
     border-radius: 10px;
 }
-.addfeedmobile {
+.addfeedmobile
+{
     background-color: rgba(191, 133, 248,0.8);
     border-top-color: rgba(191, 133, 248,0.5);
     border-top-width: 3px;
@@ -540,20 +571,24 @@ hr {
     z-index: 100;
     width: 100%;
 }
-.leftside {
+.leftside
+{
     position: fixed;
     width:16.67%;
 }
-.rightside {
+.rightside
+{
     position: fixed;
     width: 16.66%;
     right:0;
     text-align:center;
 }
-affix {
+affix
+{
     position: fixed;
 }
-.mobileheadlabel {
+.mobileheadlabel
+{
     font-family: Comic Sans MS;
     font-size: 45px;
     vertical-align: bottom;
@@ -561,14 +596,16 @@ affix {
     color: rgba(191, 133, 248,0.7);
     top: 8%;
 }
-.but:hover{
+.but:hover
+{
 	background-color:rgba(250,250,250,1);
 }
 .but:focus
 {
 	border-radius:10px;
 }
-.search {
+.search
+{
     border:hidden;
     width:99%;
     margin:0.5%;
@@ -580,16 +617,17 @@ affix {
         font-size:18px;
         text-align:center;
 	}
-	.headlabel{
+	.headlabel
+    {
 		font-size:19px;
 	}
-	.but{
+	.but
+    {
 		font-size:20px;
 	}
     .leftside
     {
 	    display:none;
-	
     }
     .rightside
     {
@@ -599,10 +637,12 @@ affix {
 	{
 		display:none;
 	}
-	.postcontainer{
+	.postcontainer
+    {
 		width:94%;
 	}
-    .commentpostcontainer {
+    .commentpostcontainer
+    {
         width: 94%;
     }
 	.like
@@ -643,7 +683,8 @@ affix {
 	    width:94%;
 	    display:block;
     }
-    .editProfile{
+    .editProfile
+    {
 	    display:block;
 	    margin-left:3%;
 	    width:94%;
