@@ -27,7 +27,13 @@ namespace Sweeter.Controllers
         [HttpGet]
         public IActionResult Search()
         {
-            int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            int id;
+            if (HttpContext.User.Claims.Count() != 0)
+            {
+                id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            }
+            else
+                id = 0;
             if (id != 0)
             {
                 
@@ -38,13 +44,19 @@ namespace Sweeter.Controllers
                 ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
                 return View();
             }
-            else return RedirectPermanent("/Search");
+            else return Redirect("/");
         }
 
         [HttpPost("search")]
         public IActionResult Search(string searchinfo)
         {
-            int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            int id;
+            if (HttpContext.User.Claims.Count() != 0)
+            {
+                id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            }
+            else
+                id = 0;
             if (searchinfo != null)
             {
                 if (id != 0)
@@ -58,9 +70,9 @@ namespace Sweeter.Controllers
 
                     return View(SearchResult);
                 }
-                else return Redirect("/Search");
+                else return Redirect("/");
             }
-            else return Redirect("/Search");
+            else return Redirect("/");
         }
     }
 }

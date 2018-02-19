@@ -39,8 +39,14 @@ namespace Sweeter.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            int id;
+            if (HttpContext.User.Claims.Count() != 0)
+            {
+                 id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            }
+            else
+                id = 0;
 
-            int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
             if (id != 0)
             {
 
@@ -73,52 +79,71 @@ namespace Sweeter.Controllers
                 _logger.LogInformation($"All is good, user {account.IDuser} look at new posts");
                 return View(feedsnew);
             }
-            else return RedirectPermanent("/Username");
+            else return Redirect("/");
         }
 
 
         [HttpPost("addfeed")]
         public IActionResult NewPost(string mypost)
         {
-            int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
-            AccountModel Author = accountDataProvider.GetAccount(id);
-            if (mypost != null)
+            int id;
+            if (HttpContext.User.Claims.Count() != 0)
             {
-                PostsModel Mypost = new PostsModel
-                {
-                    Author = Author,
-                    LikeNumder = 0,
-                    CommentNumber = 0,
-                    IDuser = id,
-                    Text = mypost
-                };
-                postDataProvider.AddPost(Mypost);
-                _logger.LogInformation($"Post {Mypost.IDpost} created by user {Author.IDuser}");
-                return Redirect("/Posts");
+                id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
             }
-            else return Redirect("/Posts");
+            else
+                id = 0;
+            if (id != 0)
+            {
+                AccountModel Author = accountDataProvider.GetAccount(id);
+                if (mypost != null)
+                {
+                    PostsModel Mypost = new PostsModel
+                    {
+                        Author = Author,
+                        LikeNumder = 0,
+                        CommentNumber = 0,
+                        IDuser = id,
+                        Text = mypost
+                    };
+                    postDataProvider.AddPost(Mypost);
+                    _logger.LogInformation($"Post {Mypost.IDpost} created by user {Author.IDuser}");
+                    return Redirect("/Posts");
+                }
+                else return Redirect("/Posts");
+            }
+            else return Redirect("/");
         }
 
         [HttpPost("search")]
         public IActionResult Search(string searchinfo)
         {
-            int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
-            if (searchinfo != null)
+            int id;
+            if (HttpContext.User.Claims.Count() != 0)
             {
-                if (id != 0)
+                id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            }
+            else
+                id = 0;
+            if (id != 0)
+            {
+                if (searchinfo != null)
                 {
-                    IEnumerable<AccountModel> SearchResult = accountDataProvider.SearchAccountsByUsername(searchinfo);
-                    AccountModel account = accountDataProvider.GetAccount(id);
-                    ViewData["Style"]=account.Style;
-                    ViewData["Username"] = account.Username;
-                    ViewData["Email"] = account.Email;
-                    ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
-                    return View("~/Views/Search/Search.cshtml", SearchResult);
+                    if (id != 0)
+                    {
+                        IEnumerable<AccountModel> SearchResult = accountDataProvider.SearchAccountsByUsername(searchinfo);
+                        AccountModel account = accountDataProvider.GetAccount(id);
+                        ViewData["Style"] = account.Style;
+                        ViewData["Username"] = account.Username;
+                        ViewData["Email"] = account.Email;
+                        ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
+                        return View("~/Views/Search/Search.cshtml", SearchResult);
+                    }
+                    else return Redirect("/Posts");
                 }
                 else return Redirect("/Posts");
             }
-            else return Redirect("/Posts");
-
+            else return Redirect("/");
         }
 
         // GET api/values

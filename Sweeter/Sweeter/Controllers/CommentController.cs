@@ -32,34 +32,42 @@ namespace Sweeter.Controllers
         [HttpGet]
         public IActionResult Comments(int? id)
         {
-            int idd = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
-            AccountModel account = accountDataProvider.GetAccount(idd);
-            idPost = id;
-            ViewData["Username"] = account.Username;
-            ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
-            ViewData["Style"] = account.Style;
-            PostsModel post = postDataProvider.GetPost(id);
-            ViewData["PostText"] = post.Text;
-            ViewData["PostAuth"] = accountDataProvider.GetAccount(post.IDuser).Username;
-            ViewData["PostLike"] = post.LikeNumder;
-            ViewData["PostComment"] = post.CommentNumber;
-            ViewData["ID"] = id;
-
-            IEnumerable<CommentModel> comments = commentDataProvider.GetCommentsOfPost(id).Reverse();
-            AccountModel Author = accountDataProvider.GetAccount(post.IDuser);
-            post.CommentNumber = comments.Count();
-            post.Author = Author;
-            postDataProvider.UpdatePost(post);
-
-            foreach (CommentModel com in comments)
+            int idd;
+            if (HttpContext.User.Claims.Count() != 0)
             {
-                com.Post = post;
-                com.Author = accountDataProvider.GetAccount(com.IDuser);
+                idd = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
             }
-
-            if (comments.Count() == 0)
+            else
+                idd = 0;
+            if (idd != 0)
             {
-                comments.Concat(new[]{new CommentModel
+                AccountModel account = accountDataProvider.GetAccount(idd);
+                idPost = id;
+                ViewData["Username"] = account.Username;
+                ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
+                ViewData["Style"] = account.Style;
+                PostsModel post = postDataProvider.GetPost(id);
+                ViewData["PostText"] = post.Text;
+                ViewData["PostAuth"] = accountDataProvider.GetAccount(post.IDuser).Username;
+                ViewData["PostLike"] = post.LikeNumder;
+                ViewData["PostComment"] = post.CommentNumber;
+                ViewData["ID"] = id;
+
+                IEnumerable<CommentModel> comments = commentDataProvider.GetCommentsOfPost(id).Reverse();
+                AccountModel Author = accountDataProvider.GetAccount(post.IDuser);
+                post.CommentNumber = comments.Count();
+                post.Author = Author;
+                postDataProvider.UpdatePost(post);
+
+                foreach (CommentModel com in comments)
+                {
+                    com.Post = post;
+                    com.Author = accountDataProvider.GetAccount(com.IDuser);
+                }
+
+                if (comments.Count() == 0)
+                {
+                    comments.Concat(new[]{new CommentModel
                 {
                     Text="There are no comments here yet",
                     Author=new AccountModel
@@ -68,39 +76,51 @@ namespace Sweeter.Controllers
                     },
                     LikeNumder=0,
                 }});
-            }
+                }
 
-            _logger.LogInformation($"User {account.IDuser} see all comments of post {post.IDpost}.");
-            return View(comments);
+                _logger.LogInformation($"User {account.IDuser} see all comments of post {post.IDpost}.");
+                return View(comments);
+            }
+            return Redirect("/");
         }
 
         [HttpPost("addcomment")]
         public IActionResult NewComment(int id, string mypost)
         {
-           
-            int idd = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
-            AccountModel Author = accountDataProvider.GetAccount(idd);
-            PostsModel post = postDataProvider.GetPost(id);
-            post.CommentNumber++;
-            AccountModel AuthorPost = accountDataProvider.GetAccount(post.IDuser);
-            if (mypost != null)
+
+            int idd;
+            if (HttpContext.User.Claims.Count() != 0)
             {
-                post.Author = AuthorPost;
-                postDataProvider.UpdatePost(post);
-                CommentModel comment = new CommentModel
+                idd = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            }
+            else
+                idd = 0;
+            if (idd != 0)
+            {
+                AccountModel Author = accountDataProvider.GetAccount(idd);
+                PostsModel post = postDataProvider.GetPost(id);
+                post.CommentNumber++;
+                AccountModel AuthorPost = accountDataProvider.GetAccount(post.IDuser);
+                if (mypost != null)
                 {
-                    Author = Author,
-                    LikeNumder = 0,
-                    IDuser = idd,
-                    IDpost = post.IDpost,
-                    Post = post,
-                    Text = mypost
-                };
-                commentDataProvider.AddComment(comment);
-                _logger.LogInformation($"User {Author.IDuser} create the comment {comment.IDcomment} on post {comment.IDpost}");
+                    post.Author = AuthorPost;
+                    postDataProvider.UpdatePost(post);
+                    CommentModel comment = new CommentModel
+                    {
+                        Author = Author,
+                        LikeNumder = 0,
+                        IDuser = idd,
+                        IDpost = post.IDpost,
+                        Post = post,
+                        Text = mypost
+                    };
+                    commentDataProvider.AddComment(comment);
+                    _logger.LogInformation($"User {Author.IDuser} create the comment {comment.IDcomment} on post {comment.IDpost}");
+                    return Redirect("/Comment?id=" + id);
+                }
                 return Redirect("/Comment?id=" + id);
             }
-            return Redirect("/Comment?id=" + id);
+            else return Redirect("/");
         }
         /*  private ICommentDataProvider commentDataProvider;
           public CommentController(ICommentDataProvider commentData)

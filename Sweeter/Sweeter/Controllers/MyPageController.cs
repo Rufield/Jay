@@ -25,7 +25,13 @@ namespace Sweeter.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            int id;
+            if (HttpContext.User.Claims.Count() != 0)
+            {
+                id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            }
+            else
+                id = 0;
             if (id != 0)
             {
                 //int id = Convert.ToInt32(Request.Cookies["0"]);
@@ -44,27 +50,37 @@ namespace Sweeter.Controllers
                 }
                 return View(feedsnew);
             }
-            else return RedirectPermanent("/Username");
+            else return Redirect("/");
         }
         [HttpPost("addfeed")]
         public IActionResult NewPost(string mypost)
         {
-            int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
-            AccountModel Author = accountDataProvider.GetAccount(id);
-            if (mypost != null)
+            int id;
+            if (HttpContext.User.Claims.Count() != 0)
             {
-                PostsModel Mypost = new PostsModel
+                id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            }
+            else
+                id = 0;
+            if (id != 0)
+            {
+                AccountModel Author = accountDataProvider.GetAccount(id);
+                if (mypost != null)
                 {
-                    Author = Author,
-                    LikeNumder = 0,
-                    CommentNumber = 0,
-                    IDuser = id,
-                    Text = mypost
-                };
-                postDataProvider.AddPost(Mypost);
+                    PostsModel Mypost = new PostsModel
+                    {
+                        Author = Author,
+                        LikeNumder = 0,
+                        CommentNumber = 0,
+                        IDuser = id,
+                        Text = mypost
+                    };
+                    postDataProvider.AddPost(Mypost);
+                    return Redirect("/MyPage");
+                }
                 return Redirect("/MyPage");
             }
-            return Redirect("/MyPage");
+            return Redirect("/");
         }
     }
 }

@@ -28,29 +28,38 @@ namespace Sweeter.Controllers
         [HttpGet]
         public IActionResult Index(int? id)
         {
-         
-            int idUs = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
-            if (unsubscribesDataProvider.GetUnsubscribes(idUs, id).Count()==0) ViewData["Act"] = "Unsubscribe";
-            else ViewData["Act"] = "Subscribe";
-            IEnumerable<PostsModel> feeds = postDataProvider.GetPostsOfAuthor(id);
-            IEnumerable<PostsModel> feedsnew = feeds.Reverse();
-            ViewData["ID"] = id;
-            AccountModel account = accountDataProvider.GetAccount(id);
-            AccountModel accountmy = accountDataProvider.GetAccount(idUs);
-            ViewData["Style"] = accountmy.Style;
-            ViewData["Username"] = account.Username;
-            ViewData["Email"] = account.Email;
-            if(account.Avatar!=null)
-            ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
-            else
-                ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(accountmy.Avatar);
-            foreach (PostsModel p in feedsnew)
+
+            int idUs;
+            if (HttpContext.User.Claims.Count() != 0)
             {
-                p.Author = accountDataProvider.GetAccount(p.IDuser);
-                p.CommentNumber = commentDataProvider.GetCommentsOfPost(p.IDpost).Count();
+                idUs = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
             }
-            return View(feedsnew);
-            
+            else
+                idUs = 0;
+            if (idUs != 0)
+            {
+                if (unsubscribesDataProvider.GetUnsubscribes(idUs, id).Count() == 0) ViewData["Act"] = "Unsubscribe";
+                else ViewData["Act"] = "Subscribe";
+                IEnumerable<PostsModel> feeds = postDataProvider.GetPostsOfAuthor(id);
+                IEnumerable<PostsModel> feedsnew = feeds.Reverse();
+                ViewData["ID"] = id;
+                AccountModel account = accountDataProvider.GetAccount(id);
+                AccountModel accountmy = accountDataProvider.GetAccount(idUs);
+                ViewData["Style"] = accountmy.Style;
+                ViewData["Username"] = account.Username;
+                ViewData["Email"] = account.Email;
+                if (account.Avatar != null)
+                    ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
+                else
+                    ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(accountmy.Avatar);
+                foreach (PostsModel p in feedsnew)
+                {
+                    p.Author = accountDataProvider.GetAccount(p.IDuser);
+                    p.CommentNumber = commentDataProvider.GetCommentsOfPost(p.IDpost).Count();
+                }
+                return View(feedsnew);
+            }
+            else return Redirect("/");
         }
     }
 }
