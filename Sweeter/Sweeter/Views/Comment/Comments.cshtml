@@ -31,7 +31,7 @@
         <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 leftside">
             <div class="logoleftt" style="text-align:center">
                 <h1 class="headlabel" style="font-size:35px; margin-top:-2%;">JAY</h1>
-                <img src="~/lib/img/logo.png" class="logoleft">
+                <img src="~/lib/img/_@ViewData["Style"]/logo.png" class="logoleft">
 
             </div>
             <hr class="line">
@@ -42,7 +42,7 @@
             <div class="headmobile">
                 <div class="row">
                     <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
-                        <img src="~/lib/img/logo.png" class="mobilelogoleft">
+                        <img src="~/lib/img/_@ViewData["Style"]/logo.png" class="mobilelogoleft">
 
                     </div>
                     <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
@@ -80,7 +80,7 @@
                     Comments to @ViewData["PostAuth"]'s post
                 </label><hr><div class="postcontainer">
                     <label class="postlabel">@ViewData["PostText"].</label>
-                </div><span><img src="~/lib/img/Like.png" class="like"></span><div class="likecontainer"><label class="likelabel">@ViewData["PostLike"]</label></div><span><img src="lib/img/comment.png" class="comment"></span><div class="commentcontainer"><label class="commentlabel">@ViewData["PostComment"]</label></div>
+                </div><span><img src="~/lib/img/_@ViewData["Style"]/Like.png" class="like"></span><div class="likecontainer"><label class="likelabel">@ViewData["PostLike"]</label></div><span><img src="lib/img/_@ViewData["Style"]/comment.png" class="comment"></span><div class="commentcontainer"><label class="commentlabel">@ViewData["PostComment"]</label></div>
             </form>
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
             <form method="post" class="addfeedform" action="Comment/addcomment">
@@ -101,7 +101,7 @@
                     <label class="postlabel">
                         @comment.Text
                     </label>
-                </div><span><img src="lib/img/Like.png" class="commentlike" data-id="@comment.IDcomment"></span><div class="likecontainer">
+                </div><span><img src="lib/img/_@ViewData["Style"]/Like.png" class="commentlike" data-id="@comment.IDcomment"></span><div class="likecontainer">
                     <label class="likelabel" id="@comment.IDcomment">
                         @comment.LikeNumder
                     </label>

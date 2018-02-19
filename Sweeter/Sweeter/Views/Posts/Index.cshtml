@@ -31,7 +31,7 @@
         <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 leftside">
             <div class="logoleftt" style="text-align:center">
                 <h1 class="headlabel" style="font-size:35px; margin-top:-2%;">JAY</h1>
-                <img src="~/lib/img/logo.png" class="logoleft">
+                <img src="~/lib/img/_@ViewData["Style"]/logo.png" class="logoleft">
             </div>
             <hr class="line">
             <img src=@ViewData["Pic"] class="avatar ">
@@ -42,7 +42,7 @@
             <div class="headmobile">
                 <div class="row">
                     <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
-                        <img src="~/lib/img/logo.png" class="mobilelogoleft">
+                        <img src="~/lib/img/_@ViewData["Style"]/logo.png" class="mobilelogoleft">
                     </div>
                     <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
                         <h1 class="mobileheadlabel">JAY</h1>
@@ -96,11 +96,11 @@
                     <label class="postlabel">
                         @post.Text
                     </label>
-                </div><span><img src="lib/img/Like.png" class="like" data-id="@post.IDpost"></span><div class="likecontainer">
+                </div><span><img src="lib/img/_@ViewData["Style"]/Like.png" class="like" data-id="@post.IDpost"></span><div class="likecontainer">
                     <label class="likelabel" id="@post.IDpost">
                         @post.LikeNumder
                     </label>
-                </div><span><img src="~/lib/img/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span><div class="commentcontainer">
+                </div><span><img src="~/lib/img/_@ViewData["Style"]/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span><div class="commentcontainer">
                     <label class="commentlabel">
                         @post.CommentNumber
                     </label>
