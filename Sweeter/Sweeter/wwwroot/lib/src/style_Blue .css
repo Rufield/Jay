@@ -80,9 +80,10 @@ select:focus{
     font-family: Comic Sans MS;
     font-size: 18px;
 }
-    .SearchButton:hover {
-        background-color: rgba(250,250,250,1);
-    }
+.SearchButton:hover
+{
+    background-color: rgba(250,250,250,1);
+}
 .SearchInput:focus
 {
     outline:none;
@@ -182,7 +183,7 @@ label
 	font-size:15px;
 	color:rgba(0,0,0,0.6);
 }
-.DeletePostButton
+.DeleteButton
 {
     border-radius: 5px;
     display: normal;
@@ -415,7 +416,6 @@ hr {
 .statcontainer
 {
 	display:inline-block;
-
 	vertical-align:central;
 }
 .like
@@ -423,7 +423,6 @@ hr {
 	vertical-align:middle;
 	width:5%;
 	display:inline-block;
-	
 	margin-left:-2%;
 }
 .commentlike
@@ -431,7 +430,6 @@ hr {
 	vertical-align:middle;
 	width:5%;
 	display:inline-block;
-	
 	margin-left:-2%;
 }
 .comment {
@@ -608,17 +606,17 @@ affix {
 	    width:10%;
 	    margin-top:0%;
 		border-radius:10px;
-}
-.MyInfo
-{
-	width:94%;
-	display:block;
-}
-.editProfile{
-	display:block;
-	margin-left:3%;
-	width:94%;
-}
+    }
+    .MyInfo
+    {
+	    width:94%;
+	    display:block;
+    }
+    .editProfile{
+	    display:block;
+	    margin-left:3%;
+	    width:94%;
+    }
 }
 @media screen and (min-width:767px)
 {

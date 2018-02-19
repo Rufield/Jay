@@ -4,7 +4,6 @@ using Sweeter.DataProviders;
 using Sweeter.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,7 +12,6 @@ namespace Sweeter.Controllers
 {
     [Route("/Comment")]
     public class CommentController : Controller
-
     {
         private IAccountDataProvider accountDataProvider;
         private ICommentDataProvider commentDataProvider;
@@ -28,7 +26,7 @@ namespace Sweeter.Controllers
             _logger = logger;
         }
 
-        public   int? idPost;
+        public int? idPost;
         [HttpGet]
         public IActionResult Comments(int? id)
         {
@@ -122,44 +120,12 @@ namespace Sweeter.Controllers
             }
             else return Redirect("/");
         }
-        /*  private ICommentDataProvider commentDataProvider;
-          public CommentController(ICommentDataProvider commentData)
-          {
-              this.commentDataProvider = commentData;
-          }
-          // GET api/values
-          [HttpGet]
-          public async Task<IEnumerable<CommentModel>> Get()
-          {
-              return await this.commentDataProvider.GetComments();
-          }
 
-          // GET api/values/5
-          [HttpGet("{id}")]
-          public async Task<CommentModel> Get(int id)
-          {
-              return await this.commentDataProvider.GetComment(id); 
-          }
-
-          // POST api/values
-          [HttpPost]
-          public async void Comment([FromBody]CommentModel comment)
-          {
-              await this.commentDataProvider.AddComment(comment);
-
-          }
-          [HttpPut("{id}")]
-          public async Task Put(int id, [FromBody]CommentModel comment)
-          {
-              await this.commentDataProvider.UpdateComment(comment);
-          }
-          */
+        [HttpPost("DeleteComment")]
+        public string DeleteComment(int? id)
+        {
+            commentDataProvider.DeleteComment(id);
+            return "";
+        }
     }
 }
-            //byte[] ImageData = account.Avatar;
-            //string path = "wwwroot/ForPics/av" + idd.ToString() + ".jpeg";
-            //using (FileStream fs = new FileStream(path, FileMode.Create))
-            //{
-            //    fs.Write(ImageData, 0, ImageData.Length);
-            //}
-            //ViewData["Pic"] = path.Substring(7);

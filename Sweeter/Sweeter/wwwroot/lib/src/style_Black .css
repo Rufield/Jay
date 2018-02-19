@@ -44,14 +44,14 @@ button:focus{
     font-size: 18px;
 	color:rgba(0,0,0,0.9);
 }
-    .SearchButton:hover {
-        background-color: rgba(250,250,250,1);
-    }
-	
-	
-	.btn-default{
-		color:rgba(0,0,0,0.9);
-	}
+.SearchButton:hover
+{
+    background-color: rgba(250,250,250,1);
+}
+.btn-default
+{
+    color:rgba(0,0,0,0.9);
+}
 .SearchInput:focus
 {
     outline:none;
@@ -152,7 +152,7 @@ label {
 	font-size:15px;
 	color:rgba(0,0,0,0.9);
 }
-.DeletePostButton
+.DeleteButton
 {
     border-radius: 10px;
     float: right;
@@ -266,9 +266,9 @@ select:focus{
 }
 .mobileavatar
 {
-		width:100%;
-		vertical-align:bottom;
-        margin-top:20%;
+	width:100%;
+    vertical-align:bottom;
+    margin-top:20%;
 }
 .avatar {
     width: 100%;
@@ -436,7 +436,6 @@ hr {
 .statcontainer
 {
 	display:inline-block;
-
 	vertical-align:central;
 }
 .like
@@ -451,7 +450,6 @@ hr {
 	vertical-align:middle;
 	width:5%;
 	display:inline-block;
-	
 	margin-left:-2%;
 }
 .comment {
@@ -612,37 +610,33 @@ affix {
         margin-top: 1%;
         margin-left: 75%;
     }
-.likecontainer
-{
-	width:10%;
-	margin-top:-0%;
-	border-radius:10px;
-}
-.comment
-{
-
-	width:10%;
-
-	margin-top:0%;
-
-
-}
-.commentcontainer
-{
-	width:10%;
-	margin-top:0%;
-		border-radius:10px;
-}
-.MyInfo
-{
-	width:94%;
-	display:block;
-}
-.editProfile{
-	display:block;
-	margin-left:3%;
-	width:94%;
-}
+    .likecontainer
+    {
+	    width:10%;
+	    margin-top:-0%;
+	    border-radius:10px;
+    }
+    .comment
+    {
+	    width:10%;
+	    margin-top:0%;
+    }
+    .commentcontainer
+    {
+	    width:10%;
+	    margin-top:0%;
+        border-radius:10px;
+    }
+    .MyInfo
+    {
+	    width:94%;
+	    display:block;
+    }
+    .editProfile{
+	    display:block;
+	    margin-left:3%;
+	    width:94%;
+    }
 }
 @media screen and (min-width:767px)
 {

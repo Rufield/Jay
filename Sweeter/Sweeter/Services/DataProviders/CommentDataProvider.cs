@@ -68,7 +68,7 @@ namespace Sweeter.DataProviders
             }
         }
 
-        public void DeleteComment(int id)
+        public void DeleteComment(int? id)
         {
             using (var sqlConnection = factory.CreateConnection)
             {
