@@ -198,6 +198,17 @@ p{
     font-family: Comic Sans MS;
     font-size: 20px;
 }
+.textareain {
+    margin: 0;
+    border-color: rgba(191, 133, 248,0.5);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 10px;
+    width: 77%;
+    text-align: left;
+    font-family: Comic Sans MS;
+    font-size: 20px;
+}
 .logo
 {
 	width:70%;

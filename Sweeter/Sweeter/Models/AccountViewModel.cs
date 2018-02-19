@@ -12,12 +12,12 @@ namespace Sweeter.Models
         public int IDuser { get; set; }
         [Required]
         public string Username { get; set; }
-        [Required]
         public string Email { get; set; }
         public string Name { get; set; }
         public IFormFile Avatar { get; set; }
         public string Password { get; set; }
         public List<PostsModel> MyPosts { get; set; }
         public string Style { get; set; }
+        public string About { get; set; }
     }
 }
