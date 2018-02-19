@@ -18,6 +18,4 @@ namespace Sweeter.Models
         public List<PostsModel> MyPosts { get; set; }
         public string Style { get; set; }
     }
-
-
 }

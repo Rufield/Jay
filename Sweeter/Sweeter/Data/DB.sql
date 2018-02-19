@@ -144,10 +144,22 @@ CREATE TABLE [dbo].[AccountTable](
 	[Email] [nvarchar](50) NOT NULL,
 	[Password] [nvarchar](50) NOT NULL,
 	[Username] [varchar](50) NOT NULL,
+	[Style] [nvarchar](15) NULL,
 	[Avatar] [varbinary](MAX) NULL,
  CONSTRAINT [PK_AccountTable] PRIMARY KEY CLUSTERED 
 (
 	[IDuser] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[UnsubscribesTable](
+	[Id] [bigint] IDENTITY(1, 1) NOT NULL,
+	[IDus_ac] [bigint] NULL,
+	[IDus_pas] [bigint] NULL,
+ CONSTRAINT [PK_UnsubscribesTable] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -201,15 +213,12 @@ CREATE TABLE [dbo].[LikesToCommentTable](
 ) ON [PRIMARY]
 GO
 
-CREATE TABLE [dbo].[UnsubscribesTable](
-	[Id] [bigint] IDENTITY(1, 1) NOT NULL,
-	[IDus_ac] [bigint] NULL,
-	[IDus_pas] [bigint] NULL,
- CONSTRAINT [PK_UnsubscribesTable] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+ALTER TABLE [dbo].[UnsubscribesTable] WITH CHECK ADD CONSTRAINT [FK_UnsubscribesTable_AccountTable_AC]
+	FOREIGN KEY ([IDus_ac]) REFERENCES [dbo].[AccountTable] ([IDuser])
+GO
+
+ALTER TABLE [dbo].[UnsubscribesTable] WITH CHECK ADD CONSTRAINT [FK_UnsubscribesTable_AccountTable_PAS]
+	FOREIGN KEY ([IDus_pas]) REFERENCES [dbo].[AccountTable] ([IDuser])
 GO
 
 ALTER TABLE [dbo].[PostTable] WITH CHECK ADD CONSTRAINT [FK_PostTable_AccountTable]
@@ -220,20 +229,20 @@ ALTER TABLE [dbo].[CommentTable] WITH CHECK ADD CONSTRAINT [FK_CommentTable_Acco
 	FOREIGN KEY ([IDuser]) REFERENCES [dbo].[AccountTable] ([IDuser])
 GO
 
-ALTER TABLE [dbo].[LikesToPostTable] WITH CHECK ADD CONSTRAINT [FK_LikesToPostTable_AccountTable]
-	FOREIGN KEY ([IDuser]) REFERENCES [dbo].[AccountTable] ([IDuser])
-GO
-
-ALTER TABLE [dbo].[LikesToCommentTable] WITH CHECK ADD CONSTRAINT [FK_LikesToCommentTable_AccountTable]
-	FOREIGN KEY ([IDuser]) REFERENCES [dbo].[AccountTable] ([IDuser])
-GO
-
 ALTER TABLE [dbo].[CommentTable] WITH CHECK ADD CONSTRAINT [FK_CommentTable_PostTable]
 	FOREIGN KEY ([IDpost]) REFERENCES [dbo].[PostTable] ([IDpost])
 GO
 
+ALTER TABLE [dbo].[LikesToPostTable] WITH CHECK ADD CONSTRAINT [FK_LikesToPostTable_AccountTable]
+	FOREIGN KEY ([IDuser]) REFERENCES [dbo].[AccountTable] ([IDuser])
+GO
+
 ALTER TABLE [dbo].[LikesToPostTable] WITH CHECK ADD CONSTRAINT [FK_LikesToPostTable_PostTable]
 	FOREIGN KEY ([IDpost]) REFERENCES [dbo].[PostTable] ([IDpost])
+GO
+
+ALTER TABLE [dbo].[LikesToCommentTable] WITH CHECK ADD CONSTRAINT [FK_LikesToCommentTable_AccountTable]
+	FOREIGN KEY ([IDuser]) REFERENCES [dbo].[AccountTable] ([IDuser])
 GO
 
 ALTER TABLE [dbo].[LikesToCommentTable] WITH CHECK ADD CONSTRAINT [FK_LikesToCommentTable_CommentTable]
@@ -250,6 +259,8 @@ BEGIN
  DELETE FROM [LikesToPostTable] WHERE IDuser IN (SELECT IDuser FROM DELETED)
  DELETE FROM [CommentTable] WHERE IDuser IN (SELECT IDuser FROM DELETED)
  DELETE FROM [PostTable] WHERE IDuser IN (SELECT IDuser FROM DELETED)
+ DELETE FROM [UnsubscribesTable] WHERE IDus_ac IN (SELECT IDus_ac FROM DELETED)
+ DELETE FROM [UnsubscribesTable] WHERE IDus_pas IN (SELECT IDus_pas FROM DELETED)
  DELETE FROM [AccountTable] WHERE IDuser IN (SELECT IDuser FROM DELETED)
 END
 GO

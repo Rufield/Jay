@@ -86,6 +86,6 @@ namespace Sweeter.Controllers
                 return Convert.ToString(comment.LikeNumder);
             }
 
-            }
+        }
     }
 }

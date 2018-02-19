@@ -9,7 +9,8 @@ body
 	margin-right:0;
 	margin-top:1%;
 }
-.SearchInput {
+.SearchInput
+{
     border-color: rgba(0,184,43,0.5);
     border-width: 2px;
     border-style: solid;
@@ -116,9 +117,9 @@ select:focus{
 	border-color:rgba(0,184,43,0.5);
 	border-width:1px;
 	font-family:Comic Sans MS;
-font-size:20px;
-color:rgba(0,0,0,0.6);
-border-radius:5px;
+    font-size:20px;
+    color:rgba(0,0,0,0.6);
+    border-radius:5px;
 }
 .mobilemypost
 {
@@ -137,9 +138,9 @@ border-radius:5px;
 	border-color:rgba(0,184,43,0.5);
 	border-width:1px;
 	font-family:Comic Sans MS;
-font-size:20px;
-color:rgba(0,0,0,0.6);
-border-radius:5px;
+    font-size:20px;
+    color:rgba(0,0,0,0.6);
+    border-radius:5px;
 }
 .addpost:hover{
 	background-color:rgba(250,250,250,1);
@@ -147,12 +148,12 @@ border-radius:5px;
 textarea
 {
 
-		border-color:rgba(0,184,43,0.5);
+    border-color:rgba(0,184,43,0.5);
 	border-width:2px;
 	border-style:solid;
 	border-radius:10px;
-		background-color:rgba(253,253,253,1);
-		text-align:left;
+	background-color:rgba(253,253,253,1);
+	text-align:left;
 	font-family:Comic Sans MS;
 	font-size:15px;
 	color:rgba(0,0,0,0.6);
@@ -178,7 +179,7 @@ form
 }
 label
 {
-		text-align:center;
+	text-align:center;
 	font-family:Comic Sans MS;
 	font-size:18px;
 	color:rgba(0,184,43,0.7);
@@ -190,6 +191,18 @@ label
 	font-size:15px;
 	color:rgba(0,0,0,0.6);
 }
+.DeletePostButton {
+    border-radius: 5px;
+    display: normal;
+    margin-left: 622px;
+    width: 35px;
+    background-color: rgba(0,184,43,0.5);
+    border-color: rgba(0,184,43,0.5);
+    border-width: 2px;
+    font-family: Comic Sans MS;
+    font-size: 18px;
+    color: rgba(0,0,0,0.6);
+}   
 .commentslabel
 {	text-align:left;
 	font-family:Comic Sans MS;
@@ -276,9 +289,9 @@ p{
 	border-color:rgba(0,184,43,0.5);
 	border-width:1px;
 	font-family:Comic Sans MS;
-font-size:20px;
-color:rgba(0,0,0,0.6);
-border-radius:10px;
+    font-size:20px;
+    color:rgba(0,0,0,0.6);
+    border-radius:10px;
 }
 .navi:hover{
 	background-color:rgba(250,250,250,1);
@@ -313,16 +326,16 @@ hr
 	border-width:1px;
 	border-radius:10px;
 	font-family:Comic Sans MS;
-font-size:18px;
-color:rgba(0,0,0,0.6);
-margin:3%;
-margin-top:1%;
-margin-bottom:1%;
-width:70%;
-text-align:left;
-position:relative;
-display:inline-block;
-padding:1%;
+    font-size:18px;
+    color:rgba(0,0,0,0.6);
+    margin:3%;
+    margin-top:1%;
+    margin-bottom:1%;
+    width:70%;
+    text-align:left;
+    position:relative;
+    display:inline-block;
+    padding:1%;
 }
 .MyInfo {
     background-color: rgba(0,184,43,0.5);
@@ -334,8 +347,8 @@ padding:1%;
     margin-bottom: 1%;
     width: 70%;
     text-align: left;
- padding:0.5%;
- display: inline-block;
+    padding:0.5%;
+    display: inline-block;
 }
 .editProfile {
     width: 20%;
@@ -363,23 +376,24 @@ padding:1%;
     font-size: 20px;
     color: rgba(0,0,0,0.6);
 }
-    .commentpostcontainer {
-        background-color: rgba(0,184,43,0.5);
-        border-color: rgba(0,184,43,0.5);
-        border-width: 1px;
-        border-radius: 10px;
-        font-family: Comic Sans MS;
-        font-size: 18px;
-        color: rgba(0,0,0,0.6);
-        margin: 3%;
-        margin-top: 1%;
-        margin-bottom: 1%;
-        width: 82%;
-        text-align: left;
-        position: relative;
-        display: inline-block;
-        padding: 1%;
-    }
+.commentpostcontainer
+{
+    background-color: rgba(0,184,43,0.5);
+    border-color: rgba(0,184,43,0.5);
+    border-width: 1px;
+    border-radius: 10px;
+    font-family: Comic Sans MS;
+    font-size: 18px;
+    color: rgba(0,0,0,0.6);
+    margin: 3%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 82%;
+    text-align: left;
+    position: relative;
+    display: inline-block;
+    padding: 1%;
+}
 .mobilenavbutton
 {
 	width:100%;
@@ -389,8 +403,8 @@ padding:1%;
 	border-width:1px;
 	border-radius:10px;
 	font-family:Comic Sans MS;
-font-size:18px;
-color:rgba(0,0,0,0.6);
+    font-size:18px;
+    color:rgba(0,0,0,0.6);
 }
 .mobilesignout
 {
@@ -420,7 +434,7 @@ color:rgba(0,0,0,0.6);
 {
 	display:inline-block;
 
-	vertical-align:center;
+	vertical-align:central;
 }
 .like
 {
@@ -505,9 +519,9 @@ color:rgba(0,0,0,0.6);
 	border-color:rgba(0,184,43,0.5);
 	border-width:1px;
 	font-family:Comic Sans MS;
-font-size:20px;
-color:rgba(0,0,0,0.6);
-border-radius:10px;
+    font-size:20px;
+    color:rgba(0,0,0,0.6);
+    border-radius:10px;
 
 }
 .addfeedmobile
@@ -523,7 +537,6 @@ border-radius:10px;
 	left:0;
 	z-index:100;
 	width:100%;
-	
 }
 .leftside {
     position: fixed;
@@ -544,8 +557,8 @@ affix {
 	font-size:45px;
 	vertical-align:bottom;
 	text-align:center;
-		color:rgba(0,184,43,0.7);
-		top:8%;
+	color:rgba(0,184,43,0.7);
+    top:8%;
 }
 .but:hover{
 	background-color:rgba(250,250,250,1);
@@ -572,15 +585,15 @@ affix {
 	.but{
 		font-size:20px;
 	}
-.leftside
-{
-	display:none;
+    .leftside
+    {
+	    display:none;
 	
-}
-.rightside
-{
-	display:none;
-}
+    }
+    .rightside
+    {
+	    display:none;
+    }
 	.addfeedform
 	{
 		display:none;
@@ -592,39 +605,36 @@ affix {
         width: 94%;
     }
 	.like
-{
-	vertical-align:middle;
-	width:10%;
-	display:inline-block;
-	margin-top:1%;
-	margin-left:53%;
-}
-    .commentlike {
+    {
+	    vertical-align:middle;
+	    width:10%;
+	    display:inline-block;
+	    margin-top:1%;
+	    margin-left:53%;
+    }
+    .commentlike
+    {
         vertical-align: middle;
         width: 10%;
         display: inline-block;
         margin-top: 1%;
         margin-left: 75%;
     }
-.likecontainer
-{
-	width:10%;
-	margin-top:-0%;
-	border-radius:10px;
-}
-.comment
-{
-
-	width:10%;
-
-	margin-top:0%;
-
-
-}
-.commentcontainer
-{
-	width:10%;
-	margin-top:0%;
+    .likecontainer
+    {
+	    width:10%;
+	    margin-top:-0%;
+	    border-radius:10px;
+    }
+    .comment
+    {
+	    width:10%;
+	    margin-top:0%;
+    }
+    .commentcontainer
+    {
+	    width:10%;
+	    margin-top:0%;
 		border-radius:10px;
 }
 .MyInfo
@@ -650,7 +660,7 @@ affix {
 	}
     .maincontainer
     {
-margin-left:16.67%;
+        margin-left:16.67%;
     }
 	.editMobProfile
 	{
