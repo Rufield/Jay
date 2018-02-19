@@ -59,7 +59,7 @@
             <div class="addfeedmobile">
                 <form action="Comment/addcomment" method="post" class="addfeedformmobile">
                     <input type="hidden" value="@ViewData["ID"]" name="id" />
-<textarea class="mobilemypost" name="mypost" id="mypost" rows="3" placeholder="What are you thinking about..."></textarea>
+                    <textarea class="mobilemypost" name="mypost" id="mypost" rows="3" placeholder="What are you thinking about..."></textarea>
                     <input type="submit" class="mobileaddpost" name="addpost" id="addpost" value="Send">
                     <hr style="border-color:rgba(0,0,0,0.6)">
 
@@ -87,65 +87,84 @@
                 <input type="hidden" value="@ViewData["ID"]" name="id" />
                 <label class="lab" style="margin:1%">Publish your comment, @ViewData["Username"]</label>
                 <hr>
-<textarea class="mypost" name="mypost" id="mypost" rows="3" placeholder="What are you thinking about..."></textarea><input type="submit" class="addpost" name="addpost" id="addpost" value="Send">
-
+                <textarea class="mypost" name="mypost" id="mypost" rows="3" placeholder="What are you thinking about..."></textarea>
+                <input type="submit" class="addpost" name="addpost" id="addpost" value="Send">
             </form>
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
             <div id="wall">
-                @foreach (CommentModel comment in Model)
-    {
-            <form action="" class="post">
-                <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=comment.IDuser})' ">
-                    @comment.Author.Username
-                </label><hr><div class="commentpostcontainer">
-                    <label class="postlabel">
-                        @comment.Text
+            @foreach (CommentModel comment in Model)
+            {
+                <form id="comment_@comment.IDcomment">
+                    <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=comment.IDuser})' ">
+                        @comment.Author.Username
                     </label>
-                </div><span><img src="lib/img/_@ViewData["Style"]/Like.png" class="commentlike" data-id="@comment.IDcomment"></span><div class="likecontainer">
-                    <label class="likelabel" id="@comment.IDcomment">
-                        @comment.LikeNumder
-                    </label>
-                </div>
-            </form>
-}
-                
-                <script>
-    $(document).ready(function () {
-        $(".commentlike").bind("click", function () {
-            var link = $(this);
-            var id = link.data('id');
-            $.ajax({
-                url: "@Url.Action("LikesToComments","Like")",
-                type: "POST",
-                data: { id: id },
-                dataType: "text",
-                success: function (result) {
+                    @if (comment.Author.Username.Equals(ViewData["Username"]))
+                    {
+                        <button type="button" class="DeleteButton" data-id="@comment.IDcomment">X</button>
+                    }
+                    <hr id="post_@comment.IDcomment">
+                    <div class="commentpostcontainer">
+                        <label class="postlabel">
+                            @comment.Text
+                        </label>
+                    </div>
+                    <span><img src="lib/img/_@ViewData["Style"]/Like.png" class="commentlike" data-id="@comment.IDcomment"></span>
+                    <div class="likecontainer">
+                        <label class="likelabel" id="@comment.IDcomment">
+                            @comment.LikeNumder
+                        </label>
+                    </div>
+                </form>
+            }
 
-                    $('#'+id).html(result);
+            <script>
+                $(document).ready(function () {
+                    $(".commentlike").bind("click", function () {
+                        var link = $(this);
+                        var id = link.data('id');
+                        $.ajax({
+                            url: "@Url.Action("LikesToComments","Like")",
+                            type: "POST",
+                            data: { id: id },
+                            dataType: "text",
+                            success: function (result) {
 
-                }
-            });
-        });
-    });
-                </script>
+                                $('#'+id).html(result);
 
+                            }
+                        });
+                    });
+                });
+            </script>
+            <script>
+                $(document).ready(function () {
+                    $(".DeleteButton").bind("click", function () {
+                        var link = $(this);
+                        var id = link.data('id');
+                        $.ajax({
+                            url: "@Url.Action("DeleteComment", "Comment")",
+                            type: "POST",
+                            data: { id: id },
+                            dataType: "text",
+                            success: function (result) {
 
+                                $("#comment_" + id).html(result);
+
+                            }
+                        });
+                    });
+                });
+            </script>
             </div>
-
-                  
-</div>
-
+        </div>
         <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 rightside">
             <nav>
                 <button class="navi" onclick="location.href='@Url.Action("Index","MyPage")' ">My Page</button>
                 <button class="navi" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
-
                 <button type="button" class="navi" onclick="location.href='@Url.Action("Logout","LogOut")' ">Log Out</button>
-
             </nav>
             <hr class="line">
         </div>
-
     </div>
 </body>
 </html>

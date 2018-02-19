@@ -43,14 +43,14 @@ button:focus{
     font-size: 18px;
 	color:rgba(0,0,0,0.9);
 }
-    .SearchButton:hover {
-        background-color: rgba(250,250,250,1);
-    }
-	
-	
-	.btn-default{
-		color:rgba(0,0,0,0.9);
-	}
+.SearchButton:hover
+{
+    background-color: rgba(250,250,250,1);
+}
+.btn-default
+{
+	color:rgba(0,0,0,0.9);
+}
 .SearchInput:focus
 {
     outline:none;
@@ -151,7 +151,7 @@ label {
 	font-size:15px;
 	color:rgba(0,0,0,0.9);
 }
-.DeletePostButton
+.DeleteButton
 {
     border-radius: 5px;
     display: normal;
@@ -219,8 +219,8 @@ p{
 }
 .mobileavatar
 {
-		width:100%;
-		vertical-align:bottom;
+	width:100%;
+	vertical-align:bottom;
 }
 .avatar {
     width: 100%;
@@ -526,15 +526,15 @@ affix {
 	.but{
 		font-size:20px;
 	}
-.leftside
-{
-	display:none;
+    .leftside
+    {
+	    display:none;
 	
-}
-.rightside
-{
-	display:none;
-}
+    }
+    .rightside
+    {
+	    display:none;
+    }
 	.addfeedform
 	{
 		display:none;
@@ -546,41 +546,38 @@ affix {
         width: 94%;
     }
 	.like
-{
-	vertical-align:middle;
-	width:10%;
-	display:inline-block;
-	margin-top:1%;
-	margin-left:53%;
-}
-    .commentlike {
+    {
+	    vertical-align:middle;
+	    width:10%;
+	    display:inline-block;
+	    margin-top:1%;
+	    margin-left:53%;
+    }
+    .commentlike
+    {
         vertical-align: middle;
         width: 10%;
         display: inline-block;
         margin-top: 1%;
         margin-left: 75%;
     }
-.likecontainer
-{
-	width:10%;
-	margin-top:-0%;
-	border-radius:10px;
-}
-.comment
-{
-
-	width:10%;
-
-	margin-top:0%;
-
-
-}
-.commentcontainer
-{
-	width:10%;
-	margin-top:0%;
+    .likecontainer
+    {
+	    width:10%;
+	    margin-top:-0%;
+	    border-radius:10px;
+    }
+    .comment
+    {
+        width:10%;
+	    margin-top:0%;
+    }
+    .commentcontainer
+    {
+	    width:10%;
+	    margin-top:0%;
 		border-radius:10px;
-}
+    }
 }
 @media screen and (min-width:767px)
 {
@@ -594,6 +591,6 @@ affix {
 	}
     .maincontainer
     {
-margin-left:16.67%;
+        margin-left:16.67%;
     }
 }

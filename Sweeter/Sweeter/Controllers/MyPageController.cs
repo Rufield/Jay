@@ -16,12 +16,14 @@ namespace Sweeter.Controllers
         private IPostDataProvider postDataProvider;
         private IAccountDataProvider accountDataProvider;
         private ICommentDataProvider commentDataProvider;
+
         public MyPageController(IPostDataProvider postData, IAccountDataProvider accountData, ICommentDataProvider commentData)
         {
             this.postDataProvider = postData;
             this.accountDataProvider = accountData;
             this.commentDataProvider = commentData;
         }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -52,6 +54,7 @@ namespace Sweeter.Controllers
             }
             else return Redirect("/");
         }
+
         [HttpPost("addfeed")]
         public IActionResult NewPost(string mypost)
         {
@@ -81,6 +84,13 @@ namespace Sweeter.Controllers
                 return Redirect("/MyPage");
             }
             return Redirect("/");
+        }
+
+        [HttpPost("DeletePost")]
+        public string DeletePost(int? id)
+        {
+            postDataProvider.DeletePost(id);
+            return "";
         }
     }
 }

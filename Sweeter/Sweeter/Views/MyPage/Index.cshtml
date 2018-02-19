@@ -3,11 +3,7 @@
 *@
 @{
 }
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+
 @using Sweeter.Models;
 @using Sweeter.DataProviders;
 @model IEnumerable<PostsModel>;
@@ -59,7 +55,7 @@
                 <!--Add Post Mobile-->
                 <div class="addfeedmobile">
                     <form action="MyPage/addfeed" method="post" class="addfeedformmobile">
-<textarea class="mobilemypost" name="mypost" id="mypost" rows="3" placeholder="What are you thinking about..."></textarea>
+                        <textarea class="mobilemypost" name="mypost" id="mypost" rows="3" placeholder="What are you thinking about..."></textarea>
                         <input type="submit" class="mobileaddpost" name="addpost" id="addpost" value="Send">
                         <hr style="border-color:rgba(0,0,0,0.6)">
 
@@ -96,46 +92,74 @@
                 <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
                 <div id="wall">
 
-                    @foreach (PostsModel post in Model)
-    {
-                <form action="" class="post">
-                    <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
-                        @post.Author.Username
-                    </label><hr><div class="postcontainer">
-                        <label class="postlabel">
-                            @post.Text
+                @foreach (PostsModel post in Model)
+                {
+                    <form id="post_@post.IDpost">
+                        <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
+                            @post.Author.Username
                         </label>
-                    </div><span><img src="lib/img/_@ViewData["Style"]/Like.png" class="like" data-id="@post.IDpost"></span><div class="likecontainer">
-                        <label class="likelabel" id="@post.IDpost">
-                            @post.LikeNumder
-                        </label>
-                    </div><span><img src="~/lib/img/_@ViewData["Style"]/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span><div class="commentcontainer">
-                        <label class="commentlabel">
-                            @post.CommentNumber
-                        </label>
-                    </div>
-                </form>
-}
-                    
-                    <script>
-    $(document).ready(function () {
-        $(".like").bind("click", function () {
-            var link = $(this);
-            var id = link.data('id');
-            $.ajax({
-                url: "@Url.Action("LikesToPosts","Like")",
-                type: "POST",
-                data: { id: id },
-                dataType: "text",
-                success: function (result) {
-
-                    $('#'+id).html(result);
-
+                        @if (post.Author.Username.Equals(ViewData["Username"]))
+                        {
+                            <button type="button" class="DeleteButton" data-id="@post.IDpost">X</button>
+                        }
+                        <hr id="post_@post.IDpost">
+                        <div class="postcontainer">
+                            <label class="postlabel">
+                                @post.Text
+                            </label>
+                        </div><span><img src="lib/img/_@ViewData["Style"]/Like.png" class="like" data-id="@post.IDpost"></span>
+                        <div class="likecontainer">
+                            <label class="likelabel" id="@post.IDpost">
+                                @post.LikeNumder
+                            </label>
+                        </div>
+                        <span><img src="~/lib/img/_@ViewData["Style"]/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span>
+                        <div class="commentcontainer">
+                            <label class="commentlabel">
+                                @post.CommentNumber
+                            </label>
+                        </div>
+                    </form>
                 }
-            });
-        });
-    });
-                    </script>
+                    
+                <script>
+                    $(document).ready(function () {
+                        $(".like").bind("click", function () {
+                            var link = $(this);
+                            var id = link.data('id');
+                            $.ajax({
+                                url: "@Url.Action("LikesToPosts","Like")",
+                                type: "POST",
+                                data: { id: id },
+                                dataType: "text",
+                                success: function (result) {
+
+                                    $('#'+id).html(result);
+
+                                }
+                            });
+                        });
+                    });
+                </script>
+                <script>
+                $(document).ready(function () {
+                    $(".DeleteButton").bind("click", function () {
+                        var link = $(this);
+                        var id = link.data('id');
+                        $.ajax({
+                            url: "@Url.Action("DeletePost", "Posts")",
+                            type: "POST",
+                            data: { id: id },
+                            dataType: "text",
+                            success: function (result) {
+
+                                $("#post_" + id).html(result);
+
+                            }
+                        });
+                    });
+                });
+                </script>
                 </div>
             </div>
             <!--Menu-->
@@ -147,5 +171,6 @@
                 </nav>
                 <hr class="line">
             </div>
+        </div>
 </body>
 </html>
