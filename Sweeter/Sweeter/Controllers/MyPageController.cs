@@ -41,8 +41,14 @@ namespace Sweeter.Controllers
                 IEnumerable<PostsModel> feedsnew = feeds.Reverse();
 
                 AccountModel account = accountDataProvider.GetAccount(id);
-                ViewData["Username"] = account.Username;
-                ViewData["Email"] = account.Email;
+                if (account.Name != null)
+                    ViewData["Name"] = account.Name;
+                else
+                    ViewData["Name"] = "Mysterious user";
+                if (account.About != null)
+                    ViewData["About"] = account.About;
+                else
+                    ViewData["About"] = "\"This person wantn't tell about himself/herself. But I knew he/she good human\" © Jay";
                 ViewData["Style"] = account.Style;
                 ViewData["Pic"] = "data:image/jpeg;base64," +Convert.ToBase64String(account.Avatar);
                 foreach (PostsModel p in feedsnew)

@@ -82,3 +82,10 @@ function checkemailbool() {
     else ermes.innerHTML = "";
 
 }
+function limitText(limitField, limitNum) {
+    var ermes = document.getElementById('error');
+    if (limitField.value.length > limitNum) {
+        limitField.value = limitField.value.substring(0, limitNum);
+        ermes.innerHTML = "Text limitation 300 characters";
+    }
+}

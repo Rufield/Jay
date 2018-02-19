@@ -25,7 +25,13 @@ namespace Sweeter.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            int id;
+            if (HttpContext.User.Claims.Count() != 0)
+            {
+                id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            }
+            else
+                id = 0;
             if (id != 0)
             {
                 AccountModel account = accountDataProvider.GetAccount(id);
@@ -66,7 +72,8 @@ namespace Sweeter.Controllers
                     Name = Faccount.Name,
                     Username = Faccount.Username,
                     Email = Faccount.Email,
-                    Style=Faccount.Style
+                    Style=Faccount.Style,
+                    About = Faccount.About
                 };
                 account.Avatar = UploadingPicture(Faccount.Avatar);
                 if (account.Avatar == null)
@@ -135,7 +142,6 @@ namespace Sweeter.Controllers
 
         private IActionResult Update(AccountModel Oldaccount, AccountModel account)
         {
-            account.Password = Oldaccount.Password;
             account.IDuser = Oldaccount.IDuser;
             accountDataProvider.UpdateAccount(account);
             _logger.LogInformation($"Update success");
