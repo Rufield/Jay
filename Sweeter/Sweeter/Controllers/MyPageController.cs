@@ -48,7 +48,7 @@ namespace Sweeter.Controllers
                 if (account.About != null)
                     ViewData["About"] = account.About;
                 else
-                    ViewData["About"] = "\"This person wantn't tell about himself/herself. But I knew he/she good human\" © Jay";
+                    ViewData["About"] = "\"This person didn't want to tell about himself/herself. But I know he/she is good person\" © Jay";
                 ViewData["Style"] = account.Style;
                 ViewData["UserName"] = account.Username;
                 ViewData["Pic"] = "data:image/jpeg;base64," +Convert.ToBase64String(account.Avatar);

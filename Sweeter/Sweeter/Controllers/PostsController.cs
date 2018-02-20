@@ -32,7 +32,13 @@ namespace Sweeter.Controllers
         public IActionResult Index()
         {
 
-            int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            int id;
+            if (HttpContext.User.Claims.Count() != 0)
+            {
+                id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            }
+            else
+                id = 0;
             if (id != 0)
             {
 
@@ -65,35 +71,51 @@ namespace Sweeter.Controllers
                 _logger.LogInformation($"All is good, user {account.IDuser} look at new posts");
                 return View(feedsnew);
             }
-            else return RedirectPermanent("/Username");
+            else return RedirectPermanent("/");
         }
 
         [HttpPost("addfeed")]
         public IActionResult NewPost(string mypost)
         {
-            int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
-            AccountModel Author = accountDataProvider.GetAccount(id);
-            if (mypost != null)
+            int id;
+            if (HttpContext.User.Claims.Count() != 0)
             {
-                PostsModel Mypost = new PostsModel
-                {
-                    Author = Author,
-                    LikeNumder = 0,
-                    CommentNumber = 0,
-                    IDuser = id,
-                    Text = mypost
-                };
-                postDataProvider.AddPost(Mypost);
-                _logger.LogInformation($"Post {Mypost.IDpost} created by user {Author.IDuser}");
-                return Redirect("/Posts");
+                id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
             }
-            else return Redirect("/Posts");
+            else
+                id = 0;
+            if (id != 0)
+            {
+                AccountModel Author = accountDataProvider.GetAccount(id);
+                if (mypost != null)
+                {
+                    PostsModel Mypost = new PostsModel
+                    {
+                        Author = Author,
+                        LikeNumder = 0,
+                        CommentNumber = 0,
+                        IDuser = id,
+                        Text = mypost
+                    };
+                    postDataProvider.AddPost(Mypost);
+                    _logger.LogInformation($"Post {Mypost.IDpost} created by user {Author.IDuser}");
+                    return Redirect("/Posts");
+                }
+                else return Redirect("/Posts");
+            }
+            else return Redirect("/");
         }
 
         [HttpPost("search")]
         public IActionResult Search(string searchinfo)
         {
-            int id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            int id;
+            if (HttpContext.User.Claims.Count() != 0)
+            {
+                id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            }
+            else
+                id = 0;
             if (searchinfo != null)
             {
                 if (id != 0)
@@ -106,7 +128,7 @@ namespace Sweeter.Controllers
                     ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
                     return View("~/Views/Search/Search.cshtml", SearchResult);
                 }
-                else return Redirect("/Posts");
+                else return Redirect("/");
             }
             else return Redirect("/Posts");
         }

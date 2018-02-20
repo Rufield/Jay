@@ -25,7 +25,18 @@ namespace Sweeter.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
+            int id;
+            if (HttpContext.User.Claims.Count() != 0)
+            {
+                id = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            }
+            else
+                id = 0;
+            if (id == 0)
+            {
+                return View();
+            }
+            else return Redirect("/posts");
         }
 
         [HttpPost]
