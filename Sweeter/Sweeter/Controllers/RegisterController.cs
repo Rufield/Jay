@@ -2,9 +2,12 @@
 using Microsoft.Extensions.Logging;
 using Sweeter.DataProviders;
 using Sweeter.Models;
+using Sweeter.Services.EmailService;
 using Sweeter.Services.HashService;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 
 namespace Sweeter.Controllers
 {
@@ -14,12 +17,14 @@ namespace Sweeter.Controllers
         private IAccountDataProvider accountDataProvider;
         private IHashService _hasher;
         private ILogger<RegisterController> _logger;
+        private IEmailService _emailService;
 
-        public RegisterController(IAccountDataProvider accountData, IHashService hasher, ILogger<RegisterController> logger)
+        public RegisterController(IAccountDataProvider accountData, IHashService hasher, ILogger<RegisterController> logger, IEmailService emailService)
         {
             accountDataProvider = accountData;
             _hasher = hasher;
             _logger = logger;
+            _emailService = emailService;
         }
 
         // GET: /<controller>/
@@ -58,6 +63,10 @@ namespace Sweeter.Controllers
                         account.Style = "Green";
                         accountDataProvider.AddAccount(account);
                         _logger.LogInformation($"New user{account.IDuser} {account.Name} register with Email {account.Email} and username {account.Username}.");
+                        MailMessage mailMessage = new MailMessage("example@gmail.com", account.Email);
+                        mailMessage.Subject = "Registration in Jay";
+                        mailMessage.Body = "Congratulations!\nYou`ve successfully registered in Jay!";
+                        _emailService.SendEmail(mailMessage);
                         return RedirectToAction("Index", "Login");
                     }
                     else

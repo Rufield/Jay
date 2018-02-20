@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Sweeter.DataProviders;
 using Sweeter.Services.ConnectionFactory;
 using Sweeter.Services.DataProviders;
+using Sweeter.Services.EmailService;
 using Sweeter.Services.HashService;
 using Sweeter.Services.LoggerService;
 
@@ -25,6 +26,7 @@ namespace Sweeter
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
             services.AddTransient<IAccountDataProvider, AccountDataProvider>();
             services.AddTransient<IPostDataProvider, PostDataProvider>();
@@ -40,7 +42,8 @@ namespace Sweeter
                   options.CookieName = "Current";
               });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddMvc();
+            services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
+            services.AddTransient<IEmailService, EmailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
