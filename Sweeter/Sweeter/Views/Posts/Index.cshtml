@@ -82,7 +82,7 @@
             {
                 <form id="post_@post.IDpost">
                     <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
-                        @post.Author.Username
+                        @post.Author.Username | Category | @post.PublicDate
                     </label>
                     @if (post.Author.Username.Equals(ViewData["Username"]))
                     {
