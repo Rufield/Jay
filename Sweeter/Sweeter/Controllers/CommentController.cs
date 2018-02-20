@@ -28,7 +28,7 @@ namespace Sweeter.Controllers
 
         public int? idPost;
         [HttpGet]
-        public IActionResult Comments(int? id)
+        public IActionResult Comments(int? id, bool? SortLike)
         {
             int idd;
             if (HttpContext.User.Claims.Count() != 0)
@@ -51,18 +51,20 @@ namespace Sweeter.Controllers
                 ViewData["PostComment"] = post.CommentNumber;
                 ViewData["ID"] = id;
 
-                IEnumerable<CommentModel> comments = commentDataProvider.GetCommentsOfPost(id).Reverse();
+                IEnumerable<CommentModel> comments = commentDataProvider.GetCommentsOfPost(id);
                 AccountModel Author = accountDataProvider.GetAccount(post.IDuser);
                 post.CommentNumber = comments.Count();
                 post.Author = Author;
                 postDataProvider.UpdatePost(post);
-
+                if(SortLike == true)
+                {
+                    comments = comments.OrderByDescending(com => com.LikeNumder);
+                }
                 foreach (CommentModel com in comments)
                 {
                     com.Post = post;
                     com.Author = accountDataProvider.GetAccount(com.IDuser);
                 }
-
                 if (comments.Count() == 0)
                 {
                     comments.Concat(new[]{new CommentModel
@@ -127,5 +129,58 @@ namespace Sweeter.Controllers
             commentDataProvider.DeleteComment(id);
             return "";
         }
+        [HttpPost("SortbyLikes")]
+        public IActionResult SortbyLikes(int? id)
+        {
+            int idd;
+            if (HttpContext.User.Claims.Count() != 0)
+            {
+                idd = int.Parse(HttpContext.User.FindFirst(x => x.Type == "Current").Value);
+            }
+            else
+                idd = 0;
+            if (idd != 0)
+            {
+                AccountModel account = accountDataProvider.GetAccount(idd);
+                idPost = id;
+                ViewData["Username"] = account.Username;
+                ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
+                ViewData["Style"] = account.Style;
+                PostsModel post = postDataProvider.GetPost(id);
+                ViewData["PostText"] = post.Text;
+                ViewData["PostAuth"] = accountDataProvider.GetAccount(post.IDuser).Username;
+                ViewData["PostLike"] = post.LikeNumder;
+                ViewData["PostComment"] = post.CommentNumber;
+                ViewData["ID"] = id;
+
+                IEnumerable<CommentModel> comments = commentDataProvider.GetCommentsOfPost(id);
+                AccountModel Author = accountDataProvider.GetAccount(post.IDuser);
+                post.CommentNumber = comments.Count();
+                post.Author = Author;
+                postDataProvider.UpdatePost(post);
+                foreach (CommentModel com in comments)
+                {
+                    com.Post = post;
+                    com.Author = accountDataProvider.GetAccount(com.IDuser);
+                }
+                if (comments.Count() == 0)
+                {
+                    comments.Concat(new[]{new CommentModel
+                {
+                    Text="There are no comments here yet",
+                    Author=new AccountModel
+                    {
+                        Username="Admin"
+                    },
+                    LikeNumder=0,
+                }});
+                }
+
+                _logger.LogInformation($"User {account.IDuser} see all comments of post {post.IDpost}.");
+                return RedirectToAction("/Comment?id=" + id, new {comments });
+            }
+            return Redirect("/");
+        }
+
     }
 }

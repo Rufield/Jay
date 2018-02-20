@@ -172,7 +172,7 @@
             </nav>
             <hr class="line">
             <nav>
-                <button class="navi" onclick="">Sort comments by likes</button>
+                <button class="navi" onclick="location.href='@Url.Action("Comments", "Comment", new {id = ViewData["ID"], SortLike = true })'">Sort comments by likes</button>
             </nav>
         </div>
     </div>
