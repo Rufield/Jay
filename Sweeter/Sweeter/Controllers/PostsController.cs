@@ -68,7 +68,6 @@ namespace Sweeter.Controllers
             else return RedirectPermanent("/Username");
         }
 
-
         [HttpPost("addfeed")]
         public IActionResult NewPost(string mypost)
         {

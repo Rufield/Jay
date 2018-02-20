@@ -91,7 +91,7 @@
                         <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
                             @post.Author.Username
                         </label>
-                        @if (post.Author.Username.Equals(ViewData["Username"]))
+                        @if (post.Author.Username.Equals(ViewData["UserName"]))
                         {
                             <button type="button" class="DeleteButton" data-id="@post.IDpost">X</button>
                         }
@@ -139,7 +139,7 @@
                         var link = $(this);
                         var id = link.data('id');
                         $.ajax({
-                            url: "@Url.Action("DeletePost", "Posts")",
+                            url: "@Url.Action("DeletePost", "MyPage")",
                             type: "POST",
                             data: { id: id },
                             dataType: "text",

@@ -50,6 +50,7 @@ namespace Sweeter.Controllers
                 else
                     ViewData["About"] = "\"This person wantn't tell about himself/herself. But I knew he/she good human\" © Jay";
                 ViewData["Style"] = account.Style;
+                ViewData["UserName"] = account.Username;
                 ViewData["Pic"] = "data:image/jpeg;base64," +Convert.ToBase64String(account.Avatar);
                 foreach (PostsModel p in feedsnew)
                 {
