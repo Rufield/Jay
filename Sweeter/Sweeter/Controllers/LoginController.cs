@@ -46,7 +46,7 @@ namespace Sweeter.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> OnPostAsync(string email, string password)
+        public async Task<IActionResult> OnPostAsync(string email, string password, string Persistent)
         {
             if (ModelState.IsValid)
             {
@@ -66,17 +66,29 @@ namespace Sweeter.Controllers
 
                 var claimsIdentity = new ClaimsIdentity(
                     claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-                var authProperties = new AuthenticationProperties
+                if (Persistent == null)
                 {
+                    var authProperties = new AuthenticationProperties
+                    {
 
-                };
+                    };
+                    await HttpContext.SignInAsync(
+                       CookieAuthenticationDefaults.AuthenticationScheme,
+                       new ClaimsPrincipal(claimsIdentity),
+                       authProperties);
+                }
+                else
+                {
+                    var authProperties = new AuthenticationProperties
+                    {
+                        IsPersistent = true
+                    };
 
-                await HttpContext.SignInAsync(
-                    CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(claimsIdentity),
-                    authProperties);
-
+                    await HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme,
+                        new ClaimsPrincipal(claimsIdentity),
+                        authProperties);
+                }
 
                 _logger.LogInformation($"User {account.IDuser} successful login with Email {account.Email}");
                 return RedirectToAction("Index", "Posts");
