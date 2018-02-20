@@ -74,9 +74,9 @@
             <form class="myInfoForm">
                 <label class="lab" style="margin:1%">@ViewData["UserName"]</label>
                 <hr>
-                <div class="MyInfo" >
-                    <h1 class="headinfo">Name: @ViewData["UserName"]</h1>
-                    <h1 class="headinfo">Email: @ViewData["Email"]</h1>
+                <div class="MyInfo">
+                    <h1 class="headinfo">My name is @ViewData["Name"]</h1>
+                    <h1 class="headinfo"><b>Something about me:</b> @ViewData["About"]</h1>
                 </div>
                 <input type="button" class="editProfile" onclick="location.href='@Url.Action("Subscribe","Unsubscribe",new { id = ViewData["ID"]})'" value="@ViewData["Act"]" >
                 

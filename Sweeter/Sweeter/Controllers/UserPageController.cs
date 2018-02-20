@@ -46,8 +46,14 @@ namespace Sweeter.Controllers
                 AccountModel account = accountDataProvider.GetAccount(id);
                 AccountModel accountmy = accountDataProvider.GetAccount(idUs);
                 ViewData["Style"] = accountmy.Style;
-                ViewData["Username"] = account.Username;
-                ViewData["Email"] = account.Email;
+                if (account.Name != null)
+                    ViewData["Name"] = account.Name;
+                else
+                    ViewData["Name"] = "Mysterious user";
+                if (account.About != null)
+                    ViewData["About"] = account.About;
+                else
+                    ViewData["About"] = "\"This person wantn't tell about himself/herself. But I knew he/she good human\" © Jay";
                 if (account.Avatar != null)
                     ViewData["Pic"] = "data:image/jpeg;base64," + Convert.ToBase64String(account.Avatar);
                 else
