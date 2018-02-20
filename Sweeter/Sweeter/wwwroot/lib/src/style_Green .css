@@ -186,11 +186,12 @@ label
 	color:rgba(0,184,43,0.7);
 	
 }
-.postlabel
-{	text-align:left;
-	font-family:Comic Sans MS;
-	font-size:15px;
-	color:rgba(0,0,0,0.6);
+.postlabel {
+    text-align: left;
+    font-family: Comic Sans MS;
+    font-size: 15px;
+    color: rgba(0,0,0,0.6);
+    word-wrap: break-word;
 }
 .DeleteButton
 {
