@@ -165,8 +165,19 @@ CREATE TABLE [dbo].[UnsubscribesTable](
 ) ON [PRIMARY]
 GO
 
+CREATE TABLE [dbo].[CategoriesTable](
+	[ID] [bigint] IDENTITY(1, 1) NOT NULL,
+	[Category] [nvarchar](15) NOT NULL,
+ CONSTRAINT [PK_CategoriesTable] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
 CREATE TABLE [dbo].[PostTable](
 	[IDpost] [bigint] IDENTITY(1, 1) NOT NULL,
+	[IDCategory] [bigint] NOT NULL,
 	[IDuser] [bigint] NOT NULL,
 	[Text] [ntext] NOT NULL,
 	[PublicDate] [datetime] NOT NULL,
@@ -226,6 +237,10 @@ ALTER TABLE [dbo].[PostTable] WITH CHECK ADD CONSTRAINT [FK_PostTable_AccountTab
 	FOREIGN KEY ([IDuser]) REFERENCES [dbo].[AccountTable] ([IDuser])
 GO
 
+ALTER TABLE [dbo].[PostTable] WITH CHECK ADD CONSTRAINT [FK_PostTable_CategoriesTable]
+	FOREIGN KEY ([IDCategory]) REFERENCES [dbo].[CategoriesTable] ([ID])
+GO
+
 ALTER TABLE [dbo].[CommentTable] WITH CHECK ADD CONSTRAINT [FK_CommentTable_AccountTable]
 	FOREIGN KEY ([IDuser]) REFERENCES [dbo].[AccountTable] ([IDuser])
 GO
@@ -266,6 +281,17 @@ BEGIN
 END
 GO
 
+CREATE TRIGGER [DELETE_CategoriesTable]
+   ON dbo.[CategoriesTable]
+   INSTEAD OF DELETE
+AS 
+BEGIN
+ SET NOCOUNT ON;
+ DELETE FROM [PostTable] WHERE IDCategory IN (SELECT IDCategory FROM DELETED)
+ DELETE FROM [CategoriesTable] WHERE ID IN (SELECT ID FROM DELETED)
+END
+GO
+
 CREATE TRIGGER [DELETE_PostTable]
    ON dbo.[PostTable]
    INSTEAD OF DELETE
@@ -287,4 +313,21 @@ BEGIN
  DELETE FROM [LikesToCommentTable] WHERE IDcomment IN (SELECT IDcomment FROM DELETED)
  DELETE FROM [CommentTable] WHERE IDcomment IN (SELECT IDcomment FROM DELETED)
 END
+GO
+
+INSERT INTO [dbo].[CategoriesTable] (Category)
+VALUES
+('Flood'),
+('Stories'),
+('Trands'),
+('Politics'),
+('Techs'),
+('Science'),
+('Art'),
+('Sport'),
+('Humor'),
+('Games'),
+('Cookery'),
+('Others'),
+('FeedBack')
 GO
