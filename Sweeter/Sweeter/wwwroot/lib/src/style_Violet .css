@@ -698,6 +698,11 @@ affix
     .telonly {
         display: inline-block;
         margin-left: 3%;
+        font-size: 19px;
+    }
+
+    .cont {
+        margin-bottom: 1%;
     }
 }
 
@@ -720,5 +725,44 @@ affix
 
     .telonly {
         display: none;
+    }
+
+    .cont {
+        display: inline-block;
+        width: 24%;
+        margin-left: -2%;
+    }
+
+    .commentcont {
+        display: inline-block;
+        width: 10%;
+        margin-left: -2%;
+    }
+
+    .commentlike {
+        width: 50%;
+    }
+
+    .like {
+        width: 21%;
+    }
+
+    .likecontainer {
+        width: 21%;
+        margin-left: 3%;
+    }
+
+    .comment {
+        width: 21%;
+        margin-left: 3%;
+    }
+
+    .commentcontainer {
+        width: 21%;
+        margin-left: 3%;
+    }
+
+    .commentlikecont {
+        width: 42%;
     }
 }
