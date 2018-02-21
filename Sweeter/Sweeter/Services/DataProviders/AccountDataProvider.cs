@@ -35,11 +35,11 @@ namespace Sweeter.DataProviders
             }
         }
 
-        public void DeleteAccount(int id)
+        public void DeleteAccount(int? id)
         {
             using (var sqlConnection = factory.CreateConnection)
             {
-                sqlConnection.Execute(@"delete from AccountTable where IDuser = @id", new { id = id });
+                sqlConnection.Execute("delete from AccountTable where IDuser = @id", new { id = id });
             }
         }
 

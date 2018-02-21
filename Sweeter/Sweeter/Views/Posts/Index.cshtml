@@ -87,8 +87,9 @@
                     <label class="lab auser componly" style="margin:1%">| Category | @post.PublicDate</label>
 
                     @if (post.Author.Username.Equals(ViewData["Username"]))
-    {<button type="button" class="DeleteButton" data-id="@post.IDpost">X</button>
-}
+                    {
+                        <button type="button" class="DeleteButton" data-id="@post.IDpost">X</button>
+                    }
                     <hr id="post_@post.IDpost">
                     <div class="postcontainer">
                         <label class="postlabel">
@@ -160,7 +161,6 @@
             </nav>
             <hr class="line">
         </div>
-
     </div>
 </body>
 </html>

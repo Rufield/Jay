@@ -15,6 +15,6 @@ namespace Sweeter.DataProviders
 
         void AddAccount(AccountModel account);
         void UpdateAccount(AccountModel account);
-        void DeleteAccount(int id);
+        void DeleteAccount(int? id);
     }
 }

@@ -36,6 +36,7 @@ namespace Sweeter.Controllers
             {
                 AccountModel account = accountDataProvider.GetAccount(id);
                 ViewData["Style"] = account.Style;
+                ViewData["AccountID"] = account.IDuser;
                 _logger.LogInformation($"User {account.IDuser} has successful download the Profile page");
                 /*if (account.Avatar == null)
                     using (FileStream FS = new FileStream("wwwroot/lib/img/Avatar.jpeg", FileMode.Open))
@@ -118,6 +119,12 @@ namespace Sweeter.Controllers
             return View(account);
         }
 
+        [HttpPost("DeleteAccount")]
+        public IActionResult DeleteAccount(int? id)
+        {
+            accountDataProvider.DeleteAccount(id);
+            return RedirectToAction("Logout","LogOut");
+        }
 
         private IActionResult CheckUsername(AccountModel Oldaccount, AccountModel account)
         {

@@ -541,6 +541,20 @@ hr
     color: rgba(0,0,0,0.6);
     border-radius: 10px;
 }
+.DeleteAccount
+{
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+    width: 70%;
+    height: 70px;
+    background-color: rgba(89, 6, 167,0.5);
+    border-color: rgba(89, 6, 167,0.5);
+    border-width: 1px;
+    font-family: Comic Sans MS;
+    font-size: 20px;
+    color: rgba(0,0,0,0.6);
+    border-radius: 10px;
+}
 .addfeedmobile
 {
     background-color: rgba(89, 6, 167,0.8);
