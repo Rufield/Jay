@@ -89,23 +89,29 @@
 
                 @foreach (PostsModel post in Model)
     {
-            <form action="" class="post">
-                <label class="lab" style="margin:1%">
-                    @post.Author.Username | Category | @post.PublicDate
-                </label><hr><div class="postcontainer">
-                    <label class="postlabel">
-                        @post.Text
+                <form action="" class="post">
+                    <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
+                        @post.Author.Username
                     </label>
-                </div><span><img src="lib/img/_@ViewData["Style"]/Like.png" class="like" data-id="@post.IDpost"></span><div class="likecontainer">
-                    <label class="likelabel" id="@post.IDpost">
-                        @post.LikeNumder
-                    </label>
-                </div><span><img src="~/lib/img/_@ViewData["Style"]/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span><div class="commentcontainer">
-                    <label class="commentlabel">
-                        @post.CommentNumber
-                    </label>
-                </div>
-            </form>
+                    <label class="lab auser componly" style="margin:1%">| Category | @post.PublicDate</label>
+
+                    <hr><div class="postcontainer">
+                        <label class="postlabel">
+                            @post.Text
+                        </label>
+                    </div><label class="telonly">| Category |</label>
+                    <span class="cont">
+                        <span><img src="lib/img/_@ViewData["Style"]/Like.png" class="like" data-id="@post.IDpost"></span><div class="likecontainer">
+                            <label class="likelabel" id="@post.IDpost">
+                                @post.LikeNumder
+                            </label>
+                        </div><span><img src="~/lib/img/_@ViewData["Style"]/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span><div class="commentcontainer">
+                            <label class="commentlabel">
+                                @post.CommentNumber
+                            </label>
+                        </div>
+                        </span>
+                </form>
 }
                 
                 <script>

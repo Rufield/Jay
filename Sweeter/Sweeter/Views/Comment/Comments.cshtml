@@ -67,9 +67,12 @@
                     Comments to @ViewData["PostAuth"]'s post
                 </label><hr><div class="postcontainer">
                     <label class="postlabel">@ViewData["PostText"].</label>
-                </div><span><img src="~/lib/img/_@ViewData["Style"]/Like.png" class="like"></span><div class="likecontainer">
-                <label class="likelabel">@ViewData["PostLike"]</label></div><span><img src="lib/img/_@ViewData["Style"]/comment.png" class="comment"></span>
-                <div class="commentcontainer"><label class="commentlabel">@ViewData["PostComment"]</label></div>
+                </div><label class="telonly">| Category |</label>
+                <span class="cont">
+                    <span><img src="~/lib/img/_@ViewData["Style"]/Like.png" class="like"></span><div class="likecontainer">
+                        <label class="likelabel">@ViewData["PostLike"]</label>
+                    </div><span><img src="lib/img/_@ViewData["Style"]/comment.png" class="comment"></span>
+                    <div class="commentcontainer"><label class="commentlabel">@ViewData["PostComment"]</label></div></span>
             </form>
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
             <form method="post" class="addfeedform" action="Comment/addcomment">
@@ -83,27 +86,30 @@
             <div id="wall">
                 @foreach (CommentModel comment in Model)
                 {
-                    <form id="comment_@comment.IDcomment">
-                        <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=comment.IDuser})' ">
-                            @comment.Author.Username
+                <form id="comment_@comment.IDcomment">
+                    <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=comment.IDuser})' ">
+                        @comment.Author.Username
+                    </label>
+                    @if (comment.Author.Username.Equals(ViewData["Username"]))
+    {
+                <button type="button" class="DeleteButton" data-id="@comment.IDcomment">X</button>
+}
+                    <hr id="post_@comment.IDcomment">
+                    <div class="commentpostcontainer">
+                        <label class="postlabel">
+                            @comment.Text
                         </label>
-                        @if (comment.Author.Username.Equals(ViewData["Username"]))
-                        {
-                            <button type="button" class="DeleteButton" data-id="@comment.IDcomment">X</button>
-                        }
-                        <hr id="post_@comment.IDcomment">
-                        <div class="commentpostcontainer">
-                            <label class="postlabel">
-                                @comment.Text
-                            </label>
-                        </div>
+                    </div>
+                    <label class="telonly" >| </label>
+                    <span class="cont">
                         <span><img src="lib/img/_@ViewData["Style"]/Like.png" class="commentlike" data-id="@comment.IDcomment"></span>
                         <div class="likecontainer">
                             <label class="likelabel" id="@comment.IDcomment">
                                 @comment.LikeNumder
                             </label>
                         </div>
-                    </form>
+                        </span>
+                </form>
                 }
                 <script>
                 $(document).ready(function () {

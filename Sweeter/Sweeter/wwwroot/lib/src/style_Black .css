@@ -291,6 +291,7 @@ select:focus
 	width:100%;
     vertical-align:bottom;
     margin-top:20%;
+
 }
 .avatar
 {
@@ -437,7 +438,7 @@ hr
 .mobilenavbutton
 {
     width: 100%;
-    background-color: (210,210,210,1);
+    background-color: rgba(210,210,210,1);
     border-color: rgba(191, 133, 248,0.5);
     border-width: 1px;
     border-radius: 10px;
@@ -611,6 +612,7 @@ affix
     width:99%;
     margin:0.5%;
 }
+
 @media screen and (max-width:767px)
 {
 	.headinfo
@@ -646,38 +648,47 @@ affix
     {
         width: 94%;
     }
+    .cont {
+        float: right;
+        margin-right: 3%;
+        width: 50%;
+        text-align: right;
+    }
 	.like
     {
 	    vertical-align:middle;
-	    width:10%;
+	    width:20%;
 	    display:inline-block;
 	    margin-top:1%;
-	    margin-left:53%;
+	    
     }
     .commentlike
     {
         vertical-align: middle;
-        width: 10%;
+        width: 20%;
         display: inline-block;
         margin-top: 1%;
-        margin-left: 75%;
+        
     }
     .likecontainer
     {
-	    width:10%;
+	    width:20%;
 	    margin-top:-0%;
 	    border-radius:10px;
     }
     .comment
     {
-	    width:10%;
+	    width:20%;
 	    margin-top:0%;
+        
+      
     }
-    .commentcontainer
-    {
-	    width:10%;
-	    margin-top:0%;
-        border-radius:10px;
+    .commentcontainer {
+        width: 20%;
+        margin-top: 0%;
+        border-radius: 10px;
+      
+        
     }
     .MyInfo
     {
@@ -690,6 +701,29 @@ affix
 	    margin-left:3%;
 	    width:94%;
     }
+    .componly
+    {
+        display:none;
+    }
+    .DeleteButton{
+        font-size:15px;
+        width:10%;
+        
+       
+    }
+    .SearchButton{
+        font-size:18px;
+        width:37%;
+    }
+    .SearchInput{
+        width:60%;
+    }
+    .telonly{
+        display:inline-block;
+        margin-left:3%;
+    }
+ 
+   
 }
 @media screen and (min-width:767px)
 {
@@ -709,4 +743,7 @@ affix
 	{
 		display:none;
 	}
+    .telonly {
+        display:none;
+    }
 }
