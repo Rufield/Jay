@@ -50,7 +50,7 @@ namespace Sweeter.Controllers
                 ViewData["PostLike"] = post.LikeNumder;
                 ViewData["PostComment"] = post.CommentNumber;
                 ViewData["ID"] = id;
-
+                ViewData["ViewSortLike"] = "Show";
                 IEnumerable<CommentModel> comments = commentDataProvider.GetCommentsOfPost(id);
                 AccountModel Author = accountDataProvider.GetAccount(post.IDuser);
                 post.CommentNumber = comments.Count();
@@ -59,6 +59,7 @@ namespace Sweeter.Controllers
                 if(SortLike == true)
                 {
                     comments = comments.OrderByDescending(com => com.LikeNumder);
+                    ViewData["ViewSortLike"] = "NotShow";
                 }
                 foreach (CommentModel com in comments)
                 {
