@@ -113,25 +113,6 @@
                 }
                 <script>
                 $(document).ready(function () {
-                    $(".like").bind("click", function () {
-                        var link = $(this);
-                        var id = link.data('id');
-                        $.ajax({
-                            url: "@Url.Action("LikesToPosts","Like")",
-                            type: "POST",
-                            data: { id: id },
-                            dataType: "text",
-                            success: function (result) {
-
-                                $('#'+id).html(result);
-
-                            }
-                        });
-                    });
-                });
-                </script>
-                <script>
-                $(document).ready(function () {
                     $(".commentlike").bind("click", function () {
                         var link = $(this);
                         var id = link.data('id');
