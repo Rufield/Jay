@@ -654,41 +654,36 @@ affix
         width: 50%;
         text-align: right;
     }
-	.like
-    {
-	    vertical-align:middle;
-	    width:20%;
-	    display:inline-block;
-	    margin-top:1%;
-	    
-    }
-    .commentlike
-    {
+    .like {
         vertical-align: middle;
         width: 20%;
         display: inline-block;
         margin-top: 1%;
-        
+        max-height: 28px;
     }
-    .likecontainer
-    {
-	    width:20%;
-	    margin-top:-0%;
-	    border-radius:10px;
+    .commentlike {
+        vertical-align: middle;
+        width: 20%;
+        display: inline-block;
+        margin-top: 1%;
+        max-height: 28px;
     }
-    .comment
-    {
-	    width:20%;
-	    margin-top:0%;
-        
-      
+    .likecontainer {
+        width: 20%;
+        margin-top: -0%;
+        border-radius: 10px;
+        max-height: 28px;
+    }
+    .comment {
+        width: 20%;
+        margin-top: 0%;
+        max-height: 28px;
     }
     .commentcontainer {
         width: 20%;
         margin-top: 0%;
         border-radius: 10px;
-      
-        
+        max-height: 28px;
     }
     .MyInfo
     {
@@ -766,19 +761,22 @@ affix
     
     .like {
         width: 21%;
-        
+    
     }
     .likecontainer {
         width: 21%;
         margin-left: 3%;
+       
     }
     .comment {
         width: 21%;
         margin-left: 3%;
+ 
     }
     .commentcontainer {
         width: 21%;
         margin-left: 3%;
+      
     }
     .commentlikecont {
         width: 42%;

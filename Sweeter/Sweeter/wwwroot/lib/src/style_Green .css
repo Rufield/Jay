@@ -644,6 +644,7 @@ affix
         width: 20%;
         display: inline-block;
         margin-top: 1%;
+        max-height: 28px;
     }
 
     .commentlike {
@@ -651,23 +652,27 @@ affix
         width: 20%;
         display: inline-block;
         margin-top: 1%;
+        max-height: 28px;
     }
 
     .likecontainer {
         width: 20%;
         margin-top: -0%;
         border-radius: 10px;
+        max-height: 28px;
     }
 
     .comment {
         width: 20%;
         margin-top: 0%;
+        max-height: 28px;
     }
 
     .commentcontainer {
         width: 20%;
         margin-top: 0%;
         border-radius: 10px;
+        max-height: 28px;
     }
 
     .MyInfo {
