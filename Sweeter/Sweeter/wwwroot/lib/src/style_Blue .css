@@ -556,12 +556,13 @@ hr
     color: rgba(0,0,0,0.6);
     border-radius: 10px;
 }
-.addfeedmobile
-{
+.addfeedmobile {
     background-color: rgba(18,161,190,0.8);
     border-top-color: rgba(18,161,190,0.5);
     border-top-width: 3px;
     border-radius: 10px;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
     font-family: Comic Sans MS;
     display: block;
     position: fixed;
@@ -569,6 +570,13 @@ hr
     left: 0;
     z-index: 100;
     width: 100%;
+    margin-bottom: 5.5%;
+}
+
+.hidebutton {
+    margin-bottom: 0%;
+    border-top-left-radius: 0%;
+    border-top-right-radius: 0%;
 }
 .leftside
 {

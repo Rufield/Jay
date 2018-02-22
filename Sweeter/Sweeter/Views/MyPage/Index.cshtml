@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="~/lib/src/style_@ViewData["Style"] .css">
     <link rel="icon" type="image/png" href="~/lib/img/logo.png">
     <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="~/js/site.js"></script>
     <link rel="shortcut icon" href="~/lib/img/logo.png" type="image/png">
     <title>Jay Feeds</title>
 </head>
@@ -34,92 +35,98 @@
             </div>
         </div>
             <!--Same mobile-->
-            <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8 maincontainer">
-                <div class="headmobile">
-                    <div class="row">
-                        <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
-                            <img src="~/lib/img/_@ViewData["Style"]/logo.png" class="mobilelogoleft">
-                        </div>
-                        <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
-                            <h1 class="mobileheadlabel">JAY</h1>
-                        </div>
-                        <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 " style="text-align:center;">
-                            <img src=@ViewData["Pic"] class="mobileavatar">
-                        </div>
+        <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8 maincontainer">
+            <div class="headmobile">
+                <div class="row">
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
+                        <img src="~/lib/img/_@ViewData["Style"]/logo.png" class="mobilelogoleft">
+                    </div>
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
+                        <h1 class="mobileheadlabel">JAY</h1>
+                    </div>
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 " style="text-align:center;">
+                        <img src=@ViewData["Pic"] class="mobileavatar">
                     </div>
                 </div>
-                <!--Add Post Mobile-->
-                <div class="addfeedmobile">
-                    <form action="MyPage/addfeed" method="post" class="addfeedformmobile">
-                        <textarea class="mobilemypost" name="mypost" id="mypost" rows="2" placeholder="What are you thinking about..."></textarea>
-                        <input type="submit" class="mobileaddpost" name="addpost" id="addpost" value="Send">
-                        <hr style="border-color:rgba(0,0,0,0.6)">
+            </div>
+            <!--Add Post Mobile-->
+            <div class="addfeedmobile" id="Addfeed">
+                <form action="MyPage/addfeed" method="post" class="addfeedformmobile">
+                    <textarea class="mobilemypost" name="mypost" id="mypost" rows="2" placeholder="What are you thinking about..."></textarea>
+                    <input type="submit" class="mobileaddpost" name="addpost" id="addpost" value="Send">
+                    <hr style="border-color:rgba(0,0,0,0.6)">
 
-                        <div class="mobilesignout">
-                            <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Logout","LogOut")' ">Sign out</button>
-                        </div>
-                        <div class="mobilemypage">
-                            <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","MyPage")' ">My Page</button>
-                        </div>
-                        <div class="mobilefeeds">
-                            <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
-                        </div>
-                    </form>
-                </div>
-                <!--Info-->
-                <form action="" method="get" class="myInfoForm">
-                    <label class="lab" style="margin:1%">@ViewData["UserName"]</label>
-                    <hr>
-                    <div class="MyInfo" style="width:94%">
-                        <h1 class="headinfo">My name is @ViewData["Name"]</h1>
-                        <h1 class="headinfo"><b>Something about me:</b> @ViewData["About"]</h1>
+                    <div class="mobilesignout">
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Logout","LogOut")' ">Sign out</button>
                     </div>
-                    <input type="button" class="editProfile editMobProfile" onclick="location.href='@Url.Action("Index","Profile")'" value="Edit">
+                    <div class="mobilemypage">
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","MyPage")' ">My Page</button>
+                    </div>
+                    <div class="mobilefeeds">
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
+                    </div>
                 </form>
-                <!--Add Post -->
-                <form action="MyPage/addfeed" method="post" class="addfeedform">
-                    <label class="lab" style="margin:1%">Publish your post, @ViewData["UserName"]</label>
-                    <hr>
-                    <textarea class="mypost" name="mypost" id="mypost" rows="2" placeholder="What are you thinking about..."></textarea>
-                    <input type="submit" class="addpost" name="addpost" id="addpost" value="Send">
-                </form>
-                <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
-                <div id="wall">
+            </div>
+            <div class="addfeedmobile hidebutton" id="HideForm">
+                <p>Hide addpost form</p>
+            </div>
+            <div class="addfeedmobile hidebutton hidden" id="ShowForm">
+                <p>Show addpost form</p>
+            </div>
+            <!--Info-->
+            <form action="" method="get" class="myInfoForm">
+                <label class="lab" style="margin:1%">@ViewData["UserName"]</label>
+                <hr>
+                <div class="MyInfo" style="width:94%">
+                    <h1 class="headinfo">My name is @ViewData["Name"]</h1>
+                    <h1 class="headinfo"><b>Something about me:</b> @ViewData["About"]</h1>
+                </div>
+                <input type="button" class="editProfile editMobProfile" onclick="location.href='@Url.Action("Index","Profile")'" value="Edit">
+            </form>
+            <!--Add Post -->
+            <form action="MyPage/addfeed" method="post" class="addfeedform">
+                <label class="lab" style="margin:1%">Publish your post, @ViewData["UserName"]</label>
+                <hr>
+                <textarea class="mypost" name="mypost" id="mypost" rows="2" placeholder="What are you thinking about..."></textarea>
+                <input type="submit" class="addpost" name="addpost" id="addpost" value="Send">
+            </form>
+            <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
+            <div id="wall">
                 @foreach (PostsModel post in Model)
-                {
-                    <form id="post_@post.IDpost">
-                        <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
-                            @post.Author.Username
-                        </label>
-                        <label class="lab auser componly" style="margin:1%">| Category | @post.PublicDate</label>
+        {
+            <form id="post_@post.IDpost">
+                <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
+                    @post.Author.Username
+                </label>
+                <label class="lab auser componly" style="margin:1%">| Category | @post.PublicDate</label>
 
-                        @if (post.Author.Username.Equals(ViewData["UserName"]))
-    {
-                    <button type="button" class="DeleteButton" data-id="@post.IDpost">X</button>
+                @if (post.Author.Username.Equals(ViewData["UserName"]))
+        {
+            <button type="button" class="DeleteButton" data-id="@post.IDpost">X</button>
 }
-                        <hr id="post_@post.IDpost">
-                        <div class="postcontainer">
-                            <label class="postlabel">
-                                @post.Text
-                            </label>
-                        </div>
-                        <div class="telonly"><label class="telonly">|Category|</label> </div>
-                        <div class="cont">
-                            <span><img src="lib/img/_@ViewData["Style"]/Like.png" class="like" data-id="@post.IDpost"></span>
-                            <div class="likecontainer">
-                                <label class="likelabel" id="@post.IDpost">
-                                    @post.LikeNumder
-                                </label>
-                            </div>
-                            <span><img src="~/lib/img/_@ViewData["Style"]/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span>
-                            <div class="commentcontainer">
-                                <label class="commentlabel">
-                                    @post.CommentNumber
-                                </label>
-                            </div>
-                            </div>
-                    </form>
-                }     
+                <hr id="post_@post.IDpost">
+                <div class="postcontainer">
+                    <label class="postlabel">
+                        @post.Text
+                    </label>
+                </div>
+                <div class="telonly"><label class="telonly">|Category|</label> </div>
+                <div class="cont">
+                    <span><img src="lib/img/_@ViewData["Style"]/Like.png" class="like" data-id="@post.IDpost"></span>
+                    <div class="likecontainer">
+                        <label class="likelabel" id="@post.IDpost">
+                            @post.LikeNumder
+                        </label>
+                    </div>
+                    <span><img src="~/lib/img/_@ViewData["Style"]/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span>
+                    <div class="commentcontainer">
+                        <label class="commentlabel">
+                            @post.CommentNumber
+                        </label>
+                    </div>
+                </div>
+            </form>
+}
                 <script>
                     $(document).ready(function () {
                         $(".like").bind("click", function () {
@@ -158,8 +165,8 @@
                     });
                 });
                 </script>
-                </div>
             </div>
+        </div>
             <!--Menu-->
             <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 rightside">
                 <nav>
