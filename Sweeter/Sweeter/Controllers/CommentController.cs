@@ -16,14 +16,16 @@ namespace Sweeter.Controllers
         private IAccountDataProvider accountDataProvider;
         private ICommentDataProvider commentDataProvider;
         private IPostDataProvider postDataProvider;
+        private ILikesToCommentsProvider likesToCommentsProvider;
         private ILogger<CommentController> _logger;
 
-        public CommentController(IPostDataProvider postData, IAccountDataProvider accountData, ICommentDataProvider commentData, ILogger<CommentController> logger)
+        public CommentController(IPostDataProvider postData, IAccountDataProvider accountData, ICommentDataProvider commentData, ILogger<CommentController> logger, ILikesToCommentsProvider likesToCommentsProvider)
         {
             this.postDataProvider = postData;
             this.accountDataProvider = accountData;
             this.commentDataProvider = commentData;
             _logger = logger;
+            this.likesToCommentsProvider = likesToCommentsProvider;
         }
 
         public int? idPost;
@@ -65,6 +67,8 @@ namespace Sweeter.Controllers
                 {
                     com.Post = post;
                     com.Author = accountDataProvider.GetAccount(com.IDuser);
+                    com.LikeNumder = likesToCommentsProvider.GetLikesOfComment(com.IDcomment).Count();
+                    commentDataProvider.UpdateComment(com);
                 }
                 if (comments.Count() == 0)
                 {

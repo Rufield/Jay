@@ -18,12 +18,14 @@ namespace Sweeter.Controllers
         private IAccountDataProvider accountDataProvider;
         private ICommentDataProvider commentDataProvider;
         private IUnsubscribesDataProvider unsubscribesDataProvider;
-        public UserPageController(IPostDataProvider postData, IAccountDataProvider accountData, ICommentDataProvider commentData, IUnsubscribesDataProvider unsubscribesData)
+        private ILikesToPostsProvider LikesToPostsProvider;
+        public UserPageController(IPostDataProvider postData, IAccountDataProvider accountData, ICommentDataProvider commentData, IUnsubscribesDataProvider unsubscribesData, ILikesToPostsProvider likesToPostsProvider)
         {
             this.postDataProvider = postData;
             this.accountDataProvider = accountData;
             this.commentDataProvider = commentData;
             this.unsubscribesDataProvider = unsubscribesData;
+            this.LikesToPostsProvider = likesToPostsProvider;
         }
         [HttpGet]
         public IActionResult Index(int? id)
@@ -62,6 +64,8 @@ namespace Sweeter.Controllers
                 {
                     p.Author = accountDataProvider.GetAccount(p.IDuser);
                     p.CommentNumber = commentDataProvider.GetCommentsOfPost(p.IDpost).Count();
+                    p.LikeNumder = LikesToPostsProvider.GetLikesOfPost(p.IDpost).Count();
+                    postDataProvider.UpdatePost(p);
                 }
                 return View(feedsnew);
             }

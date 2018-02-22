@@ -40,6 +40,7 @@ namespace Sweeter.Controllers
             PostsModel post = postDataProvider.GetPost(id);
             post.Author = accountDataProvider.GetAccount(post.IDuser);
             IEnumerable<LikesToPostsModel> like = LikesToPostsProvider.GetLikes(idd, id);
+            
             if (like.Count() == 0)
             {
                 LikesToPostsProvider.AddLike(new LikesToPostsModel
