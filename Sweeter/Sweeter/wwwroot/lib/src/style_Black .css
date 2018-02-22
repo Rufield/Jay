@@ -635,7 +635,9 @@ affix
     width:99%;
     margin:0.5%;
 }
-
+textarea:focus{
+    outline:none;
+}
 @media screen and (max-width:767px)
 {
 	.headinfo
