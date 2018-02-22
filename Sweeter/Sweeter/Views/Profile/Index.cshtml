@@ -27,53 +27,73 @@
         <div class="col-md-2 col-xs-1 col-lg-2 col-sm-2"></div>
     </div>
     <!--Picture-->
+    
     <div class="forma">
         <form action="" method="post" enctype="multipart/form-data">
             <div class="row">
-                <div class="col-md-3 col-xs-0 col-lg-3 col-sm-3" style="text-align:center">
+                <div class="col-md-3 col-xs-12 col-lg-3 col-sm-3" style="text-align:center">
                     <p>
-                        <img src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))" id="imageshow" width=68%>
-                        <div class="row">
-                            <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12" style="text-align:center">
-                                <label class="btn btn-default btn-file">Edit your avatar
-                    <p style="text-align:right"></p>
-                    <input type="file" onchange="upload()" accept="image/*" name="avatar" value="avatar" id="avatar" style="display:none" />
+                        
+                                <img src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))" id="imageshow" style="width:68%;">
+                                <label class="btn btn-default btn-file" for="avatar">Edit your avatar</label>
+
+
+                                <input type="file" onchange="upload()" accept="image/*" name="avatar" value="avatar" id="avatar" style="display:none" />
+                           
+                </div>
+
+
+
+
+
+                <!--First part-->
+                <div class="col-md-6 col-xs-12 col-lg-6 col-sm-6">
+                    <p>
+                        <select size="1" name="Style" id="Style" class="select">
+                            <option disabled selected>Choose your style</option>
+                            <option value="Green" class="Green">Green</option>
+                            <option value="Black" class="Black">Black</option>
+                            <option value="Violet" class="Violet">Violet</option>
+                            <option value="LightViolet" class="LightViolet">Light Violet</option>
+                            <option value="Blue" class="Blue">Blue</option>
+                        </select>
+                    </p>
+                    <p><label for="username" style="text-align:center">Your Username </label>
+                    <p><input type="text" name="username" class="textin" id="username" value=@Model.Username onchange="checkUsername()" required>
+                    <p><label for="name" style="text-align:center">Your Fullname </label>
+                    <p><input type="text" name="name" class="textin" id="name" value=@Model.Name>
+                    <p><label for="about" style="text-align:center">Tell me about yourself</label>
+                    <p>
+                        <textarea type="text" style="width: 77%" rows="5" id="about" name="about" class="textareain" value=@Model.About onKeyDown="limitText(this,300);"
+                                  onKeyUp="limitText(this,300);">@Model.About</textarea>
+                        <!--Second part-->
+                        <div id="foo"></div>
+                        <!--Submit-->
+                    <p style="text-align:center">
+                        <input type="submit" class="but" id="Change" value="Change">
+                        <h1 class="headlabel" id="error">@ViewData["Error"]</h1>
+                </div>
+                <div class="col-md-3 col-xs-12 col-lg-3 col-sm-3" style="text-align:center">
+
                 </div>
             </div>
         </form>
-    </div>
-    <!--First part-->
-    <div class="col-md-6 col-xs-12 col-lg-6 col-sm-6">
-        <p>
-            <select size="1" name="Style" id="Style" class="select">
-                <option disabled selected>Choose your style</option>
-                <option value="Green" class="Green">Green</option>
-                <option value="Black" class="Black">Black</option>
-                <option value="Violet" class="Violet">Violet</option>
-                <option value="LightViolet" class="LightViolet">Light Violet</option>
-                <option value="Blue" class="Blue">Blue</option>
-            </select>
-        </p>
-        <p><label for="username" style="text-align:center">Your Username </label>
-        <p><input type="text" name="username" class="textin" id="username" value=@Model.Username onchange="checkUsername()" required>
-        <p><label for="fullname" style="text-align:center">Your Fullname </label>
-        <p><input type="text" name="name" class="textin" id="name" value=@Model.Name>
-        <p><label for="about" style="text-align:center">Tell me about yourself</label>
-        <p>
-            <textarea type="text" style="width: 77%" rows="5" id="about" name="about" class="textareain" value=@Model.About onKeyDown="limitText(this,300);"
-                      onKeyUp="limitText(this,300);">@Model.About</textarea>
-            <!--Second part-->
-            <div id="foo"></div>
-            <!--Submit-->
-        <p style="text-align:center">
-            <input type="submit" class="but" id="Change" value="Change">
-            <h1 class="headlabel" id="error">@ViewData["Error"]</h1>
-    </div>
-    <div class="col-md-3 col-xs-0 col-lg-3 col-sm-3" style="text-align:center">
-        <form asp-controller="Profile" asp-action="DeleteAccount" method="post" style="border-style:hidden">
-            <input type="hidden" name="id" value="@Model.IDuser">
-            <input type="submit" class="but DeleteAccount" value="Delete account">
-        </form>
-    </div>
+        <div class="row">
+            <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2" style="text-align:center">
+            </div>
+            <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8" style="text-align:center">
+                <form asp-controller="Profile" asp-action="DeleteAccount" method="post" style="border-style:hidden">
+                    <input type="hidden" name="id" value="@Model.IDuser">
+                    <input type="submit" class=" DeleteAccount but" value="Delete account">
+                </form>
+            </div>
+            <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2" style="text-align:center">
+            </div>
+        </div>
+        </div>
+   
+
+   
+   
 </body>
 </html>

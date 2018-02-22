@@ -169,11 +169,11 @@
             <nav>
                 @if (ViewData["ViewSortLike"].ToString() == "Show")
                     {
-                         <button class="navi" onclick="location.href='@Url.Action("Comments", "Comment", new { id = ViewData["ID"], SortLike = true })'">Sort comments by <b>likes</b></button>
+                         <button class="navi" onclick="location.href='@Url.Action("Comments", "Comment", new { id = ViewData["ID"], SortLike = true })'">Sort by <b>likes</b></button>
                     }
                 else
                     {
-                         <button class="navi" onclick="location.href='@Url.Action("Comments", "Comment", new { id = ViewData["ID"] })'">Sort comments by <b>date</b></button>
+                         <button class="navi" onclick="location.href='@Url.Action("Comments", "Comment", new { id = ViewData["ID"] })'">Sort by <b>date</b></button>
                     }
             </nav>
         </div>

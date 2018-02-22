@@ -570,13 +570,14 @@ hr
     left: 0;
     z-index: 100;
     width: 100%;
-    margin-bottom: 5.5%;
+    margin-bottom: 25px;
 }
 
 .hidebutton {
     margin-bottom: 0%;
     border-top-left-radius: 0%;
     border-top-right-radius: 0%;
+    font-size: 18px;
 }
 .leftside
 {
