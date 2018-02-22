@@ -41,7 +41,7 @@ namespace Sweeter.Controllers
             if (id == 0)
             {
                 return View();
-            }
+           }
             else return Redirect("/posts");
         }
 
