@@ -73,8 +73,9 @@ namespace Sweeter.Controllers
                     p.CommentNumber = commentDataProvider.GetCommentsOfPost(p.IDpost).Count();
                     p.LikeNumder = likesToPostsProvider.GetLikesOfPost(p.IDpost).Count();
                     postDataProvider.UpdatePost(p);
-                  
+                    p.Category = new CategoriesModel { ID=p.IDCategory, Category= categoriesDataProvider.GetCategoryByID(p.IDCategory).Category };
                 }
+                ViewData["categories"] = categoriesDataProvider.GetCategories();
                 _logger.LogInformation($"All is good, user {account.IDuser} look at new posts");
                 return View(feedsnew);
             }
@@ -82,7 +83,7 @@ namespace Sweeter.Controllers
         }
 
         [HttpPost("addfeed")]
-        public IActionResult NewPost(string mypost)
+        public IActionResult NewPost(string mypost, string category)
         {
             int id;
             if (HttpContext.User.Claims.Count() != 0)
@@ -91,18 +92,22 @@ namespace Sweeter.Controllers
             }
             else
                 id = 0;
+
             if (id != 0)
             {
                 AccountModel Author = accountDataProvider.GetAccount(id);
                 if (mypost != null)
                 {
+                    if (category == null) category = "Flood";
+
                     PostsModel Mypost = new PostsModel
                     {
                         Author = Author,
                         LikeNumder = 0,
                         CommentNumber = 0,
                         IDuser = id,
-                        Text = mypost
+                        Text = mypost,
+                        IDCategory = categoriesDataProvider.GetCategoryByName(category).ID
                     };
                     postDataProvider.AddPost(Mypost);
                     _logger.LogInformation($"Post {Mypost.IDpost} created by user {Author.IDuser}");

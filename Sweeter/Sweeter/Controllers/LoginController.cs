@@ -42,7 +42,7 @@ namespace Sweeter.Controllers
             {
                 return View();
            }
-            else return Redirect("/posts");
+           else return Redirect("/posts");
         }
 
         [HttpPost]

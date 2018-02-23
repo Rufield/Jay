@@ -11,12 +11,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="~/lib/src/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/lib/src/style_@ViewData["Style"] .css">
     <link rel="icon" type="image/png" href="~/lib/img/logo.png">
 
-    <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/js/site.js"></script>
+
     <link rel="shortcut icon" href="~/lib/img/logo.png" type="image/png">
     <title>Jay Feeds</title>
 </head>
@@ -48,10 +50,10 @@
                 </div>
             </div>
             <!--Mobile Menu-->
-            <div class="addfeedmobile" id="Addfeed" >
+            <div class="addfeedmobile" id="Addfeed">
                 <form method="post" action="Posts/addfeed" class="addfeedformmobile">
                     <textarea class="mobilemypost" name="mypost" id="mypost" rows="2" placeholder="What are you thinking about..."></textarea>
-                    <input type="submit" class="mobileaddpost" name="addpost" id="addpost" value="Send">
+                    <button type="button" class=" btn mobileaddpost" data-toggle="modal" data-target="#myMobileModal" name="addpost" id="addpost">Send</button>
                     <hr style="border-color:rgba(0,0,0,0.6)">
                     <div class="mobilesignout">
                         <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Logout","LogOut")' ">Sign out</button>
@@ -62,6 +64,35 @@
                     <div class="mobilefeeds">
                         <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
                     </div>
+                    <div class="modal fade" id="myMobileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 class="modal-title" id="exampleModalLongTitle">Choose the category</h2>
+
+                                </div>
+                                <div class="modal-body" style="text-align:center;">
+
+                                    <select size="13" name="category" id="Style" class="select">
+                                        @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
+                        {
+
+
+                            <option value="@cats.Category">  <h4>@cats.Category</h4></option>
+
+
+
+
+        }
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <input type="submit" class="btn btn-primary" value="Send post">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="addfeedmobile hidebutton" id="HideForm">
@@ -71,7 +102,7 @@
                 <p class="HideText">Show addpost form</p>
             </div>
 
-            
+
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
             <form action="Posts/search" method="post" class="search">
                 <input type="search" name="searchinfo" placeholder="Search users in Jay" class="SearchInput" />
@@ -83,8 +114,44 @@
                 <label class="lab" style="margin:1%">Publish your post, @ViewData["Username"]</label>
                 <hr>
                 <textarea class="mypost" name="mypost" id="mypost" rows="2" placeholder="What are you thinking about..."></textarea>
-                <input type="submit" class="addpost" name="addpost" id="addpost" value="Send">
+                <button type="button" class="btn addpost" name="addpost" id="addpost" data-toggle="modal" data-target="#myModal">Add post</button>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="modal-title" id="exampleModalLongTitle">Choose the category</h2>
+
+                            </div>
+                            <div class="modal-body" style="text-align:center;">
+
+                                <select size="13" name="category" id="Style" class="select">
+                                    @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
+                        {
+
+
+                            <option value="@cats.Category">  <h4>@cats.Category</h4></option>
+
+
+
+
+            }
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Send post">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
+
+     
+          
+
+
+
+
             <!--Great Wall with Unique hidden script-->
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
             <div id="wall">
@@ -94,7 +161,7 @@
                 <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
                     @post.Author.Username
                 </label>
-                <label class="lab auser componly" style="margin:1%">| Category | @post.PublicDate</label>
+                <label class="lab auser componly" style="margin:1%">| @post.Category.Category | @post.PublicDate</label>
 
                 @if (post.Author.Username.Equals(ViewData["Username"]))
         {
@@ -106,7 +173,8 @@
                         @post.Text
                     </label>
                 </div>
-                <div class="telonly"><label class="telonly">|Category|</label> </div>
+
+                <div class="telonly"><label class="telonly">|@post.Category.Category|</label> </div>
                 <div class="cont">
                     <span><img src="lib/img/_@ViewData["Style"]/Like.png" class="like" data-id="@post.IDpost"></span><div class="likecontainer">
 

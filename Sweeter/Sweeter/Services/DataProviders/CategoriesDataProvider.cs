@@ -2,6 +2,7 @@
 using Sweeter.Models;
 using Sweeter.Services.ConnectionFactory;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Sweeter.Services.DataProviders
 {
@@ -23,19 +24,19 @@ namespace Sweeter.Services.DataProviders
             }
         }
 
-        public string GetCategoryByID(int ID)
+        public CategoriesModel GetCategoryByID(int ID)
         {
             using (var sqlConnection = connection.CreateConnection)
             {
-                string category = sqlConnection.Query<CategoriesModel>("select Category from CategoriesTable where ID = @ID", new { ID = ID }).ToString();
+                var category = sqlConnection.Query<CategoriesModel>("select * from CategoriesTable where ID = @id", new { id = ID }).First();
                 return category;
             }
         }
-        public int GetCategoryByName(string categoryname)
+        public CategoriesModel GetCategoryByName(string categoryname)
         {
             using (var sqlConnection = connection.CreateConnection)
             {
-                int category = int.Parse(sqlConnection.Query<CategoriesModel>("select ID from CategoriesTable where Category = @Category", new { Category = categoryname }).ToString());
+                var category = sqlConnection.Query<CategoriesModel>("select * from CategoriesTable where Category = @Category", new { Category = categoryname }).First();
                 return category;
             }
         }

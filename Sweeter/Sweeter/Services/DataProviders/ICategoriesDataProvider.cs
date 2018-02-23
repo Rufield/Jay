@@ -6,11 +6,11 @@ namespace Sweeter.Services.DataProviders
     public interface ICategoriesDataProvider
     {
         void AddCategory(CategoriesModel category);
-        string GetCategoryByID(int ID);
+        CategoriesModel GetCategoryByID(int ID);
         IEnumerable<CategoriesModel> GetCategories();
         void DeleteCategoryByID(int ID);
         void DeleteCategoryByName(string Name);
-        int GetCategoryByName(string categoryname);
+        CategoriesModel GetCategoryByName(string categoryname);
 
     }
 }

@@ -20,9 +20,9 @@ namespace Sweeter.DataProviders
             post.PublicDate = System.DateTime.Now;
             using (var sqlConnection = factory.CreateConnection)
             {
-                sqlConnection.Execute(@"insert into PostTable(IDuser,Text,PublicDate, LikeNumder, CommentNumber)
-                values (@IDauthor,@Text,@PublicDate, @LikeNumder, @CommentNumber);",
-                new { IDauthor = post.Author.IDuser, Text = post.Text, PublicDate = post.PublicDate, LikeNumder = post.LikeNumder, CommentNumber = post.CommentNumber });
+                sqlConnection.Execute(@"insert into PostTable(IDuser, IDcategory, Text,PublicDate, LikeNumder, CommentNumber)
+                values (@IDauthor,@IDcategory,@Text,@PublicDate, @LikeNumder, @CommentNumber);",
+                new { IDauthor = post.Author.IDuser, IDcategory=post.IDCategory, Text = post.Text, PublicDate = post.PublicDate, LikeNumder = post.LikeNumder, CommentNumber = post.CommentNumber });
             }
         }
 
