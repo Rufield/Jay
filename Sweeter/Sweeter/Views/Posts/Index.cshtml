@@ -64,20 +64,19 @@
                     <div class="mobilefeeds">
                         <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
                     </div>
-                    <div class="modal fade" id="myMobileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
+                    <div class="modal " style="margin-top:18%;" data-backdrop = "false" id="myMobileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="margin-bottom:2%;">
                                 <div class="modal-header">
-                                    <h2 class="modal-title" id="exampleModalLongTitle">Choose the category</h2>
-
+                                    <h4 class="modal-title" id="exampleModalLongTitle">Choose the category</h4>
+                                    <h4 class="modal-title" id="exampleModalLongTitle">If you choose nothing, "flood" would be chosen</h4>
                                 </div>
                                 <div class="modal-body" style="text-align:center;">
-
                                     <select size="13" name="category" id="Style" class="select">
                                         @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
-                                             {
-                                                <option value="@cats.Category">  <h4>@cats.Category</h4></option>
-                                             }
+    {
+                                    <option style="font-size:16px;" value="@cats.Category">  <h4>@cats.Category</h4></option>
+}
                                     </select>
                                 </div>
                                 <div class="modal-footer">
@@ -87,6 +86,7 @@
                             </div>
                         </div>
                     </div>
+                   
                 </form>
             </div>
             <div class="addfeedmobile hidebutton" id="HideForm">
@@ -113,8 +113,9 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h2 class="modal-title" id="exampleModalLongTitle">Choose the category</h2>
-
+                                  <h4 class="modal-title" id="exampleModalLongTitle">Choose the category</h4>
+                                    <h4 class="modal-title" id="exampleModalLongTitle">If you choose nothing, "flood" would be chosen</h4>
+ 
                             </div>
                             <div class="modal-body" style="text-align:center;">
 
