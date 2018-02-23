@@ -73,7 +73,7 @@ namespace Sweeter.DataProviders
         {
             using (var sqlConnection = factory.CreateConnection)
             {
-                var posts = sqlConnection.Query<PostsModel>("select * from PostTable where IDCategory=@ID", new { IDCategory = ID }).AsList();
+                var posts = sqlConnection.Query<PostsModel>("select * from PostTable where IDCategory=@IDCategory", new { IDCategory = ID }).AsList();
                 return posts;
             }
         }

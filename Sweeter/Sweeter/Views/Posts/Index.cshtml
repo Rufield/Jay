@@ -75,15 +75,9 @@
 
                                     <select size="13" name="category" id="Style" class="select">
                                         @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
-                        {
-
-
-                            <option value="@cats.Category">  <h4>@cats.Category</h4></option>
-
-
-
-
-        }
+                                             {
+                                                <option value="@cats.Category">  <h4>@cats.Category</h4></option>
+                                             }
                                     </select>
                                 </div>
                                 <div class="modal-footer">
@@ -126,15 +120,9 @@
 
                                 <select size="13" name="category" id="Style" class="select">
                                     @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
-                        {
-
-
+                                     {
                             <option value="@cats.Category">  <h4>@cats.Category</h4></option>
-
-
-
-
-            }
+                                        }
                                 </select>
                             </div>
                             <div class="modal-footer">
@@ -156,7 +144,7 @@
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
             <div id="wall">
                 @foreach (PostsModel post in Model)
-        {
+                    {
             <form id="post_@post.IDpost">
                 <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
                     @post.Author.Username
@@ -164,9 +152,9 @@
                 <label class="lab auser componly" style="margin:1%">| @post.Category.Category | @post.PublicDate</label>
 
                 @if (post.Author.Username.Equals(ViewData["Username"]))
-        {
+                 {
             <button type="button" class="DeleteButton" data-id="@post.IDpost">X</button>
-}
+                    }
                 <hr id="post_@post.IDpost">
                 <div class="postcontainer">
                     <label class="postlabel">
@@ -238,7 +226,16 @@
                 <button type="button" class="navi" onclick="location.href='@Url.Action("Logout","LogOut")' ">Log Out</button>
             </nav>
             <hr class="line">
+            <div class="category-wrap">
+                <h3>Catagory</h3>
+                <ul>
+                    @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
+                     {
+                <li><a location.href=''>@cats.Category</a></li>
+                     }
+                </ul>
+            </div>
         </div>
-    </div>
-</body>
-</html>
+        </div>
+    </body>
+    </html>
