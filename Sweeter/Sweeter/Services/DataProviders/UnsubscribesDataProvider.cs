@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Dapper;
+using Sweeter.Models;
+using Sweeter.Services.ConnectionFactory;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Sweeter.Services.ConnectionFactory;
-using Sweeter.Models;
-using Dapper;
 
 
 namespace Sweeter.Services.DataProviders

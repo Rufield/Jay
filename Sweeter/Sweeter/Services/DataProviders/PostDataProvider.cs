@@ -68,6 +68,16 @@ namespace Sweeter.DataProviders
                 return posts;
             }
         }
+
+        public IEnumerable<PostsModel> GetPostsByCategory(int ID)
+        {
+            using (var sqlConnection = factory.CreateConnection)
+            {
+                var posts = sqlConnection.Query<PostsModel>("select * from PostTable where IDCategory=@ID", new { IDCategory = ID }).AsList();
+                return posts;
+            }
+        }
+
         public void UpdatePost(PostsModel post)
         {
             using (var sqlConnection = factory.CreateConnection)
