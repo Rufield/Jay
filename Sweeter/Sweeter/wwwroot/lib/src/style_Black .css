@@ -638,14 +638,14 @@ hr
     color: rgba(0,0,0,0.9);
     border-radius: 10px;
 }
-.addfeedmobile
-{
-    background-color: rgba(191, 133, 248,0.8);
+.addfeedmobile {
+    background-color: rgba(155, 132, 249, 1);
+    
     border-top-color: rgba(191, 133, 248,0.5);
     border-top-width: 3px;
     border-radius: 10px;
-    border-bottom-left-radius:0%;
-    border-bottom-right-radius:0%;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
     font-family: Comic Sans MS;
     display: block;
     position: fixed;
@@ -653,8 +653,7 @@ hr
     left: 0;
     z-index: 100;
     width: 100%;
-    margin-bottom:25px;
-
+    margin-bottom: 25px;
 }
 .hidebutton{
     margin-bottom:0%;
@@ -818,6 +817,9 @@ textarea:focus{
 }
 @media screen and (min-width:767px)
 {
+    .mobile{
+        display:none;
+    }
 	.headmobile
 	{
 		display:none;
