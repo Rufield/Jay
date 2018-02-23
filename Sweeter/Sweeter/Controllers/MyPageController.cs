@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sweeter.DataProviders;
 using Sweeter.Models;
+using Sweeter.Services.DataProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +18,14 @@ namespace Sweeter.Controllers
         private IAccountDataProvider accountDataProvider;
         private ICommentDataProvider commentDataProvider;
         private ILikesToPostsProvider likesToPostsProvider;
-        public MyPageController(IPostDataProvider postData, IAccountDataProvider accountData, ICommentDataProvider commentData, ILikesToPostsProvider likesToPostsProvider)
+        private ICategoriesDataProvider categoriesDataProvider;
+        public MyPageController(IPostDataProvider postData, IAccountDataProvider accountData, ICommentDataProvider commentData, ILikesToPostsProvider likesToPostsProvider, ICategoriesDataProvider categoriesDataProvider)
         {
             this.postDataProvider = postData;
             this.accountDataProvider = accountData;
             this.commentDataProvider = commentData;
             this.likesToPostsProvider = likesToPostsProvider;
+            this.categoriesDataProvider = categoriesDataProvider;
         }
 
         [HttpGet]
@@ -53,12 +56,15 @@ namespace Sweeter.Controllers
                 ViewData["Style"] = account.Style;
                 ViewData["UserName"] = account.Username;
                 ViewData["Pic"] = "data:image/jpeg;base64," +Convert.ToBase64String(account.Avatar);
+                ViewData["categories"] = categoriesDataProvider.GetCategories();
                 foreach (PostsModel p in feedsnew)
                 {
                     p.Author = accountDataProvider.GetAccount(p.IDuser);
                     p.CommentNumber = commentDataProvider.GetCommentsOfPost(p.IDpost).Count();
                     p.LikeNumder = likesToPostsProvider.GetLikesOfPost(p.IDpost).Count();
                     postDataProvider.UpdatePost(p);
+                    p.Category = new CategoriesModel { ID = p.IDCategory, Category = categoriesDataProvider.GetCategoryByID(p.IDCategory).Category };
+
                 }
                 return View(feedsnew);
             }
@@ -66,7 +72,7 @@ namespace Sweeter.Controllers
         }
 
         [HttpPost("addfeed")]
-        public IActionResult NewPost(string mypost)
+        public IActionResult NewPost(string mypost, string category)
         {
             int id;
             if (HttpContext.User.Claims.Count() != 0)
@@ -80,13 +86,16 @@ namespace Sweeter.Controllers
                 AccountModel Author = accountDataProvider.GetAccount(id);
                 if (mypost != null)
                 {
+                    if (category == null) category = "Flood";
                     PostsModel Mypost = new PostsModel
                     {
                         Author = Author,
                         LikeNumder = 0,
                         CommentNumber = 0,
                         IDuser = id,
-                        Text = mypost
+                        Text = mypost,
+                        IDCategory = categoriesDataProvider.GetCategoryByName(category).ID
+
                     };
                     postDataProvider.AddPost(Mypost);
                     return Redirect("/MyPage");
