@@ -2,6 +2,9 @@ body
 {
 	background-color:rgba(250,250,250,1.0);
 }
+::-webkit-scrollbar {
+    height: 0px;
+}
 .row
 {
 	margin-left:0;
@@ -358,11 +361,12 @@ hr
         padding: 0;
         border-top: 1px solid rgba(89, 6, 167,0.5);
         height: calc(100vh - 272px);
-        overflow: auto;
+        overflow:auto;
+
     }
 
     .category-wrap li {
-        margin: 12px 0 0 0px;
+        margin: 12px 0 0 20px;
     }
 
     .category-wrap a {
