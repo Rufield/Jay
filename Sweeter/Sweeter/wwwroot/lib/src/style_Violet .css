@@ -357,6 +357,8 @@ hr
         margin: 0;
         padding: 0;
         border-top: 1px solid rgba(89, 6, 167,0.5);
+        height: calc(100vh - 272px);
+        overflow: auto;
     }
 
     .category-wrap li {

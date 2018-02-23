@@ -353,6 +353,8 @@ p
         margin: 0;
         padding: 0;
         border-top: 1px solid rgba(0,184,43,0.5);
+        height: calc(100vh - 272px);
+        overflow: auto;
     }
 
     .category-wrap li {
