@@ -18,9 +18,10 @@ namespace Sweeter.Controllers
         private ICommentDataProvider commentDataProvider;
         private IUnsubscribesDataProvider unsubscribesDataProvider;
         private ILikesToPostsProvider likesToPostsProvider;
+        private ICategoriesDataProvider categoriesDataProvider;
         private ILogger<PostsController> _logger;
 
-        public PostsController(IPostDataProvider postData, IAccountDataProvider accountData, ICommentDataProvider commentData, IUnsubscribesDataProvider unsubscribesData, ILogger<PostsController> logger, ILikesToPostsProvider likesToPostsProvider)
+        public PostsController(IPostDataProvider postData, IAccountDataProvider accountData, ICommentDataProvider commentData, IUnsubscribesDataProvider unsubscribesData, ILogger<PostsController> logger, ILikesToPostsProvider likesToPostsProvider, ICategoriesDataProvider categoriesDataProvider)
         {
             this.postDataProvider = postData;
             this.accountDataProvider = accountData;
@@ -28,6 +29,7 @@ namespace Sweeter.Controllers
             this.unsubscribesDataProvider = unsubscribesData;
             _logger = logger;
             this.likesToPostsProvider = likesToPostsProvider;
+            this.categoriesDataProvider = categoriesDataProvider;
         }
 
         [HttpGet]
@@ -71,6 +73,7 @@ namespace Sweeter.Controllers
                     p.CommentNumber = commentDataProvider.GetCommentsOfPost(p.IDpost).Count();
                     p.LikeNumder = likesToPostsProvider.GetLikesOfPost(p.IDpost).Count();
                     postDataProvider.UpdatePost(p);
+                  
                 }
                 _logger.LogInformation($"All is good, user {account.IDuser} look at new posts");
                 return View(feedsnew);

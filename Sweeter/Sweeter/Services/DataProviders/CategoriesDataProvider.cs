@@ -31,6 +31,14 @@ namespace Sweeter.Services.DataProviders
                 return category;
             }
         }
+        public int GetCategoryByName(string categoryname)
+        {
+            using (var sqlConnection = connection.CreateConnection)
+            {
+                int category = int.Parse(sqlConnection.Query<CategoriesModel>("select ID from CategoriesTable where Category = @Category", new { Category = categoryname }).ToString());
+                return category;
+            }
+        }
 
         public IEnumerable<CategoriesModel> GetCategories()
         {
@@ -56,5 +64,7 @@ namespace Sweeter.Services.DataProviders
                 sqlConnection.Execute(@"delete from CategoriesTable where Category = @Name", new { ID = Name });
             }
         }
+
+      
     }
 }

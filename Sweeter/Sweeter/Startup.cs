@@ -34,6 +34,7 @@ namespace Sweeter
             services.AddTransient<ILikesToCommentsProvider, LikesToCommentsProvider>();
             services.AddTransient<ILikesToPostsProvider, LikesToPostsProvider>();
             services.AddTransient<IUnsubscribesDataProvider, UnsubscribesDataProvider>();
+            services.AddTransient<ICategoriesDataProvider, CategoriesDataProvider>();
             services.AddSingleton<IHashService, HashService>();
             services.AddTransient<IConnectionFactory, ConnectionFactory>();
             services.AddTransient<ILogger, LoggerService>();

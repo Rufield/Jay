@@ -15,5 +15,6 @@ namespace Sweeter.Models
         public int CommentNumber { get; set; }
         public List<CommentModel> Comments { get; set; }
         public string Text { get; set; }
+        public CategoriesModel Category { get; set; }
     }
 }

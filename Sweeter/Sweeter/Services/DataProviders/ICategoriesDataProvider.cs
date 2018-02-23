@@ -10,5 +10,7 @@ namespace Sweeter.Services.DataProviders
         IEnumerable<CategoriesModel> GetCategories();
         void DeleteCategoryByID(int ID);
         void DeleteCategoryByName(string Name);
+        int GetCategoryByName(string categoryname);
+
     }
 }
