@@ -805,6 +805,9 @@ textarea:focus {
 }
 
 @media screen and (min-width:767px) {
+    .mobile {
+        display: none;
+    }
     .headmobile {
         display: none;
     }
