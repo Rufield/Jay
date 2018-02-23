@@ -143,18 +143,20 @@
             <!--Great Wall with Unique hidden script-->
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
             <div id="wall">
+                @if (Model != null)
+                {
                 @foreach (PostsModel post in Model)
                     {
             <form id="post_@post.IDpost">
-                <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
+                <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser", "User", new { idUs = post.IDuser })' ">
                     @post.Author.Username
                 </label>
                 <label class="lab auser componly" style="margin:1%">| @post.Category.Category | @post.PublicDate</label>
 
                 @if (post.Author.Username.Equals(ViewData["Username"]))
-                 {
+                {
             <button type="button" class="DeleteButton" data-id="@post.IDpost">X</button>
-                    }
+                }
                 <hr id="post_@post.IDpost">
                 <div class="postcontainer">
                     <label class="postlabel">
@@ -169,7 +171,7 @@
                         <label class="likelabel" id="@post.IDpost">
                             @post.LikeNumder
                         </label>
-                    </div><span><img src="~/lib/img/_@ViewData["Style"]/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span><div class="commentcontainer">
+                    </div><span><img src="~/lib/img/_@ViewData["Style"]/comment.png" onclick="location.href='@Url.Action("Comments", "Comment", new { id = post.IDpost })' " class="comment" /></span><div class="commentcontainer">
                         <label class="commentlabel">
                             @post.CommentNumber
                         </label>
@@ -177,7 +179,12 @@
                 </div>
 
             </form>
-}
+                }
+                }
+                else
+                {
+            <label class="postlabel">This catagory is empty, but I sure someone write post in this moment </label>
+                }
                 <script>
                 $(document).ready(function () {
                     $(".like").bind("click", function () {
@@ -231,7 +238,7 @@
                 <ul >
                     @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
                      {
-                <li><a location.href=''>@cats.Category</a></li>
+                <li><a  onclick="location.href='@Url.Action("Index","Posts", new{CatID = @cats.ID })'">@cats.Category</a></li>
                      }
                 </ul>
             </div>

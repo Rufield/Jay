@@ -33,7 +33,7 @@ namespace Sweeter.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int? CatID)
         {
 
             int id;
@@ -48,7 +48,15 @@ namespace Sweeter.Controllers
 
                 IEnumerable<UnsubscribesModel> unsubscribes = unsubscribesDataProvider.GetUnsubscribesOfUser(id);
                 //int id = Convert.ToInt32(Request.Cookies["0"]);
-                IEnumerable<PostsModel> feeds = postDataProvider.GetPosts();
+                IEnumerable<PostsModel> feeds;
+                if (CatID == null)
+                {
+                    feeds = postDataProvider.GetPosts();
+                }
+                else
+                {
+                    feeds = postDataProvider.GetPostsByCategory(CatID.Value);
+                }
                 IEnumerable<PostsModel> feedsrev = feeds.Reverse();
                 AccountModel account = accountDataProvider.GetAccount(id);
                 ViewData["Style"] = account.Style;
