@@ -141,38 +141,39 @@
             <div id="wall">
                 @foreach (PostsModel post in Model)
         {
-            <form id="post_@post.IDpost">
-                <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
-                    @post.Author.Username
-                </label>
-                <label class="lab auser componly" style="margin:1%">| @post.Category.Category | @post.PublicDate</label>
-
-                @if (post.Author.Username.Equals(ViewData["UserName"]))
-        {
-            <button type="button" class="DeleteButton" data-id="@post.IDpost">X</button>
-}
-                <hr id="post_@post.IDpost">
-                <div class="postcontainer">
-                    <label class="postlabel">
-                        @post.Text
+                <form id="post_@post.IDpost">
+                    <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
+                        @post.Author.Username
                     </label>
-                </div>
-                <div class="telonly"><label class="telonly">|@post.Category.Category|</label> </div>
-                <div class="cont">
-                    <span><img src="lib/img/_@ViewData["Style"]/Like.png" class="like" data-id="@post.IDpost"></span>
-                    <div class="likecontainer">
-                        <label class="likelabel" id="@post.IDpost">
-                            @post.LikeNumder
+                    <label class="lab auser componly" style="margin:1%" onclick="location.href='@Url.Action("Index","Posts",new { CatID=post.IDCategory})'">| @post.Category.Category | </label>
+                    <label class="lab auser componly" style="margin:1%">@post.PublicDate</label>
+
+                    @if (post.Author.Username.Equals(ViewData["UserName"]))
+    {
+                <button type="button" class="DeleteButton" data-id="@post.IDpost">X</button>
+}
+                    <hr id="post_@post.IDpost">
+                    <div class="postcontainer">
+                        <label class="postlabel">
+                            @post.Text
                         </label>
                     </div>
-                    <span><img src="~/lib/img/_@ViewData["Style"]/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span>
-                    <div class="commentcontainer">
-                        <label class="commentlabel">
-                            @post.CommentNumber
-                        </label>
+                    <div class="telonly"><label class="telonly" onclick="location.href='@Url.Action("Index","Posts",new { CatID=post.IDCategory})'">|@post.Category.Category|</label> </div>
+                    <div class="cont">
+                        <span><img src="lib/img/_@ViewData["Style"]/Like.png" class="like" data-id="@post.IDpost"></span>
+                        <div class="likecontainer">
+                            <label class="likelabel" id="@post.IDpost">
+                                @post.LikeNumder
+                            </label>
+                        </div>
+                        <span><img src="~/lib/img/_@ViewData["Style"]/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span>
+                        <div class="commentcontainer">
+                            <label class="commentlabel">
+                                @post.CommentNumber
+                            </label>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
 }
                 <script>
                     $(document).ready(function () {

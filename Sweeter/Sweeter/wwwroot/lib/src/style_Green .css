@@ -363,7 +363,9 @@ p
     .category-wrap li {
         margin: 12px 0 0 20px;
     }
-
+        .category-wrap li :hover {
+            cursor: pointer;
+        }
     .category-wrap a {
         text-decoration: none;
         display: block;
