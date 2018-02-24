@@ -104,7 +104,7 @@
                 <input type="submit" name="search" value="Search" class="SearchButton" />
             </form>
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
-            
+
             <!--Add Post-->
             <form action="Posts/addfeed" method="post" class="addfeedform">
                 <label class="lab" style="margin:1%">Publish your post, @ViewData["Username"]</label>
@@ -121,9 +121,9 @@
                             <div class="modal-body" style="text-align:center;">
                                 <select size="13" name="category" id="Style" class="select">
                                     @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
-                                     {
-                            <option value="@cats.Category">  <h4>@cats.Category</h4></option>
-                                        }
+                            {
+                                <option value="@cats.Category">  <h4>@cats.Category</h4></option>
+                    }
                                 </select>
                             </div>
                             <div class="modal-footer">
@@ -135,27 +135,55 @@
                 </div>
             </form>
 
-     
-          
 
 
 
+
+            <button type="button" class="btn mobileaddpost mobile" data-toggle="modal" data-target="#myModalChoose">Choose category</button>
+                        <div class="modal fade" id="myModalChoose" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content" style="margin-top:20%;">
+                                               <div class="modal-header">
+                                                       <h4 class="modal-title" id="exampleModalLongTitle">Choose the category</h4>
+                                                       <h4 class="modal-title" id="exampleModalLongTitle"></h4>
+                           
+                           
+                        </div>
+                                                <div class="modal-body" style="text-align:center;">
+                           
+                                                @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
+                                        {
+                                                    <h4 onclick="location.href='@Url.Action("Index","Posts", new{CatID = @cats.ID })'">@cats.Category</h4>
+                                          
+                                }
+                
+                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                
+                        </div>
+                
+                    </div>
+                
+                </div>
+                
+            </div>
 
             <!--Great Wall with Unique hidden script-->
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
             <div id="wall">
                 @foreach (PostsModel post in Model)
-                    {
+        {
             <form id="post_@post.IDpost">
                 <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
                     @post.Author.Username
                 </label>
-                <label class="lab auser componly" style="margin:1%">| @post.Category.Category | @post.PublicDate</label>
-
+                <label class="lab auser componly" style="margin:1%" onclick="location.href='@Url.Action("Index","Posts",new { CatID=post.IDCategory})'">| @post.Category.Category | </label>
+                <label class="lab auser componly" style="margin:1%">@post.PublicDate</label>
                 @if (post.Author.Username.Equals(ViewData["Username"]))
-                 {
+        {
             <button type="button" class="DeleteButton" data-id="@post.IDpost">X</button>
-                    }
+}
                 <hr id="post_@post.IDpost">
                 <div class="postcontainer">
                     <label class="postlabel">
@@ -163,7 +191,7 @@
                     </label>
                 </div>
 
-                <div class="telonly"><label class="telonly">|@post.Category.Category|</label> </div>
+                <div class="telonly"><label class="telonly" onclick="location.href='@Url.Action("Index","Posts",new { CatID=post.IDCategory})'">|@post.Category.Category|</label> </div>
                 <div class="cont">
                     <span><img src="lib/img/_@ViewData["Style"]/Like.png" class="like" data-id="@post.IDpost"></span><div class="likecontainer">
 
@@ -234,7 +262,7 @@
                 <ul >
                     @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
                      {
-                <li><a location.href=''>@cats.Category</a></li>
+                <li><a onclick="location.href='@Url.Action("Index","Posts", new{CatID = @cats.ID })'">@cats.Category</a></li>
                      }
                 </ul>
             </div>
