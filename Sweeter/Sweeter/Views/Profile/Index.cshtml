@@ -2,6 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model Sweeter.Models.AccountModel
+
 <!DOCTYPE html>
 
 <html>
@@ -15,7 +16,7 @@
     <link rel="shortcut icon" href="~/lib/img/logo.png" type="image/png">
 
     <script src="~/js/require.js"></script>
-    <script type="text/javascript" src="~/js/RegisterPageScripts.js"></script>
+    <script type="text/javascript" src="~/js/ProfilePageScripts.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Your profile</title>
@@ -54,9 +55,9 @@
                         </select>
                     </p>
                     <p><label for="username" style="text-align:center">Your Username </label>
-                    <p><input type="text" name="username" class="textin" id="username" oninput="checkusername()" value=@Model.Username onchange="checkUsername()" required>
+                    <p><input type="text" name="username" class="textin" id="username" oninput="checkusername()" value=@Model.Username required>
                     <p><label for="name" style="text-align:center">Your Fullname </label>
-                    <p><input type="text" name="name" class="textin" id="name" value=@Model.Name>
+                    <p><input type="text" name="name" class="textin" id="name" oninput="checkfullname()" value=@Model.Name>
                     <p><label for="about" style="text-align:center">Tell me about yourself</label>
                     <p>
                         <textarea type="text" style="width: 77%" rows="5" id="about" name="about" class="textareain" value=@Model.About onKeyDown="limitText(this,300);"
@@ -72,6 +73,7 @@
                 <div class="col-md-3 col-xs-12 col-lg-3 col-sm-3" style="text-align:center"></div>
             </div>
         </form>
+        <!--Pop-up For Deleting-->
         <div class="row">
             <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2" style="text-align:center"></div>
             <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8" style="text-align:center">

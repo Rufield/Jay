@@ -1,16 +1,4 @@
-﻿function upload() {
-	var preview = document.querySelector('img');
-	var file = document.querySelector('input[type=file]').files[0];
-	var reader = new FileReader();
-
-	reader.onloadend = function () { preview.src = reader.result; }
-
-	if (file) {
-		reader.readAsDataURL(file);
-	} else { preview.src = "~/lib/img/avatar.jpeg" }
-}
-
-function checkpass() {
+﻿function checkpass() {
     var pas = document.getElementById("password");
     var pas2 = document.getElementById("password2");
     var ermes = document.getElementById('error');
@@ -48,6 +36,7 @@ function checkpasswords() {
 function checkusername() {
     var username = document.getElementById('username');
     var regexp = /^[a-zA-Z0-9]*$/;
+    var regexp2 = /^[0-9]*$/;
     var ermes = document.getElementById('error');
     if (!regexp.test(username.value)) { // if username contains only symbols listed in regexp
         ermes.innerText = "Username may contain only letters from English alphabet and numbers!";
@@ -55,6 +44,10 @@ function checkusername() {
     }
     else if (username.value.length > 50) {
         ermes.innerText = "Username must not be longer than 50 characters.";
+        username.classList.add("notright");
+    }
+    else if (regexp2.test(username.value)) { // if username contains only numbers
+        ermes.innerText = "Username must containe at least 1 character from English alphabet!";
         username.classList.add("notright");
     }
     else {
@@ -111,30 +104,3 @@ function checkemailbool() {
     else ermes.innerText = "";
 
 }
-
-function limitText(limitField, limitNum) {
-    var ermes = document.getElementById('error');
-    if (limitField.value.length > limitNum) {
-        limitField.value = limitField.value.substring(0, limitNum);
-        ermes.innerText = "Text limitation 300 characters";
-    }
-}
-
-function CheckPasswordForDelete() {
-    var password = document.getElementById('password');
-    var button = document.getElementById('DeleteButton')
-    var ermes = document.getElementById('DeleteError');
-    if (password.value.length < 6) {
-        ermes.innerText = "Unlike the truth, this password is too short.";
-        button.disabled = true;
-    }
-    else {
-        ermes.innerText = "";
-        button.disabled = false;
-    }
-}
-
-(function ClearModal() {
-    var modal = document.getElementById('password');
-    modal.innerText = '';
-})()
