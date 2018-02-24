@@ -54,7 +54,7 @@
                         </select>
                     </p>
                     <p><label for="username" style="text-align:center">Your Username </label>
-                    <p><input type="text" name="username" class="textin" id="username" value=@Model.Username onchange="checkUsername()" required>
+                    <p><input type="text" name="username" class="textin" id="username" oninput="checkusername()" value=@Model.Username onchange="checkUsername()" required>
                     <p><label for="name" style="text-align:center">Your Fullname </label>
                     <p><input type="text" name="name" class="textin" id="name" value=@Model.Name>
                     <p><label for="about" style="text-align:center">Tell me about yourself</label>

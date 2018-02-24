@@ -16,11 +16,14 @@ function checkpass() {
     var ermes = document.getElementById('error');
     if (pas.value.length < 6) {
         pas.classList.add("notright");
-        ermes.innerHTML = "This password is too short, try somethin bigger than 6 symbols.";
+        ermes.innerText = "This password is too short, try somethin bigger than 6 symbols.";
+        pas2.classList.remove("notright");
+        pas2.value = "";
+        pas2.disabled = true; 
     }
     else {
         pas.classList.remove("notright");
-        ermes.innerHTML = "";
+        ermes.innerText = "";
         pas2.disabled = false; 
     }
 }
@@ -32,12 +35,12 @@ function checkpasswords() {
 	if (pas1.value != pas2.value) { // if passwords match 
 		pas1.classList.add("notright");
 		pas2.classList.add("notright");
-        ermes.innerHTML = "Passwords are not simmilar!";
+        ermes.innerText = "Passwords are not simmilar!";
 	}
 	else {
 		pas1.classList.remove("notright");
 		pas2.classList.remove("notright");
-        ermes.innerHTML = "";
+        ermes.innerText = "";
         register();
 	}
 }
@@ -47,11 +50,15 @@ function checkusername() {
     var regexp = /^[a-zA-Z0-9]*$/;
     var ermes = document.getElementById('error');
     if (!regexp.test(username.value)) { // if username contains only symbols listed in regexp
-        ermes.innerHTML = "Username may contain only letters from English alphabet and numbers!";
+        ermes.innerText = "Username may contain only letters from English alphabet and numbers!";
+        username.classList.add("notright");
+    }
+    else if (username.value.length > 50) {
+        ermes.innerText = "Username must not be longer than 50 characters.";
         username.classList.add("notright");
     }
     else {
-        ermes.innerHTML = "";
+        ermes.innerText = "";
         username.classList.remove("notright");
         register();
     }
@@ -66,19 +73,19 @@ function checkemail() {
 	var indat = emailval.indexOf("@"); // index of @
     var regexp = /[a-z0-9]/i; // all allowed symbols for the end of an email
 	if (ind == -1) { // check if there is a .
-		ermes.innerHTML = "Email is invalid!";
+		ermes.innerText = "Email is invalid!";
 		email.classList.add("notright");
 	}
 	else if (ind - indat == 1) { // if user wrote . right after the @
-		ermes.innerHTML = "Email is invalid!";
+		ermes.innerText = "Email is invalid!";
 		email.classList.add("notright");
     }
     else if (!regexp.test(emailval[emailval.length-1])) { // if email end with smth else then regexp
-        ermes.innerHTML = "Email is invalid!";
+        ermes.innerText = "Email is invalid!";
         email.classList.add("notright");
     }
 	else { // allowed email
-		ermes.innerHTML = "";
+		ermes.innerText = "";
         email.classList.remove("notright");
         register();
 	}
@@ -98,10 +105,10 @@ function checkemailbool() {
     var email = document.getElementById('email').value;
     var ermes = document.getElementById('error');
     var foo = document.getElementById("foo")
-    foo.innerHTML = '<p><label for="password" style="text-align:center">Your Password* </label> <p> <input type="password" name="password" id="password" class="textin" required></input>';
-    ermes.innerHTML = "Write your password"
-    if (email.indexOf(".", email.indexOf("@")) == -1) ermes.innerHTML = "Email is invalid!";
-    else ermes.innerHTML = "";
+    foo.innerText = '<p><label for="password" style="text-align:center">Your Password* </label> <p> <input type="password" name="password" id="password" class="textin" required></input>';
+    ermes.innerText = "Write your password"
+    if (email.indexOf(".", email.indexOf("@")) == -1) ermes.innerText = "Email is invalid!";
+    else ermes.innerText = "";
 
 }
 
@@ -109,7 +116,7 @@ function limitText(limitField, limitNum) {
     var ermes = document.getElementById('error');
     if (limitField.value.length > limitNum) {
         limitField.value = limitField.value.substring(0, limitNum);
-        ermes.innerHTML = "Text limitation 300 characters";
+        ermes.innerText = "Text limitation 300 characters";
     }
 }
 
@@ -118,11 +125,11 @@ function CheckPasswordForDelete() {
     var button = document.getElementById('DeleteButton')
     var ermes = document.getElementById('DeleteError');
     if (password.value.length < 6) {
-        ermes.innerHTML = "Unlike the truth, this password is too short.";
+        ermes.innerText = "Unlike the truth, this password is too short.";
         button.disabled = true;
     }
     else {
-        ermes.innerHTML = "";
+        ermes.innerText = "";
         button.disabled = false;
     }
 }
