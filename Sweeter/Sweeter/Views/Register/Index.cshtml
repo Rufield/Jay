@@ -31,27 +31,27 @@
         <div class="col-md-2 col-xs-1 col-lg-2 col-sm-2"></div>
     </div>
     <div class="forma">
-                <form action="" method="post" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="row">
-                    <!--First part-->
-                    <div class="col-md-2 col-xs-1 col-lg-2 col-sm-2"></div> <!--Offset-->
-                    <div class="col-md-8 col-xs-10 col-lg-8 col-sm-8">
-                        <p><label for="username" style="text-align:center">Your Username* </label>
-                        <p><input type="text" name="username" class="textin" id="username" value=@ViewData["Username"] onchange="checkusername()" required></input>
-                        <p><label for="email" style="text-align:center">Your E-mail*</label>
-                        <p><input type="email" id="email" name="Email" class="textin" value=@ViewData["Email"] oninput="checkemail()" required></input>
-                            <!--Second part-->
-                        <p><label for="password" style="text-align:center">Your Password* </label>
-                        <p><input type="password" name="password" id="password" oninput="checkpass()" class="textin" required></input>
-                        <p><label for="password2" style="text-align:center">Repeat Your Password* </label>
-                        <p><input type="password" id="password2" name="password2" class="textin" oninput="checkpasswords()" required disabled></input>
-                            <!--Submit-->
-                        <p style="text-align:center">
-                            <input type="submit" class="but" id="register" value="Register" disabled></input>
-                            <h1 class="headlabel" id="error">@ViewData["Error"]</h1>
-                    </div>
+                <!--First part-->
+                <div class="col-md-2 col-xs-1 col-lg-2 col-sm-2"></div> <!--Offset-->
+                <div class="col-md-8 col-xs-10 col-lg-8 col-sm-8">
+                    <p><label for="username" style="text-align:center">Your Username* </label>
+                    <p><input type="text" name="username" class="textin" id="username" value=@ViewData["Username"] onchange="checkusername()" required>
+                    <p><label for="email" style="text-align:center">Your E-mail*</label>
+                    <p><input type="email" id="email" name="Email" class="textin" value=@ViewData["Email"] oninput="checkemail()" required>
+                    <!--Second part-->
+                    <p><label for="password" style="text-align:center">Your Password* </label>
+                    <p><input type="password" name="password" id="password" oninput="checkpass()" class="textin" required>
+                    <p><label for="password2" style="text-align:center">Repeat Your Password* </label>
+                    <p><input type="password" id="password2" name="password2" class="textin" oninput="checkpasswords()" required disabled>
+                    <!--Submit-->
+                    <p style="text-align:center">
+                    <input type="submit" class="but" id="register" value="Register" disabled>
+                    <h1 class="headlabel" id="error">@ViewData["Error"]</h1>
+                </div>
             </div>
-                </form>
+        </form>
     </div>
 </body>
 </html>

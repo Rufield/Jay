@@ -6,7 +6,6 @@ using Sweeter.Services.EmailService;
 using Sweeter.Services.HashService;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Mail;
 
 namespace Sweeter.Controllers
@@ -102,23 +101,3 @@ namespace Sweeter.Controllers
         }
     }
 }
-                        //byte[] ImageData;
-                        //var filepath = Path.GetTempFileName();
-                        //if (avatar != null)
-                        //{
-                        //    using (Stream fs = avatar.OpenReadStream())
-                        //    {
-                        //        ImageData = new byte[fs.Length];
-                        //        fs.Read(ImageData, 0, ImageData.Length);
-                        //    }
-                        //}
-                        //else
-                        //{
-                            
-                        //    using (FileStream FS = new FileStream("wwwroot/lib/img/Avatar.jpeg", FileMode.Open))
-                        //    {
-                        //        ImageData = new byte[FS.Length];
-                        //        FS.Read(ImageData, 0, ImageData.Length);
-                        //    }
-                        //}
-                        //account.Avatar = ImageData;

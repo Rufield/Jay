@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Sweeter.DataProviders;
 using Sweeter.Models;
+using Sweeter.Services.HashService;
 using System.IO;
 using System.Linq;
 
@@ -14,11 +15,13 @@ namespace Sweeter.Controllers
     public class ProfileController : Controller
     {
         private IAccountDataProvider accountDataProvider;
+        private IHashService _hasher;
         private ILogger<ProfileController> _logger;
 
-        public ProfileController(IAccountDataProvider accountData, ILogger<ProfileController> logger)
+        public ProfileController(IAccountDataProvider accountData, ILogger<ProfileController> logger, IHashService hasher)
         {
             accountDataProvider = accountData;
+            _hasher = hasher;
             _logger = logger;
         }
         // GET: /<controller>/
@@ -55,7 +58,7 @@ namespace Sweeter.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(AccountViewModel Faccount)
+        public IActionResult Index(string password, AccountViewModel Faccount)
         {
             int id;
             if (HttpContext.User.Claims.Count() != 0)
@@ -66,48 +69,65 @@ namespace Sweeter.Controllers
                 id = 0;
             if (id != 0)
             {
-                AccountModel Oldaccount = accountDataProvider.GetAccount(id);
-                if (Faccount.Style == null) Faccount.Style = Oldaccount.Style;
-                AccountModel account = new AccountModel
+                if (password == null)
                 {
-                    Name = Faccount.Name,
-                    Username = Faccount.Username,
-                    Email = Faccount.Email,
-                    Style=Faccount.Style,
-                    About = Faccount.About
-                };
-                account.Avatar = UploadingPicture(Faccount.Avatar);
-                if (account.Avatar == null)
-                    account.Avatar = Oldaccount.Avatar;
-                account.Password = "0";
-                if (ModelState.IsValid)
-                {
-                    if (account.Email != Oldaccount.Email)
+                    AccountModel Oldaccount = accountDataProvider.GetAccount(id);
+                    if (Faccount.Style == null) Faccount.Style = Oldaccount.Style;
+                    AccountModel account = new AccountModel
                     {
-                        _logger.LogInformation($"User Email {Faccount.Email} != {Oldaccount.Email}");
-                        if (accountDataProvider.GetAccountsByEmail(account.Email).Count() == 0)
+                        Name = Faccount.Name,
+                        Username = Faccount.Username,
+                        Email = Faccount.Email,
+                        Style = Faccount.Style,
+                        About = Faccount.About
+                    };
+                    account.Avatar = UploadingPicture(Faccount.Avatar);
+                    if (account.Avatar == null)
+                        account.Avatar = Oldaccount.Avatar;
+                    account.Password = "0";
+                    if (ModelState.IsValid)
+                    {
+                        if (account.Email != Oldaccount.Email)
                         {
+                            _logger.LogInformation($"User Email {Faccount.Email} != {Oldaccount.Email}");
+                            if (accountDataProvider.GetAccountsByEmail(account.Email).Count() == 0)
+                            {
 
-                            return CheckUsername(Oldaccount, account);
+                                return CheckUsername(Oldaccount, account);
+                            }
+                            else
+                            {
+                                _logger.LogInformation($"This Email is already in use.");
+                                ViewData["Error"] = "This Email is already in use.";
+                                return View(account);
+                            }
+                            //return RedirectToAction("Password", account);
                         }
                         else
                         {
-                            _logger.LogInformation($"This Email is already in use.");
-                            ViewData["Error"] = "This Email is already in use.";
-                            return View(account);
+                            _logger.LogInformation($"Maybe {Faccount.IDuser} user's Email {Faccount.Email} = {Oldaccount.Email}");
+                            return CheckUsername(Oldaccount, account);
                         }
-                        //return RedirectToAction("Password", account);
                     }
                     else
                     {
-                        _logger.LogInformation($"Maybe {Faccount.IDuser} user's Email {Faccount.Email} = {Oldaccount.Email}");
-                        return CheckUsername(Oldaccount, account);
+                        _logger.LogInformation($"Model of user {Faccount.IDuser} not valid");
+                        return View(account);
                     }
                 }
                 else
                 {
-                    _logger.LogInformation($"Model of user {Faccount.IDuser} not valid");
-                    return View(account);
+                    AccountModel CurrentUser = accountDataProvider.GetAccount(id);
+                    if (CurrentUser.Password.Equals(_hasher.GetHashString(password)))
+                    {
+                        accountDataProvider.DeleteAccount(id);
+                        return RedirectToAction("Logout", "LogOut");
+                    }
+                    else
+                    {
+                        ViewData["DeleteError"] = "Password is not correct!";
+                        return View(CurrentUser);
+                    }
                 }
             }
             else return RedirectToAction("/");
@@ -117,13 +137,6 @@ namespace Sweeter.Controllers
         public IActionResult Password(AccountModel account)
         {
             return View(account);
-        }
-
-        [HttpPost("DeleteAccount")]
-        public IActionResult DeleteAccount(int? id)
-        {
-            accountDataProvider.DeleteAccount(id);
-            return RedirectToAction("Logout","LogOut");
         }
 
         private IActionResult CheckUsername(AccountModel Oldaccount, AccountModel account)
@@ -154,22 +167,6 @@ namespace Sweeter.Controllers
             _logger.LogInformation($"Update success");
             return RedirectToAction("Index", "MyPage");
         }
-
-        /*private bool Valid(AccountViewModel account)
-        {
-            if (account.Name == "")
-                return false;
-
-            else if (account.Username == "")
-                return false;
-
-            else if (account.Email == "")
-                return false;
-
-            else
-                return true;
-
-        }*/
 
         private byte[] UploadingPicture(IFormFile Avatar)
         {
