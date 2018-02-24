@@ -57,7 +57,6 @@ function checkusername() {
     }
 }
 
-
 function checkemail() {
 	var email = document.getElementById('email');
 	var ermes = document.getElementById('error');
@@ -105,6 +104,7 @@ function checkemailbool() {
     else ermes.innerHTML = "";
 
 }
+
 function limitText(limitField, limitNum) {
     var ermes = document.getElementById('error');
     if (limitField.value.length > limitNum) {
@@ -112,3 +112,22 @@ function limitText(limitField, limitNum) {
         ermes.innerHTML = "Text limitation 300 characters";
     }
 }
+
+function CheckPasswordForDelete() {
+    var password = document.getElementById('password');
+    var button = document.getElementById('DeleteButton')
+    var ermes = document.getElementById('DeleteError');
+    if (password.value.length < 6) {
+        ermes.innerHTML = "Unlike the truth, this password is too short.";
+        button.disabled = true;
+    }
+    else {
+        ermes.innerHTML = "";
+        button.disabled = false;
+    }
+}
+
+(function ClearModal() {
+    var modal = document.getElementById('password');
+    modal.innerText = '';
+})()

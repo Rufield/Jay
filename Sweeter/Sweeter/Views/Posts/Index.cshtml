@@ -34,6 +34,7 @@
             <img src=@ViewData["Pic"] class="avatar ">
             <hr class="line ">
         </div>
+
         <!--Same Mobile-->
         <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8 maincontainer">
             <div class="headmobile">
@@ -49,6 +50,7 @@
                     </div>
                 </div>
             </div>
+
             <!--Mobile Menu-->
             <div class="addfeedmobile" id="Addfeed">
                 <form method="post" action="Posts/addfeed" class="addfeedformmobile">
@@ -96,34 +98,32 @@
                 <p class="HideText">Show addpost form</p>
             </div>
 
-
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
             <form action="Posts/search" method="post" class="search">
                 <input type="search" name="searchinfo" placeholder="Search users in Jay" class="SearchInput" />
                 <input type="submit" name="search" value="Search" class="SearchButton" />
             </form>
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
+            
             <!--Add Post-->
             <form action="Posts/addfeed" method="post" class="addfeedform">
                 <label class="lab" style="margin:1%">Publish your post, @ViewData["Username"]</label>
                 <hr>
                 <textarea class="mypost" name="mypost" id="mypost" rows="2" placeholder="What are you thinking about..."></textarea>
-                <button type="button" class="btn addpost" name="addpost" id="addpost" data-toggle="modal" data-target="#myModal">Add post</button>
+                <button type="button" class="btn addpost" name="addpost" id="addpost" data-toggle="modal" data-target="#myModal">Send</button>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="exampleModalLongTitle">Choose the category</h4>
-                                <h4 class="modal-title" id="exampleModalLongTitle">If you choose nothing, "flood" would be chosen</h4>
+                                <h2 class="modal-title" id="exampleModalLongTitle">Choose the category</h2>
 
                             </div>
                             <div class="modal-body" style="text-align:center;">
-
                                 <select size="13" name="category" id="Style" class="select">
                                     @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
-                            {
-                                <option value="@cats.Category">  @cats.Category</option>
-                    }
+                                     {
+                            <option value="@cats.Category">  <h4>@cats.Category</h4></option>
+                                        }
                                 </select>
                             </div>
                             <div class="modal-footer">
@@ -135,78 +135,50 @@
                 </div>
             </form>
 
+     
+          
 
 
 
-            <button type="button" class="btn mobileaddpost mobile" data-toggle="modal" data-target="#myModalChoose">Choose category</button>
-            <div class="modal fade" id="myModalChoose" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content" style="margin-top:20%;">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLongTitle">Choose the category</h4>
-                            <h4 class="modal-title" id="exampleModalLongTitle"></h4>
-
-                        </div>
-                        <div class="modal-body" style="text-align:center;">
-
-                                @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
-                        {
-                            <h4 onclick="location.href='@Url.Action("Index","Posts", new{CatID = @cats.ID })'">@cats.Category</h4>
-                }
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
 
             <!--Great Wall with Unique hidden script-->
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
             <div id="wall">
-                @if (Model != null)
-                {
                 @foreach (PostsModel post in Model)
-        {
-                <form id="post_@post.IDpost">
-                    <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser", "User", new { idUs = post.IDuser })' ">
-                        @post.Author.Username
+                    {
+            <form id="post_@post.IDpost">
+                <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
+                    @post.Author.Username
+                </label>
+                <label class="lab auser componly" style="margin:1%">| @post.Category.Category | @post.PublicDate</label>
+
+                @if (post.Author.Username.Equals(ViewData["Username"]))
+                 {
+            <button type="button" class="DeleteButton" data-id="@post.IDpost">X</button>
+                    }
+                <hr id="post_@post.IDpost">
+                <div class="postcontainer">
+                    <label class="postlabel">
+                        @post.Text
                     </label>
-                    <label class="lab auser componly" style="margin:1%" onclick="location.href='@Url.Action("Index","Posts",new { CatID=post.IDCategory})'">| @post.Category.Category | </label>
-                    <label class="lab auser componly" style="margin:1%">@post.PublicDate</label>
-                        @if (post.Author.Username.Equals(ViewData["Username"]))
-        {
-                <button type="button" class="DeleteButton" data-id="@post.IDpost">X</button>
+                </div>
+
+                <div class="telonly"><label class="telonly">|@post.Category.Category|</label> </div>
+                <div class="cont">
+                    <span><img src="lib/img/_@ViewData["Style"]/Like.png" class="like" data-id="@post.IDpost"></span><div class="likecontainer">
+
+                        <label class="likelabel" id="@post.IDpost">
+                            @post.LikeNumder
+                        </label>
+                    </div><span><img src="~/lib/img/_@ViewData["Style"]/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span><div class="commentcontainer">
+                        <label class="commentlabel">
+                            @post.CommentNumber
+                        </label>
+                    </div>
+                </div>
+
+            </form>
 }
-                        <hr id="post_@post.IDpost">
-                        <div class="postcontainer">
-                            <label class="postlabel">
-                                @post.Text
-                            </label>
-                        </div>
-
-                        <div class="telonly"><label class="telonly" onclick="location.href='@Url.Action("Index","Posts",new { CatID=post.IDCategory})'">|@post.Category.Category|</label> </div>
-                        <div class="cont">
-                            <span><img src="lib/img/_@ViewData["Style"]/Like.png" class="like" data-id="@post.IDpost"></span><div class="likecontainer">
-
-                                <label class="likelabel" id="@post.IDpost">
-                                    @post.LikeNumder
-                                </label>
-                            </div><span><img src="~/lib/img/_@ViewData["Style"]/comment.png" onclick="location.href='@Url.Action("Comments", "Comment", new { id = post.IDpost })' " class="comment" /></span><div class="commentcontainer">
-                                <label class="commentlabel">
-                                    @post.CommentNumber
-                                </label>
-                            </div>
-                        </div>
-
-                </form>
-                }
-                }
-                else
-                {
-            <label class="postlabel">This catagory is empty, but I sure someone write post in this moment </label>
-                }
                 <script>
                 $(document).ready(function () {
                     $(".like").bind("click", function () {
@@ -247,6 +219,7 @@
                 </script>
             </div>
         </div>
+        
         <!--Menu-->
         <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 rightside">
             <nav>
@@ -255,16 +228,17 @@
                 <button type="button" class="navi" onclick="location.href='@Url.Action("Logout","LogOut")' ">Log Out</button>
             </nav>
             <hr class="line">
+
             <div class="category-wrap">
                 <h3>Category</h3>
                 <ul >
                     @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
                      {
-                <li><a  onclick="location.href='@Url.Action("Index","Posts", new{CatID = @cats.ID })'">@cats.Category</a></li>
+                <li><a location.href=''>@cats.Category</a></li>
                      }
                 </ul>
             </div>
         </div>
-        </div>
-    </body>
-    </html>
+    </div>
+</body>
+</html>

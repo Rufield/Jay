@@ -11,6 +11,5 @@ namespace Sweeter.Services.DataProviders
         void DeleteCategoryByID(int ID);
         void DeleteCategoryByName(string Name);
         CategoriesModel GetCategoryByName(string categoryname);
-
     }
 }

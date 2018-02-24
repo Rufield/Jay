@@ -65,7 +65,5 @@ namespace Sweeter.Services.DataProviders
                 sqlConnection.Execute(@"delete from CategoriesTable where Category = @Name", new { ID = Name });
             }
         }
-
-      
     }
 }
