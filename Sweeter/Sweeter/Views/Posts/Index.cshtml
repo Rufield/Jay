@@ -16,29 +16,24 @@
     <link rel="icon" type="image/png" href="~/lib/img/logo.png">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            /* set variables locally for increased performance */
-            var scroll_timer;
-            var displayed = false;
-            var $message = $('#message a');
-            var $window = $(window);
-            var top = $(document.body).children(0).position().top;
-            /* react to scroll event on window */
-            $window.scroll(function () {
-                window.clearTimeout(scroll_timer);
-                scroll_timer = window.setTimeout(function () {
-                    if ($window.scrollTop() <= top) {
-                        displayed = false;
-                        $message.fadeOut(500);
-                    }
-                    else if (displayed == false) {
-                        displayed = true;
-                        $message.stop(true, true).show().click(function () { $message.fadeOut(500); });
-                    }
-                }, 1);
-            });
-        });
+    <script>
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 300) {
+                $('#scrollToTop').show();
+            }
+            else {
+                $('#scrollToTop').hide();
+            }
+        })
+        var timeOut;
+        function scrollToTop() {
+            var position = document.body.scrollTop || document.documentElement.scrollTop;
+            if (position) {
+                window.scrollBy(0, -Math.max(10, Math.floor(position / 10)));
+                scrollAnimation = setTimeout('scrollToTop()', 10);
+            }
+            else clearTimeout(scrollAnimation);
+        }
     </script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/js/site.js"></script>
@@ -57,6 +52,7 @@
             <hr class="line">
             <img src=@ViewData["Pic"] class="avatar ">
             <hr class="line ">
+            <button id="scrollToTop" class="navi" title="Back to Top" href="#" onclick="scrollToTop();return false" hidden>Back to Top &uarr;</button> <!--butoon to scroll up-->
         </div>
 
         <!--Same Mobile-->
@@ -121,8 +117,6 @@
             <div class="addfeedmobile hidebutton hidden" id="ShowForm">
                 <p class="HideText">Show addpost form</p>
             </div>
-
-            <div id="top"></div><!--Mark where to go to top-->
 
             <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
             <form action="Posts/search" method="post" class="search">
@@ -233,8 +227,6 @@
 
             </form>
 }
-                <div id="message"><a href="#top">Scroll to top</a></div> <!--butoon to scroll up-->
-
                 <script>
                     $(document).ready(function () {
                         $(".like").bind("click", function () {

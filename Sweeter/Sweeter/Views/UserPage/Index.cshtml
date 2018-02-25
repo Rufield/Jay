@@ -3,14 +3,10 @@
 *@
 @{
 }
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
 @using Sweeter.Models;
 @using Sweeter.DataProviders;
 @model IEnumerable<PostsModel>;
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +17,25 @@
     <link rel="icon" type="image/png" href="~/lib/img/logo.png">
     <link rel="shortcut icon" href="~/lib/img/logo.png" type="image/png">
     <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script>
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 300) {
+                $('#scrollToTop').show();
+            }
+            else {
+                $('#scrollToTop').hide();
+            }
+        })
+        var timeOut;
+        function scrollToTop() {
+            var position = document.body.scrollTop || document.documentElement.scrollTop;
+            if (position) {
+                window.scrollBy(0, -Math.max(10, Math.floor(position / 10)));
+                scrollAnimation = setTimeout('scrollToTop()', 10);
+            }
+            else clearTimeout(scrollAnimation);
+        }
+    </script>
     <script type="text/javascript" src="~/js/site.js"></script>
     <title>Jay Feeds</title>
 </head>
@@ -35,6 +50,7 @@
             <hr class="line ">
             <img src=@ViewData["Pic"] class="avatar ">
             <hr class="line ">
+            <button id="scrollToTop" class="navi" title="Back to Top" href="#" onclick="scrollToTop();return false" hidden>Back to Top &uarr;</button> <!--butoon to scroll up-->
         </div>
         <!--Same mobile-->
         <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8 maincontainer">

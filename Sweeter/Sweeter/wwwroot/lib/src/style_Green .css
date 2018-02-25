@@ -692,34 +692,14 @@ affix
 textarea:focus {
     outline: none;
 }
-#message a {
-    /* display: block before hiding */
-    display: block;
-    display: none;
-    /* link is above all other elements */
-    z-index: 999;
-    /* link doesn't hide text behind it */
-    opacity: .8;
-    /* link stays at same place on page */
+.scrolltop {
+    width: 40px;
+    height: 40px;
     position: fixed;
-    /* link goes at the bottom of the page */
-    top: 100%;
-    margin-top: -80px; /* = height + preferred bottom margin */
-    /* link is centered */
-    left: 40%;
-    margin-left: -160px; /* = half of width */
-    /* round the corners (to your preference) */
-    border-radius: 10px;
-    /* make it big and easy to see (size, style to preferences) */
-    width: 30%;
-    height: 60px;
-    line-height: 48px;
-    padding: 10px;
-    background-color: #000;
-    font-size: 24px;
-    font-family: 'Comic Sans MS';
-    text-align: center;
-    color: #fff;
+    left: 10%;
+    bottom: 0;
+    display: block;
+    background: url('../img/top.png') no-repeat;
 }
 @media screen and (max-width:767px) {
         .headinfo {
