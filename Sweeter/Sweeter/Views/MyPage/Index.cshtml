@@ -16,28 +16,43 @@
     <link rel="icon" type="image/png" href="~/lib/img/logo.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
-        $(function () {
-            /* set variables locally for increased performance */
-            var scroll_timer;
-            var displayed = false;
-            var $message = $('#message a');
-            var $window = $(window);
-            var top = $(document.body).children(0).position().top;
-            /* react to scroll event on window */
-            $window.scroll(function () {
-                window.clearTimeout(scroll_timer);
-                scroll_timer = window.setTimeout(function () {
-                    if ($window.scrollTop() <= top) {
-                        displayed = false;
-                        $message.fadeOut(500);
-                    }
-                    else if (displayed == false) {
-                        displayed = true;
-                        $message.stop(true, true).show().click(function () { $message.fadeOut(500); });
-                    }
-                }, 100);
-            });
-        });
+        //$(function () {
+        //    /* set variables locally for increased performance */
+        //    var scroll_timer;
+        //    var displayed = false;
+        //    var $message = $('#message a');
+        //    var $window = $(window);
+        //    var top = $(document.body).children(0).position().top;
+        //    /* react to scroll event on window */
+        //    $window.scroll(function () {
+        //        window.clearTimeout(scroll_timer);
+        //        scroll_timer = window.setTimeout(function () {
+        //            if ($window.scrollTop() <= top) {
+        //                displayed = false;
+        //                $message.fadeOut(500);
+        //            }
+        //            else if (displayed == false) {
+        //                displayed = true;
+        //                $message.stop(true, true).show().click(function () { $message.fadeOut(500); });
+        //            }
+        //        }, 100);
+        //    });
+        //});
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
     </script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -58,6 +73,7 @@
             <hr class="line ">
             <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 leftside">
                 <button class="navi" onclick="location.href='@Url.Action("Index","Profile")' ">Edit</button>
+            <button class="navi" onclick="topFunction()" id="myBtn">Back to top</button>
             </div>
         </div>
             <!--Same mobile-->
