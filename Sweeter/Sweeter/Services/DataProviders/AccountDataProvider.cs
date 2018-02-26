@@ -30,7 +30,7 @@ namespace Sweeter.DataProviders
             using (var sqlConnection = factory.CreateConnection)
             {
                 IEnumerable<AccountModel> accounts = sqlConnection.Query<AccountModel>("select * from AccountTable").ToList();
-                accounts = accounts.Where(x=>x.Username.Contains(username));
+                accounts = accounts.Where(x=>x.Username.Contains(username.ToLower())|| x.Username.Contains(username.ToUpper()));
                 return accounts;
             }
         }
