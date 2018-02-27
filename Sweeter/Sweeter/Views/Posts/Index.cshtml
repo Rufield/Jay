@@ -16,6 +16,25 @@
     <link rel="icon" type="image/png" href="~/lib/img/logo.png">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 300) {
+                $('#scrollToTop').show();
+            }
+            else {
+                $('#scrollToTop').hide();
+            }
+        })
+        var timeOut;
+        function scrollToTop() {
+            var position = document.body.scrollTop || document.documentElement.scrollTop;
+            if (position) {
+                window.scrollBy(0, -Math.max(10, Math.floor(position / 10)));
+                scrollAnimation = setTimeout('scrollToTop()', 10);
+            }
+            else clearTimeout(scrollAnimation);
+        }
+    </script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/js/site.js"></script>
 
@@ -33,6 +52,7 @@
             <hr class="line">
             <img src=@ViewData["Pic"] class="avatar ">
             <hr class="line ">
+            <button id="scrollToTop" style="width:100%" class="navi" title="Back to Top" href="#" onclick="scrollToTop();return false" hidden>Back to Top &uarr;</button> <!--butoon to scroll up-->
         </div>
 
         <!--Same Mobile-->
@@ -76,9 +96,9 @@
                                 <div class="modal-body" style="text-align:center;">
                                     <select size="13" name="category" id="Style" class="select">
                                         @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
-                                {
+                                        {
                                     <option style="font-size:16px;" value="@cats.Category"> @cats.Category</option>
-                        }
+                                        }
                                     </select>
                                 </div>
                                 <div class="modal-footer">
@@ -140,33 +160,33 @@
 
 
             <button type="button" class="btn mobileaddpost mobile" data-toggle="modal" data-target="#myModalChoose">Choose category</button>
-                        <div class="modal fade" id="myModalChoose" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content" style="margin-top:20%;">
-                                               <div class="modal-header">
-                                                       <h4 class="modal-title" id="exampleModalLongTitle">Choose the category</h4>
-                                                       <h4 class="modal-title" id="exampleModalLongTitle"></h4>
-                           
-                           
+            <div class="modal fade" id="myModalChoose" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content" style="margin-top:20%;">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalLongTitle">Choose the category</h4>
+                            <h4 class="modal-title" id="exampleModalLongTitle"></h4>
+
+
                         </div>
-                                                <div class="modal-body" style="text-align:center;">
-                           
-                                                @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
-                                        {
-                                                    <h4 onclick="location.href='@Url.Action("Index","Posts", new{CatID = @cats.ID })'">@cats.Category</h4>
-                                          
-                                }
-                
+                        <div class="modal-body" style="text-align:center;">
+
+                            @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
+                    {
+                        <h4 onclick="location.href='@Url.Action("Index","Posts", new{CatID = @cats.ID })'">@cats.Category</h4>
+
+            }
+
                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
                         </div>
-                
+
                     </div>
-                
+
                 </div>
-                
+
             </div>
 
             <!--Great Wall with Unique hidden script-->
@@ -208,46 +228,50 @@
             </form>
 }
                 <script>
-                $(document).ready(function () {
-                    $(".like").bind("click", function () {
-                        var link = $(this);
-                        var id = link.data('id');
-                        $.ajax({
-                            url: "@Url.Action("LikesToPosts","Like")",
-                            type: "POST",
-                            data: { id: id },
-                            dataType: "text",
-                            success: function (result) {
+                    $(document).ready(function () {
+                        $(".like").bind("click", function () {
+                            var link = $(this);
+                            var id = link.data('id');
+                            $.ajax({
+                                /**/
+                                url: "@Url.Action("LikesToPosts", "Like")",
+                    /**/
+                    type: "POST",
+                    data: { id: id },
+                    dataType: "text",
+                    success: function (result) {
 
-                                $('#'+id).html(result);
+                        $('#' + id).html(result);
 
-                            }
-                        });
-                    });
+                    }
                 });
+            });
+        });
                 </script>
                 <script>
-                $(document).ready(function () {
-                    $(".DeleteButton").bind("click", function () {
-                        var link = $(this);
-                        var id = link.data('id');
-                        $.ajax({
-                            url: "@Url.Action("DeletePost", "Posts")",
-                            type: "POST",
-                            data: { id: id },
-                            dataType: "text",
-                            success: function (result) {
+                    $(document).ready(function () {
+                        $(".DeleteButton").bind("click", function () {
+                            var link = $(this);
+                            var id = link.data('id');
+                            $.ajax({
+                                /**/
+                                url: "@Url.Action("DeletePost", "Posts")",
+                    /**/
+                    type: "POST",
+                    data: { id: id },
+                    dataType: "text",
+                    success: function (result) {
 
-                                $("#post_" + id).html('<p text-align="center"><label>Post is deleted</label></p>');
+                        $("#post_" + id).html('<p text-align="center"><label>Post is deleted</label></p>');
 
-                            }
-                        });
-                    });
+                    }
                 });
+            });
+        });
                 </script>
             </div>
         </div>
-        
+
         <!--Menu-->
         <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 rightside">
             <nav>
@@ -259,11 +283,11 @@
 
             <div class="category-wrap">
                 <h3>Category</h3>
-                <ul >
+                <ul>
                     @foreach (CategoriesModel cats in (List<CategoriesModel>)ViewData["categories"])
-                     {
-                <li><a onclick="location.href='@Url.Action("Index","Posts", new{CatID = @cats.ID })'">@cats.Category</a></li>
-                     }
+                    {
+                    <li><a onclick="location.href='@Url.Action("Index","Posts", new{CatID = @cats.ID })'">@cats.Category</a></li>
+                    }
                 </ul>
             </div>
         </div>

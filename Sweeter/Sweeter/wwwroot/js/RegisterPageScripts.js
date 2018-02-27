@@ -2,9 +2,17 @@
     var pas = document.getElementById("password");
     var pas2 = document.getElementById("password2");
     var ermes = document.getElementById('error');
-    if (pas.value.length < 6) {
+    var regexp = /^[a-zA-Z0-9]*$/;
+    if (pas.value.length < 6) { // length of password 1
         pas.classList.add("notright");
         ermes.innerText = "This password is too short, try somethin bigger than 6 symbols.";
+        pas2.classList.remove("notright");
+        pas2.value = "";
+        pas2.disabled = true; 
+    }
+    else if (!regexp.test(pas.value)) { // characters in password 1
+        pas.classList.add("notright");
+        ermes.innerText = "This password contains not allowed characters.";
         pas2.classList.remove("notright");
         pas2.value = "";
         pas2.disabled = true; 
@@ -20,7 +28,7 @@ function checkpasswords() {
 	var pas1 = document.getElementById('password');
 	var pas2 = document.getElementById('password2');
 	var ermes = document.getElementById('error');
-	if (pas1.value != pas2.value) { // if passwords match 
+	if (pas1.value !== pas2.value) { // if passwords match 
 		pas1.classList.add("notright");
 		pas2.classList.add("notright");
         ermes.innerText = "Passwords are not simmilar!";
@@ -65,11 +73,11 @@ function checkemail() {
 	var ind = emailval.indexOf(".", emailval.indexOf("@")); //index of . after @ 
 	var indat = emailval.indexOf("@"); // index of @
     var regexp = /[a-z0-9]/i; // all allowed symbols for the end of an email
-	if (ind == -1) { // check if there is a .
+	if (ind === -1) { // check if there is a .
 		ermes.innerText = "Email is invalid!";
 		email.classList.add("notright");
 	}
-	else if (ind - indat == 1) { // if user wrote . right after the @
+	else if (ind - indat === 1) { // if user wrote . right after the @
 		ermes.innerText = "Email is invalid!";
 		email.classList.add("notright");
     }
@@ -89,7 +97,7 @@ function register() {
     var email = document.getElementById('email');
     var pass = document.getElementById('password');
     var button = document.getElementById('register');
-    if (username.value.length != 0 && email.value.length != 0 && pass.value.length != 0) { // if all textinputs are filled
+    if ((username.value.length !== 0) && (email.value.length !== 0) && (pass.value.length !== 0)) { // if all textinputs are filled
         if (!email.classList.contains("notright") && !username.classList.contains("notright") && !pass.classList.contains("notright")) button.disabled = false; // if out scripts decided that everthing is good
     }
 }
@@ -100,7 +108,7 @@ function checkemailbool() {
     var foo = document.getElementById("foo")
     foo.innerText = '<p><label for="password" style="text-align:center">Your Password* </label> <p> <input type="password" name="password" id="password" class="textin" required></input>';
     ermes.innerText = "Write your password"
-    if (email.indexOf(".", email.indexOf("@")) == -1) ermes.innerText = "Email is invalid!";
+    if (email.indexOf(".", email.indexOf("@")) === -1) ermes.innerText = "Email is invalid!";
     else ermes.innerText = "";
 
 }
