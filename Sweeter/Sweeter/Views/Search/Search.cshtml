@@ -1,0 +1,109 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Sweeter.Models;
+@using Sweeter.DataProviders;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="~/lib/src/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/src/style_@ViewData["Style"] .css">
+    <link rel="icon" type="image/png" href="~/lib/img/logo.png">
+    <link rel="shortcut icon" href="~/lib/img/logo.png" type="image/png">
+    <script type="text/javascript">
+        window.onload = function () {
+            var wall = document.getElementById('wall');
+            var label = document.createElement('label');
+            if (wall.children.length == 0) {
+                label.innerText = 'Sorry, we didn`t find anything';
+                wall.appendChild(label);
+            }
+        };
+      </script>
+
+    <title>Search</title>
+</head>
+<body>
+    <!--Profile Pic and Logo-->
+    <div class="row">
+        <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 leftside">
+            <div class="logoleftt" style="text-align:center">
+                <h1 class="headlabel" style="font-size:35px; margin-top:-2%;">JAY</h1>
+                <img src="~/lib/img/_@ViewData["Style"]/logo.png" class="logoleft">
+            </div>
+            <hr class="line">
+            <img src=@ViewData["Pic"] class="avatar ">
+            <hr class="line ">
+        </div>
+        <!--Same Mobile-->
+        <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8 maincontainer">
+            <div class="headmobile">
+                <div class="row">
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
+                        <img src="~/lib/img/_@ViewData["Style"]/logo.png" class="mobilelogoleft">
+                    </div>
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
+                        <h1 class="mobileheadlabel">JAY</h1>
+                    </div>
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 " style="text-align:center;">
+                        <img src=@ViewData["Pic"] class="mobileavatar">
+
+                    </div>
+                </div>
+            </div>
+            <div class="addfeedmobile">
+                <form action="MyPage/addfeed" method="post" class="addfeedformmobile">
+
+                    <div class="mobilesignout">
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Logout","LogOut")' ">Sign out</button>
+                    </div>
+                    <div class="mobilemypage">
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","MyPage")' ">My Page</button>
+                    </div>
+                    <div class="mobilefeeds">
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
+                    </div>
+
+                </form>
+            </div>
+            <form action="/Search/search" method="post" class="search">
+                <input type="search" name="searchinfo" placeholder="Search users in Jay" class="SearchInput" />
+                <input type="submit" name="search" class="SearchButton" value="Search" />
+            </form>
+            <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
+            <div id="wall">
+
+                @if (Model != null)
+    {
+            @foreach (AccountModel post in Model)
+{
+            <form action="" class="post">
+                <img src="data:image/jpeg;base64,@Convert.ToBase64String(post.Avatar)" class="SearchAvatar ">
+                <label class="lab auser" style="margin:1%; font-size:25px" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})'">
+                    @post.Username
+                </label>
+            </form>
+}
+                  //  if (Model.Count() != 0)
+                    //{
+                    //}
+                }
+            </div>
+        </div>
+        <!--Menu-->
+        <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 rightside">
+            <nav>
+                <button class="navi" onclick="location.href='@Url.Action("Index","MyPage")' ">My Page</button>
+                <button class="navi" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
+                <button type="button" class="navi" onclick="location.href='@Url.Action("Logout","LogOut")' ">Log Out</button>
+            </nav>
+            <hr class="line">
+        </div>
+    </div>
+</body>
+</html>

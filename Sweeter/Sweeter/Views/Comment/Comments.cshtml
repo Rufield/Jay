@@ -1,0 +1,182 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Sweeter.Models;
+@model IEnumerable<CommentModel>;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="~/lib/src/bootstrap.min.css">
+    <script data-main="scripts/main" src="~/js/require.js"></script>
+    <link rel="stylesheet" href="~/lib/src/style_@ViewData["Style"] .css">
+    <link rel="icon" type="image/png" href="~/lib/img/logo.png">
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="~/js/site.js"></script>
+    <link rel="shortcut icon" href="~/lib/img/logo.png" type="image/png">
+    <title>Jay Feeds</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 leftside">
+            <div class="logoleftt" style="text-align:center">
+                <h1 class="headlabel" style="font-size:35px; margin-top:-2%;">JAY</h1>
+                <img src="~/lib/img/_@ViewData["Style"]/logo.png" class="logoleft">
+            </div>
+            <hr class="line">
+            <img src=@ViewData["Pic"] class="avatar ">
+            <hr class="line ">
+        </div>
+        <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8 maincontainer">
+            <div class="headmobile">
+                <div class="row">
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
+                        <img src="~/lib/img/_@ViewData["Style"]/logo.png" class="mobilelogoleft">
+                    </div>
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
+                        <h1 class="mobileheadlabel">JAY</h1>
+                    </div>
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 " style="text-align:center;">
+                        <img src=@ViewData["Pic"] class="mobileavatar">
+                    </div>
+                </div>
+            </div>
+            <div class="addfeedmobile" id="Addfeed">
+                <form action="Comment/addcomment" method="post" class="addfeedformmobile">
+                    <input type="hidden" value="@ViewData["ID"]" name="id" />
+                    <textarea class="mobilemypost" name="mypost" id="mypost" rows="2" placeholder="What are you thinking about..."></textarea>
+                    <input type="submit" class="mobileaddpost" name="addpost" id="addpost" value="Send">
+                    <hr style="border-color:rgba(0,0,0,0.6)">
+
+                    <div class="mobilesignout">
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Logout","LogOut")' ">Sign out</button>
+                    </div>
+                    <div class="mobilemypage">
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","MyPage")' ">My Page</button>
+                    </div>
+                    <div class="mobilefeeds">
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
+                    </div>
+                </form>
+            </div>
+            <div class="addfeedmobile hidebutton" id="HideForm">
+                <p>Hide addcomment form</p>
+            </div>
+            <div class="addfeedmobile hidebutton hidden" id="ShowForm">
+                <p>Show addcomment form</p>
+            </div>
+            <form action="" class="post">
+                <label class="lab" style="margin:1%">
+                    Comments to @ViewData["PostAuth"]'s post
+                </label><hr><div class="postcontainer">
+                    <label class="postlabel">@ViewData["PostText"].</label>
+                </div> <div class="telonly"><label class="telonly">|Category|</label> </div>
+                <div class="cont">
+                    <span><img src="~/lib/img/_@ViewData["Style"]/Like.png" class="like"></span><div class="likecontainer">
+                        <label class="likelabel">@ViewData["PostLike"]</label>
+                    </div><span><img src="lib/img/_@ViewData["Style"]/comment.png" class="comment"></span>
+                    <div class="commentcontainer"><label class="commentlabel">@ViewData["PostComment"]</label></div>
+                </div>
+            </form>
+            <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
+            <form method="post" class="addfeedform" action="Comment/addcomment">
+                <input type="hidden" value="@ViewData["ID"]" name="id" />
+                <label class="lab" style="margin:1%">Publish your comment, @ViewData["Username"]</label>
+                <hr>
+                <textarea class="mypost" name="mypost" id="mypost" rows="2" placeholder="What are you thinking about..."></textarea>
+                <input type="submit" class="addpost" name="addpost" id="addpost" value="Send">
+            </form>
+            <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
+            <div id="wall">
+                @foreach (CommentModel comment in Model)
+        {
+            <form id="comment_@comment.IDcomment">
+                <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=comment.IDuser})' ">
+                    @comment.Author.Username
+                </label>
+                @if (comment.Author.Username.Equals(ViewData["Username"]))
+        {
+            <button type="button" class="DeleteButton" data-id="@comment.IDcomment">X</button>
+}
+                <hr id="post_@comment.IDcomment">
+                <div class="commentpostcontainer">
+                    <label class="postlabel">
+                        @comment.Text
+                    </label>
+                </div>
+                <div class="telonly"><label class="telonly">|</label> </div>
+                <div class="cont commentcont">
+                    <span><img src="lib/img/_@ViewData["Style"]/Like.png" class="commentlike" data-id="@comment.IDcomment"></span>
+                    <div class="likecontainer commentlikecont">
+                        <label class="likelabel" id="@comment.IDcomment">
+                            @comment.LikeNumder
+                        </label>
+                    </div>
+                </div>
+            </form>
+}
+                <script>
+                $(document).ready(function () {
+                    $(".commentlike").bind("click", function () {
+                        var link = $(this);
+                        var id = link.data('id');
+                        $.ajax({
+                            url: "@Url.Action("LikesToComments","Like")",
+                            type: "POST",
+                            data: { id: id },
+                            dataType: "text",
+                            success: function (result) {
+
+                                $('#'+id).html(result);
+
+                            }
+                        });
+                    });
+                });
+                </script>
+                <script>
+                $(document).ready(function () {
+                    $(".DeleteButton").bind("click", function () {
+                        var link = $(this);
+                        var id = link.data('id');
+                        $.ajax({
+                            url: "@Url.Action("DeleteComment", "Comment")",
+                            type: "POST",
+                            data: { id: id },
+                            dataType: "text",
+                            success: function (result) {
+
+                                $("#comment_" + id).html('<p text-align="center"><label>Comment is deleted</label></p>');
+
+                            }
+                        });
+                    });
+                });
+                </script>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 rightside">
+            <nav>
+                <button class="navi" onclick="location.href='@Url.Action("Index","MyPage")' ">My Page</button>
+                <button class="navi" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
+                <button type="button" class="navi" onclick="location.href='@Url.Action("Logout","LogOut")' ">Log Out</button>
+            </nav>
+            <hr class="line">
+            <nav>
+                @if (ViewData["ViewSortLike"].ToString() == "Show")
+                    {
+                         <button class="navi" onclick="location.href='@Url.Action("Comments", "Comment", new { id = ViewData["ID"], SortLike = true })'">Sort by <b>likes</b></button>
+                    }
+                else
+                    {
+                         <button class="navi" onclick="location.href='@Url.Action("Comments", "Comment", new { id = ViewData["ID"] })'">Sort by <b>date</b></button>
+                    }
+            </nav>
+        </div>
+    </div>
+</body>
+</html>
