@@ -1,0 +1,166 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Sweeter.Models;
+@using Sweeter.DataProviders;
+@model IEnumerable<PostsModel>;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="~/lib/src/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/src/style_@ViewData["Style"] .css">
+    <link rel="icon" type="image/png" href="~/lib/img/logo.png">
+    <link rel="shortcut icon" href="~/lib/img/logo.png" type="image/png">
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script>
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 300) {
+                $('#scrollToTop').show();
+            }
+            else {
+                $('#scrollToTop').hide();
+            }
+        })
+        var timeOut;
+        function scrollToTop() {
+            var position = document.body.scrollTop || document.documentElement.scrollTop;
+            if (position) {
+                window.scrollBy(0, -Math.max(10, Math.floor(position / 10)));
+                scrollAnimation = setTimeout('scrollToTop()', 10);
+            }
+            else clearTimeout(scrollAnimation);
+        }
+    </script>
+    <script type="text/javascript" src="~/js/site.js"></script>
+    <title>Jay Feeds</title>
+</head>
+<body>
+    <div class="row">
+        <!--Avatar + logo-->
+        <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 leftside">
+            <div class="logoleftt " style="text-align:center">
+                <h1 class="headlabel " style="font-size:35px; margin-top:-2%;">JAY</h1>
+                <img src="~/lib/img/_@ViewData["Style"]/logo.png" class="logoleft ">
+            </div>
+            <hr class="line ">
+            <img src=@ViewData["Pic"] class="avatar ">
+            <hr class="line ">
+            <button id="scrollToTop" class="navi" title="Back to Top" href="#" onclick="scrollToTop();return false" hidden>Back to Top &uarr;</button> <!--butoon to scroll up-->
+        </div>
+        <!--Same mobile-->
+        <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8 maincontainer">
+            <div class="headmobile">
+                <div class="row">
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
+                        <img src="~/lib/img/_@ViewData["Style"]/logo.png" class="mobilelogoleft">
+
+                    </div>
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 ">
+                        <h1 class="mobileheadlabel">JAY</h1>
+
+                    </div>
+                    <div class="col-md-0 col-xs-4 col-lg-0 col-sm-0 " style="text-align:center;">
+                        <img src=@ViewData["Pic"] class="mobileavatar">
+
+                    </div>
+                </div>
+            </div>
+            <!--Add Post Mobile-->
+            <div class="addfeedmobile" style="margin-bottom:0%;">
+                <form action="MyPage/addfeed" method="post" class="addfeedformmobile">
+
+                    <div class="mobilesignout">
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Logout","LogOut")' ">Sign out</button>
+                    </div>
+                    <div class="mobilemypage">
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","MyPage")' ">My Page</button>
+                    </div>
+                    <div class="mobilefeeds">
+                        <button type="button" class="mobilenavbutton" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
+                    </div>
+
+                </form>
+            </div>
+            <!--Info-->
+            <form class="myInfoForm">
+                <label class="lab" style="margin:1%">@ViewData["UserName"]</label>
+                <hr>
+                <div class="MyInfo">
+                    <h1 class="headinfo">My name is @ViewData["Name"]</h1>
+                    <h1 class="headinfo"><b>Something about me:</b> @ViewData["About"]</h1>
+                </div>
+                <input type="button" class="editProfile" onclick="location.href='@Url.Action("Subscribe","Unsubscribe",new { id = ViewData["ID"]})'" value="@ViewData["Act"]" >
+                
+
+            </form>
+            <!--Add Post -->
+          
+            <hr class="line" style="margin-top:1.5%;margin-bottom:1.5%">
+            <div id="wall">
+
+                @foreach (PostsModel post in Model)
+    {
+                <form action="" class="post">
+                    <label class="lab auser" style="margin:1%" onclick="location.href='@Url.Action("GetUser","User", new { idUs=post.IDuser})' ">
+                        @post.Author.Username
+                    </label>
+                    <label class="lab auser componly" style="margin:1%" onclick="location.href='@Url.Action("Index","Posts",new { CatID=post.IDCategory})'">| @post.Category.Category | </label>
+                    <label class="lab auser componly" style="margin:1%">@post.PublicDate</label>
+
+                    <hr><div class="postcontainer">
+                        <label class="postlabel">
+                            @post.Text
+                        </label>
+                    </div>
+                    <div class="telonly"><label class="telonly" onclick="location.href='@Url.Action("Index","Posts",new { CatID=post.IDCategory})'">|@post.Category.Category|</label> </div>
+                    <div class="cont">
+                        <span><img src="lib/img/_@ViewData["Style"]/Like.png" class="like" data-id="@post.IDpost"></span><div class="likecontainer">
+                            <label class="likelabel" id="@post.IDpost">
+                                @post.LikeNumder
+                            </label>
+                        </div><span><img src="~/lib/img/_@ViewData["Style"]/comment.png" onclick="location.href='@Url.Action("Comments","Comment", new { id=post.IDpost})' " class="comment" /></span><div class="commentcontainer">
+                            <label class="commentlabel">
+                                @post.CommentNumber
+                            </label>
+                        </div>
+                    </div>
+                </form>
+}
+                
+                <script>
+    $(document).ready(function () {
+        $(".like").bind("click", function () {
+            var link = $(this);
+            var id = link.data('id');
+            $.ajax({
+                url: "@Url.Action("LikesToPosts","Like")",
+                type: "POST",
+                data: { id: id },
+                dataType: "text",
+                success: function (result) {
+
+                    $('#'+id).html(result);
+
+                }
+            });
+        });
+    });
+                </script>
+            </div>
+        </div>
+        <!--Menu-->
+        <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2 rightside">
+            <nav>
+                <button class="navi" onclick="location.href='@Url.Action("Index","MyPage")' ">My Page</button>
+                <button class="navi" onclick="location.href='@Url.Action("Index","Posts")' ">Feeds</button>
+                <button class="navi" onclick="location.href='@Url.Action("Logout","LogOut")' ">Log Out</button>
+            </nav>
+            <hr class="line">
+        </div>
+</body>
+</html>

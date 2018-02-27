@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Sweeter.Models
 {
     public class PostsModel
     {
-        public int IDnews { get; set; }
+        public int IDpost { get; set; }
         public DateTime PublicDate { get; set; }
         public AccountModel Author { get; set; }
-        public int LikesNumber { get; set; }
+        public int LikeNumder { get; set; }
+        public int IDuser { get; set; }
+        public int IDCategory { get; set; }
         public List<LikesToPostsModel> Likes { get; set; }
-        public int CommentsNumber { get; set; }
+        public int CommentNumber { get; set; }
         public List<CommentModel> Comments { get; set; }
         public string Text { get; set; }
+        public CategoriesModel Category { get; set; }
     }
 }

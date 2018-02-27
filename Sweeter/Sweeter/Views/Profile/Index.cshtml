@@ -1,0 +1,109 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Sweeter.Models.AccountModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/src/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/src/style_@Model.Style .css">
+    <link rel="icon" type="image/png" href="~/lib/img/logo.png">
+    <link rel="shortcut icon" href="~/lib/img/logo.png" type="image/png">
+
+    <script src="~/js/require.js"></script>
+    <script type="text/javascript" src="~/js/ProfilePageScripts.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Your profile</title>
+</head>
+<body>
+    <!--Intoduction-->
+    <div class="row">
+        <div class="col-md-2 col-xs-1 col-lg-2 col-sm-2"></div>
+        <div class="col-md-8 col-xs-10 col-lg-8 col-sm-8">
+            <h1 class="headlabel">Edit your profile</h1>
+        </div>
+        <div class="col-md-2 col-xs-1 col-lg-2 col-sm-2"></div>
+    </div>
+    
+    <!--Picture-->
+    <div class="forma">
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-3 col-xs-12 col-lg-3 col-sm-3" style="text-align:center">
+                    <p>
+                        <img src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))" id="imageshow" style="width:68%;">
+                        <label class="btn btn-default btn-file" for="avatar">Edit your avatar</label>
+                        <input type="file" onchange="upload()" accept="image/*" name="avatar" value="avatar" id="avatar" style="display:none" />
+                </div>
+
+                <!--First part-->
+                <div class="col-md-6 col-xs-12 col-lg-6 col-sm-6">
+                    <p>
+                        <select size="1" name="Style" id="Style" class="select">
+                            <option disabled selected>Choose your style</option>
+                            <option value="Green" class="Green">Green</option>
+                            <option value="Black" class="Black">Black</option>
+                            <option value="Violet" class="Violet">Violet</option>
+                            <option value="LightViolet" class="LightViolet">Light Violet</option>
+                            <option value="Blue" class="Blue">Blue</option>
+                        </select>
+                    </p>
+                    <p><label for="username" style="text-align:center">Your Username </label>
+                    <p><input type="text" name="username" class="textin" id="username" oninput="checkusername()" value=@Model.Username required>
+                    <p><label for="name" style="text-align:center">Your Fullname </label>
+                    <p><input type="text" name="name" class="textin" id="name" oninput="checkfullname()" value=@Model.Name>
+                    <p><label for="about" style="text-align:center">Tell me about yourself</label>
+                    <p>
+                        <textarea type="text" style="width: 77%" rows="5" id="about" name="about" class="textareain" value=@Model.About onKeyDown="limitText(this,300);"
+                                  onKeyUp="limitText(this,300);">@Model.About</textarea>
+                        
+                        <!--Second part-->
+                        <div id="foo"></div>
+                        <!--Submit-->
+                    <p style="text-align:center">
+                        <input type="submit" class="but" id="Change" value="Change">
+                        <h1 class="headlabel" id="error">@ViewData["Error"]</h1>
+                </div>
+                <div class="col-md-3 col-xs-12 col-lg-3 col-sm-3" style="text-align:center"></div>
+            </div>
+        </form>
+        <!--Pop-up For Deleting-->
+        <div class="row">
+            <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2" style="text-align:center"></div>
+            <div class="col-md-8 col-xs-12 col-lg-8 col-sm-8" style="text-align:center">
+                <form asp-controller="Profile" asp-action="DeleteAccount" method="post" style="border-style:hidden">
+                    <button type="button" class=" but DeleteAccount" name="DeleteAccount" id="DeleteAccount" data-toggle="modal" data-target="#DeleteModal">Delete account</button>
+                    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 class="modal-title" id="exampleModalTitle">Are you sure?</h2>
+                                    <h2 class="modal-title" id="exampleModalTitle">Confirm by password</h2>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="password" name="password" class="textin @ViewData["PasswordStat"]" id="password" oninput="CheckPasswordForDelete()" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" required>
+                                    <h1 class="headlabel" id="DeleteError">@ViewData["Error"]</h1>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="DeleteAccount" style="width:49%" data-dismiss="modal">Close</button>
+                                    <input type="hidden" name="id" value="@Model.IDuser">
+                                    <input type="submit" class=" DeleteAccount" style="width:49%" value="Delete account" id="DeleteButton" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h1 class="headlabel">@ViewData["DeleteError"]</h1>
+                </form>
+            </div>
+            <div class="col-md-2 col-xs-0 col-lg-2 col-sm-2" style="text-align:center"></div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -6,16 +6,36 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Index\" />
-    <Folder Include="wwwroot\js\" />
+    <Compile Remove="wwwroot\ForPics\av\**" />
+    <Content Remove="wwwroot\ForPics\av\**" />
+    <EmbeddedResource Remove="wwwroot\ForPics\av\**" />
+    <None Remove="wwwroot\ForPics\av\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Posts\DeleteIdex.cshtml" />
   </ItemGroup>
   <ItemGroup>
+	<PackageReference Include="Dapper" Version="1.50.4" />
 	<PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+	<PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.4" />
+	<PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation" Version="3.2.4" />
+	<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
+	<PackageReference Include="SimpleDI.Configuration" Version="1.0.4" />
+	<PackageReference Include="System.Configuration.ConfigurationManager" Version="4.4.1" />
   </ItemGroup>
   <ItemGroup>
 	<DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
 	<DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
 	<DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Views\Index\Index.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\ForPics\" />
   </ItemGroup>
 
 </Project>
